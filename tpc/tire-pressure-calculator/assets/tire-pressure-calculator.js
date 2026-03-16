@@ -6,7 +6,7 @@
   // DATA
   // ═══════════════════════════════════════════
 
-  // Spreadsheet equations: y = slope*x + intercept  (x = total weight in KG)
+  // Spreadsheet equations: y = slope*x + intercept  (x = wheel load in KG)
   // Keyed by nominal width → { firm: [slope, intercept], soft: [slope, intercept] }
   var EQUATIONS = {
     28: { firm: [0.8105, 6.0956], soft: [0.6762, 2.5409] },
@@ -19,17 +19,17 @@
   var ANCHOR_WIDTHS = [28, 35, 38, 44, 48];
 
   // Rene Herse available widths (for tire finder output snapping)
-  var RH_WIDTHS      = [26, 28, 31, 35, 38, 43, 48, 55];
-  var RH_CALC_WIDTH  = { 26:26, 28:28, 31:31, 35:35, 38:38, 43:43, 48:48, 55:55 };
-  var RH_DISPLAY     = { 26:'26 mm', 28:'28 mm', 31:'31–32 mm', 35:'35 mm', 38:'38 mm', 43:'42–44 mm', 48:'48 mm', 55:'55 mm' };
+  var RH_WIDTHS     = [26, 28, 31, 35, 38, 43, 48, 55];
+  var RH_CALC_WIDTH = { 26:26, 28:28, 31:31, 35:35, 38:38, 43:43, 48:48, 55:55 };
+  var RH_DISPLAY    = { 26:'26 mm', 28:'28 mm', 31:'31–32 mm', 35:'35 mm', 38:'38 mm', 43:'42–44 mm', 48:'48 mm', 55:'55 mm' };
 
   // Tire finder multipliers
   var FINDER_MULT = { road:12, allroad:18, gravel:25, adventure:36 };
 
-  // Casing adjustments (psi)
+  // Casing adjustments (psi numerator; divided by tire width)
   var CASING_ADJ = { '0':0, '-50':-50, '-150':-150, '-150b':-150, '-100':-100 };
 
-  // Bike style front/rear ratios
+  // Bike style front/rear weight ratios
   var BIKE_STYLE = {
     '40/60':  [0.40, 0.60],
     '40/60g': [0.40, 0.60],
@@ -37,7 +37,7 @@
     '35/65':  [0.35, 0.65],
   };
 
-  // Riding position front/rear adjustments (percentage points)
+  // Riding position: fraction of total weight shifted front/rear
   var POSITION_ADJ = {
     aero:         [ 0.03, -0.03],
     low:          [ 0,     0   ],
@@ -61,11 +61,13 @@
     f: { unit:'us', feel:'soft' },
   };
 
-  // Shared fields that appear on multiple tabs — synced on tab switch
+  // Shared fields synced on tab switch
   var SHARED_FIELDS = [
     { s: 'rhc-s-rider', p: 'rhc-p-rider', f: 'rhc-f-rider' },
     { s: 'rhc-s-bike',  p: 'rhc-p-bike',  f: 'rhc-f-bike'  },
   ];
+
+  var TAB_IDS = { s: 'rhc-tab-simple', p: 'rhc-tab-pro', f: 'rhc-tab-finder' };
 
   // ═══════════════════════════════════════════
   // INTERPOLATION
@@ -90,6 +92,7 @@
     return [ls + t*(us-ls), li + t*(ui-li)];
   }
 
+  // weightLb converted to kg internally; equation is m × kg + b
   function calcPSI(weightLb, width, feel) {
     var eq = getEquation(width, feel);
     var weightKg = weightLb / LB_PER_KG;
@@ -99,6 +102,8 @@
   // ═══════════════════════════════════════════
   // UNIT HELPERS
   // ═══════════════════════════════════════════
+
+  // Simple / Finder rounding: nearest 1 psi or 0.1 bar
   function fmtPressureVal(psi, unit) {
     if (unit === 'metric') {
       return { val: (psi * BAR_PER_PSI).toFixed(1), unit: 'bar' };
@@ -106,12 +111,20 @@
     return { val: Math.round(psi), unit: 'psi' };
   }
 
-  function wtLabel(noun, unit) {
-    return unit === 'us' ? noun + ' Weight (lb)' : noun + ' Weight (kg)';
+  // Pro rounding: 0.1 psi or 0.01 bar (spec §3 / §5.9)
+  function fmtProPressure(psi, unit) {
+    if (unit === 'metric') {
+      return { val: (psi * BAR_PER_PSI).toFixed(2), unit: 'bar' };
+    }
+    return { val: psi.toFixed(1), unit: 'psi' };
   }
 
-  function getWeight(id, unit) {
+  // Returns weight in lb. Reads per-field unit select (id + '-unit') if present,
+  // falling back to the tab-level unit — supports mixed units per spec §7.
+  function getWeight(id, fallbackUnit) {
     var v = parseFloat(document.getElementById(id).value) || 0;
+    var unitEl = document.getElementById(id + '-unit');
+    var unit = unitEl ? unitEl.value : fallbackUnit;
     return unit === 'us' ? v : v * LB_PER_KG; // always return lb
   }
 
@@ -119,6 +132,7 @@
   // UI HELPERS
   // ═══════════════════════════════════════════
   function syncSharedFields(fromPrefix) {
+    if (fromPrefix === 'b') return; // background tab has no shared fields
     SHARED_FIELDS.forEach(function(map) {
       var val = document.getElementById(map[fromPrefix]).value;
       Object.keys(map).forEach(function(prefix) {
@@ -167,6 +181,7 @@
     if (prefix === 's') window.rhcTpcCalcSimple();
     else if (prefix === 'p') window.rhcTpcCalcPro();
     else if (prefix === 'f') window.rhcTpcCalcFinder();
+    // 'b' (background tab) has no calculation
   }
 
   function showError(prefix, msg) {
@@ -189,7 +204,7 @@
     document.querySelectorAll('.rhc-tpc .tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.getElementById('rhc-tab-' + name).classList.add('active');
     btn.classList.add('active');
-    state.activeTab = name[0]; // 's', 'p', 'f'
+    state.activeTab = name[0]; // 's', 'p', 'f', 'b'
     liveCalc(state.activeTab);
   };
 
@@ -197,15 +212,11 @@
     state[prefix].unit = unit;
     document.getElementById('rhc-' + prefix + '-unit-us').classList.toggle('active', unit === 'us');
     document.getElementById('rhc-' + prefix + '-unit-metric').classList.toggle('active', unit === 'metric');
-
-    var maps = {
-      s: [['rhc-s-rider-lbl','Rider'],['rhc-s-bike-lbl','Bike']],
-      p: [['rhc-p-rider-lbl','Rider'],['rhc-p-bike-lbl','Bike'],['rhc-p-fp-lbl','Front Panniers'],['rhc-p-rp-lbl','Rear Panniers'],['rhc-p-bp-lbl','Bikepacking Load / Frame Bag']],
-      f: [['rhc-f-rider-lbl','Rider'],['rhc-f-bike-lbl','Bike']],
-    };
-    (maps[prefix] || []).forEach(function(pair) {
-      document.getElementById(pair[0]).textContent = wtLabel(pair[1], unit);
-    });
+    // Sync all per-field unit selects on this tab (convenience — user can override individually)
+    var tabEl = document.getElementById(TAB_IDS[prefix]);
+    if (tabEl) {
+      tabEl.querySelectorAll('.field-unit-sel').forEach(function(sel) { sel.value = unit; });
+    }
     liveCalc(prefix);
   };
 
@@ -240,13 +251,13 @@
 
     var totalLb = rider + bike;
     var psi     = calcPSI(totalLb, width, feel);
-    var pv      = fmtPressureVal(psi, 'us');
-    var bv      = fmtPressureVal(psi, 'metric');
 
     setWeightWarning('s', rider, bike);
-    document.getElementById('rhc-s-out-psi').innerHTML = pv.val + ' <span class="unit">psi</span>';
-    document.getElementById('rhc-s-out-bar').innerHTML = bv.val + ' <span class="unit">bar</span>';
-    document.getElementById('rhc-s-out-bar-row').style.display = 'flex';
+
+    var pv = fmtPressureVal(psi, 'us');
+    var bv = fmtPressureVal(psi, 'metric');
+    document.getElementById('rhc-s-out-psi').innerHTML =
+      pv.val + ' <span class="unit">psi</span> / ' + bv.val + ' <span class="unit">bar</span>';
 
     var note = state.s.feel === 'dk'
       ? 'Using Soft values since preferred feel was set to "Don\'t Know".'
@@ -281,69 +292,70 @@
 
     if (!fw || !rw || !rider || !bike) return hideResults('p');
 
-    // 1. Total weight
-    var totalLb = rider + bike + fp + rp + bp;
-
-    // 2. Bike style base split
+    // 1. Bike style base split
     var bsSplit = BIKE_STYLE[bsVal] || BIKE_STYLE['40/60'];
     var fRatio  = bsSplit[0];
     var rRatio  = bsSplit[1];
 
-    // 3. Riding position adjustment
+    // 2. Riding position adjustment
     var posAdj = POSITION_ADJ[posVal] || [0, 0];
-    var fBaseRatio = fRatio + posAdj[0];
-    var rBaseRatio = rRatio + posAdj[1];
 
-    // 4. Front & rear load
-    var bikeHalf = (bike + bp) * 0.5;
-    var fLoad = rider * fBaseRatio + bikeHalf + fp;
-    var rLoad = rider * rBaseRatio + bikeHalf + rp;
+    // 3. Per-wheel loads (spec §5.2–5.3)
+    // splitTotal = rider + bike + bikepacking (panniers added directly to their wheel)
+    var splitTotalLb = rider + bike + bp;
+    var fLoad = splitTotalLb * (fRatio + posAdj[0]) + fp;
+    var rLoad = splitTotalLb * (rRatio + posAdj[1]) + rp;
+    // totalLb includes everything — used as the equation input (equations calibrated
+    // for total system weight, same as Simple) and for scaling each wheel's pressure
+    var totalLb = rider + bike + fp + rp + bp;
 
-    // 5. Determine feel from terrain
+    // 4. Terrain: override feel and set multiplier
     var feel = state.p.feel === 'dk' ? 'soft' : state.p.feel;
-    var terrainMultF = 1, terrainMultR = 1;
+    var terrainMult = 1;
     if (terrain === 'smooth-gravel' || terrain === 'mixed') {
       feel = 'soft';
     } else if (terrain === 'coarse-gravel') {
-      feel = 'soft'; terrainMultF = terrainMultR = 0.95;
+      feel = 'soft'; terrainMult = 0.95;
     } else if (terrain === 'rough-gravel') {
-      feel = 'soft'; terrainMultF = terrainMultR = 1.05;
+      feel = 'soft'; terrainMult = 1.05;
     }
 
-    // 6. Base pressures
-    // Equations are calibrated for total rider+bike weight (not per-wheel load).
-    // Scale by how much each wheel's actual load deviates from the bike style baseline.
-    var fPsi = calcPSI(totalLb, fw, feel) * (fLoad / (totalLb * fRatio)) * terrainMultF;
-    var rPsi = calcPSI(totalLb, rw, feel) * (rLoad / (totalLb * rRatio)) * terrainMultR;
+    // 5. Rim width multiplier (spec §5.6)
+    var rimAdj = Math.min(rimw, 32) - 19;
+    var rimMult = rimAdj > 0 ? (1 - rimAdj * 0.002) : 1;
 
-    // 7. Casing adjustments (psi / tire width)
+    // 6. Casing adjustments (psi / tire width, spec §5.5)
     var fcAdj = (CASING_ADJ[fcVal] || 0) / fw;
     var rcAdj = (CASING_ADJ[rcVal] || 0) / rw;
-    fPsi += fcAdj;
-    rPsi += rcAdj;
 
-    // 8. Rim width adjustment: each mm over 19 (up to 32) → −0.2%
-    var rimAdj = Math.min(rimw, 32) - 19;
-    if (rimAdj > 0) {
-      fPsi *= (1 - rimAdj * 0.002);
-      rPsi *= (1 - rimAdj * 0.002);
+    // Full pressure pipeline: base → scale by load ratio → terrain → casing → rim
+    // Simple is calibrated for a road bike (40/60 front/rear). Pro anchors to that
+    // baseline so road + neutral + no panniers = Simple exactly. Other bike styles and
+    // position adjustments produce small, proportionate deviations:
+    //   scalingFactor = (wheelLoad / totalLb) + (1 − roadBaseline)
+    // e.g. road+aero front: 0.43 + 0.60 = 1.03 → +3%; road+upright: 0.32+0.60 = 0.92 → −8%
+    var ROAD_FRONT = 0.40, ROAD_REAR = 0.60;
+    function pipePSI(loadLb, complementFraction, width, f, casingAdj) {
+      var scale = loadLb / totalLb + complementFraction;
+      var base  = calcPSI(totalLb, width, f) * scale * terrainMult;
+      return (base + casingAdj) * rimMult;
     }
 
-    // 9. Hookless / tubeless caps
+    // 7. Compute base pressures
+    var fPsi = pipePSI(fLoad, ROAD_REAR, fw, feel, fcAdj);
+    var rPsi = pipePSI(rLoad, ROAD_FRONT, rw, feel, rcAdj);
+
+    // 8. Hookless / tubeless caps (spec §5.7–5.8)
     var notes = [];
     var HOOKLESS_MAX = 72.5;
     var TUBELESS_MAX = 60;
 
     if (rimtype === 'hookless' || rimtype === 'dk') {
-      [['f', fw], ['r', rw]].forEach(function(pair) {
-        var side = pair[0], w = pair[1];
+      [['f', fw, fLoad, ROAD_REAR, fcAdj], ['r', rw, rLoad, ROAD_FRONT, rcAdj]].forEach(function(entry) {
+        var side = entry[0], w = entry[1], load = entry[2], comp = entry[3], adj = entry[4];
         var p = side === 'f' ? fPsi : rPsi;
         if (p > HOOKLESS_MAX) {
-          var load  = side === 'f' ? fLoad : rLoad;
-          var ratio = side === 'f' ? fRatio : rRatio;
-          var mult  = side === 'f' ? terrainMultF : terrainMultR;
-          var adj   = side === 'f' ? fcAdj : rcAdj;
-          var softP = calcPSI(totalLb, w, 'soft') * (load / (totalLb * ratio)) * mult + adj;
+          var softP = pipePSI(load, comp, w, 'soft', adj);
           if (softP > HOOKLESS_MAX) {
             notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires pressure that exceeds the 5 bar / 72.5 psi ETRTO limit for hookless rims.');
             if (side === 'f') fPsi = HOOKLESS_MAX; else rPsi = HOOKLESS_MAX;
@@ -356,16 +368,12 @@
     }
 
     if (tube === 'tubeless') {
-      [['f', fw], ['r', rw]].forEach(function(pair) {
-        var side = pair[0], w = pair[1];
+      [['f', fw, fLoad, ROAD_REAR, fcAdj], ['r', rw, rLoad, ROAD_FRONT, rcAdj]].forEach(function(entry) {
+        var side = entry[0], w = entry[1], load = entry[2], comp = entry[3], adj = entry[4];
         if (w > 31) {
           var p = side === 'f' ? fPsi : rPsi;
           if (p > TUBELESS_MAX) {
-            var load  = side === 'f' ? fLoad : rLoad;
-            var ratio = side === 'f' ? fRatio : rRatio;
-            var mult  = side === 'f' ? terrainMultF : terrainMultR;
-            var adj   = side === 'f' ? fcAdj : rcAdj;
-            var softP = calcPSI(totalLb, w, 'soft') * (load / (totalLb * ratio)) * mult + adj;
+            var softP = pipePSI(load, comp, w, 'soft', adj);
             if (softP > TUBELESS_MAX) {
               notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires a pressure that exceeds the 60 psi / 4.1 bar limit for Rene Herse tubeless tires (>31 mm). We suggest using tubes instead or switching to wider tires.');
               if (side === 'f') fPsi = TUBELESS_MAX; else rPsi = TUBELESS_MAX;
@@ -378,25 +386,25 @@
       });
     }
 
-    // 10. Front must be ≥ soft pressure for 50% of total weight
+    // 9. Front minimum: Soft pressure for 50% of total system weight (spec §5.9)
     var fMin = calcPSI(totalLb * 0.5, fw, 'soft');
     if (fPsi < fMin) {
       fPsi = fMin;
       notes.push('Front pressure raised to minimum safe level for braking performance.');
     }
 
-    // 11. Rear must be ≥ front
+    // 10. Rear ≥ front
     if (rPsi < fPsi) {
       rPsi = fPsi;
       notes.push('Rear pressure adjusted to match front (rear must be ≥ front).');
     }
 
-    // 12. Format output
+    // 11. Format output — Pro: 0.1 psi / 0.01 bar (spec §5.9)
     setWeightWarning('p', rider, bike);
-    var fv = fmtPressureVal(fPsi, 'us');
-    var rv = fmtPressureVal(rPsi, 'us');
-    var fb = fmtPressureVal(fPsi, 'metric');
-    var rb = fmtPressureVal(rPsi, 'metric');
+    var fv = fmtProPressure(fPsi, 'us');
+    var rv = fmtProPressure(rPsi, 'us');
+    var fb = fmtProPressure(fPsi, 'metric');
+    var rb = fmtProPressure(rPsi, 'metric');
 
     document.getElementById('rhc-p-out-f').innerHTML =
       fv.val + ' <span class="unit">psi</span> / ' + fb.val + ' <span class="unit">bar</span>';
@@ -427,9 +435,9 @@
 
     if (!rider || !bike) return hideResults('f');
 
-    var totalLb  = rider + bike;
-    var totalKg  = totalLb / LB_PER_KG;
-    var mult     = FINDER_MULT[style];
+    var totalLb    = rider + bike;
+    var totalKg    = totalLb / LB_PER_KG;
+    var mult       = FINDER_MULT[style];
     var idealWidth = Math.sqrt(totalKg * mult);
 
     // Snap to nearest RH width
@@ -448,9 +456,8 @@
 
     setWeightWarning('f', rider, bike);
     document.getElementById('rhc-f-out-width').innerHTML = RH_DISPLAY[best];
-    document.getElementById('rhc-f-out-psi').innerHTML   = pv.val + ' <span class="unit">psi</span>';
-    document.getElementById('rhc-f-out-bar').innerHTML   = bv.val + ' <span class="unit">bar</span>';
-    document.getElementById('rhc-f-out-bar-row').style.display = 'flex';
+    document.getElementById('rhc-f-out-psi').innerHTML =
+      pv.val + ' <span class="unit">psi</span> / ' + bv.val + ' <span class="unit">bar</span>';
 
     var note = 'Ideal width calculated: ' + idealWidth.toFixed(1) + ' mm → rounded to ' + RH_DISPLAY[best] + '. Pressure based on ' + feel + ' values at ' + Math.round(totalLb) + ' lb / ' + totalKg.toFixed(1) + ' kg total.';
     var noteEl = document.getElementById('rhc-f-result-note');
@@ -485,30 +492,39 @@
     buildWidthDropdown('rhc-p-rw');
 
     // Simple tab
-    onField('rhc-s-width',  's', 'change');
-    onField('rhc-s-rider',  's');
-    onField('rhc-s-bike',   's');
+    onField('rhc-s-width',      's', 'change');
+    onField('rhc-s-rider',      's');
+    onField('rhc-s-bike',       's');
+    onField('rhc-s-rider-unit', 's', 'change');
+    onField('rhc-s-bike-unit',  's', 'change');
 
     // Pro tab
-    onField('rhc-p-fw',       'p', 'change');
-    onField('rhc-p-rw',       'p', 'change');
-    onField('rhc-p-fc',       'p', 'change');
-    onField('rhc-p-rc',       'p', 'change');
-    onField('rhc-p-rimw',     'p');
-    onField('rhc-p-rimtype',  'p', 'change');
-    onField('rhc-p-bikestyle','p', 'change');
-    onField('rhc-p-position', 'p', 'change');
-    onField('rhc-p-terrain',  'p', 'change');
-    onField('rhc-p-rider',    'p');
-    onField('rhc-p-bike',     'p');
-    onField('rhc-p-fp',       'p');
-    onField('rhc-p-rp',       'p');
-    onField('rhc-p-bp',       'p');
+    onField('rhc-p-fw',         'p', 'change');
+    onField('rhc-p-rw',         'p', 'change');
+    onField('rhc-p-fc',         'p', 'change');
+    onField('rhc-p-rc',         'p', 'change');
+    onField('rhc-p-rimw',       'p');
+    onField('rhc-p-rimtype',    'p', 'change');
+    onField('rhc-p-bikestyle',  'p', 'change');
+    onField('rhc-p-position',   'p', 'change');
+    onField('rhc-p-terrain',    'p', 'change');
+    onField('rhc-p-rider',      'p');
+    onField('rhc-p-bike',       'p');
+    onField('rhc-p-fp',         'p');
+    onField('rhc-p-rp',         'p');
+    onField('rhc-p-bp',         'p');
+    onField('rhc-p-rider-unit', 'p', 'change');
+    onField('rhc-p-bike-unit',  'p', 'change');
+    onField('rhc-p-fp-unit',    'p', 'change');
+    onField('rhc-p-rp-unit',    'p', 'change');
+    onField('rhc-p-bp-unit',    'p', 'change');
 
     // Finder tab
-    onField('rhc-f-style', 'f', 'change');
-    onField('rhc-f-rider', 'f');
-    onField('rhc-f-bike',  'f');
+    onField('rhc-f-style',      'f', 'change');
+    onField('rhc-f-rider',      'f');
+    onField('rhc-f-bike',       'f');
+    onField('rhc-f-rider-unit', 'f', 'change');
+    onField('rhc-f-bike-unit',  'f', 'change');
   });
 
 }() );
