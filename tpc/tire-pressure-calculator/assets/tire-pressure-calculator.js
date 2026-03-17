@@ -215,7 +215,12 @@
     // Sync all per-field unit selects on this tab (convenience — user can override individually)
     var tabEl = document.getElementById(TAB_IDS[prefix]);
     if (tabEl) {
-      tabEl.querySelectorAll('.field-unit-sel').forEach(function(sel) { sel.value = unit; });
+      tabEl.querySelectorAll('.field-unit-sel').forEach(function(sel) {
+        sel.value = unit;
+        sel.classList.remove('unit-flash');
+        void sel.offsetWidth; // restart animation
+        sel.classList.add('unit-flash');
+      });
     }
     liveCalc(prefix);
   };

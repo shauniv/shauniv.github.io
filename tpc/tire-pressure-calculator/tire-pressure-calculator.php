@@ -24,7 +24,7 @@ define( 'RHC_TPC_URL', plugins_url( '', __FILE__ ) );
 function rhc_tpc_enqueue_assets() {
 	wp_enqueue_style(
 		'rhc-tpc-fonts',
-		'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap',
+		'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600;700;800&display=swap',
 		[],
 		null
 	);

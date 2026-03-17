@@ -412,8 +412,8 @@
     <div class="bg-section bg-further">
       <h2>Further Reading</h2>
       <ul>
-        <li><a href="https://www.renehersecycles.com/science-behind-the-tire-pressure-calculator/" target="_blank">Science behind the Tire Pressure Calculator</a></li>
-        <li><a href="https://www.renehersecycles.com/category/bicycle-quarterly/tire-tests/" target="_blank">Results of <em>Bicycle Quarterly's</em> tire tests</a></li>
+        <li><a href="https://www.renehersecycles.com/category/bicycle-quarterly/tire-tests/" target="_blank">Science behind the Tire Pressure Calculator</a></li>
+        <li><a href="https://www.renehersecycles.com/bq-tire-test-results/" target="_blank">Results of <em>Bicycle Quarterly's</em> tire tests</a></li>
       </ul>
     </div>
 
