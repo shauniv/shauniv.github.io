@@ -359,15 +359,9 @@
       [['f', fw, fLoad, ROAD_REAR, fcAdj], ['r', rw, rLoad, ROAD_FRONT, rcAdj]].forEach(function(entry) {
         var side = entry[0], w = entry[1], load = entry[2], comp = entry[3], adj = entry[4];
         var p = side === 'f' ? fPsi : rPsi;
-        if (p > HOOKLESS_MAX) {
-          var softP = pipePSI(load, comp, w, 'soft', adj);
-          if (softP > HOOKLESS_MAX) {
-            notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires pressure that exceeds the 5 bar / 72.5 psi ETRTO limit for hookless rims.');
-            if (side === 'f') fPsi = HOOKLESS_MAX; else rPsi = HOOKLESS_MAX;
-          } else {
-            notes.push((side==='f'?'Front':'Rear') + ': Switched to Soft values to stay within hookless rim limit (72.5 psi).');
-            if (side === 'f') fPsi = softP; else rPsi = softP;
-          }
+        if (p !== null && p > HOOKLESS_MAX) {
+          notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires pressure that exceeds the 5 bar / 72.5 psi ETRTO limit for hookless rims.');
+          if (side === 'f') fPsi = null; else rPsi = null;
         }
       });
     }
@@ -377,15 +371,9 @@
         var side = entry[0], w = entry[1], load = entry[2], comp = entry[3], adj = entry[4];
         if (w > 31) {
           var p = side === 'f' ? fPsi : rPsi;
-          if (p > TUBELESS_MAX) {
-            var softP = pipePSI(load, comp, w, 'soft', adj);
-            if (softP > TUBELESS_MAX) {
-              notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires a pressure that exceeds the 60 psi / 4.1 bar limit for Rene Herse tubeless tires (>31 mm). We suggest using tubes instead or switching to wider tires.');
-              if (side === 'f') fPsi = TUBELESS_MAX; else rPsi = TUBELESS_MAX;
-            } else {
-              notes.push((side==='f'?'Front':'Rear') + ': Switched to Soft values to stay within tubeless limit (60 psi) for ' + w + ' mm tire.');
-              if (side === 'f') fPsi = softP; else rPsi = softP;
-            }
+          if (p !== null && p > TUBELESS_MAX) {
+            notes.push('⚠️ Your ' + (side==='f'?'front':'rear') + ' tire/rim combination requires a pressure that exceeds the 60 psi / 4.1 bar limit for Rene Herse tubeless tires (>31 mm). We suggest using tubes instead or switching to wider tires.');
+            if (side === 'f') fPsi = null; else rPsi = null;
           }
         }
       });
@@ -393,28 +381,22 @@
 
     // 9. Front minimum: Soft pressure for 50% of total system weight (spec §5.9)
     var fMin = calcPSI(totalLb * 0.5, fw, 'soft');
-    if (fPsi < fMin) {
-      fPsi = fMin;
-      notes.push('Front pressure raised to minimum safe level for braking performance.');
-    }
-
-    // 10. Rear ≥ front
-    if (rPsi < fPsi) {
-      rPsi = fPsi;
-      notes.push('Rear pressure adjusted to match front (rear must be ≥ front).');
+    if (fPsi !== null && fPsi < fMin) {
+      notes.push('⚠️ Front pressure is below the minimum safe level for braking performance.');
+      fPsi = null;
     }
 
     // 11. Format output — Pro: 0.1 psi / 0.01 bar (spec §5.9)
     setWeightWarning('p', rider, bike);
-    var fv = fmtProPressure(fPsi, 'us');
-    var rv = fmtProPressure(rPsi, 'us');
-    var fb = fmtProPressure(fPsi, 'metric');
-    var rb = fmtProPressure(rPsi, 'metric');
 
-    document.getElementById('rhc-p-out-f').innerHTML =
-      fv.val + ' <span class="unit">psi</span> / ' + fb.val + ' <span class="unit">bar</span>';
-    document.getElementById('rhc-p-out-r').innerHTML =
-      rv.val + ' <span class="unit">psi</span> / ' + rb.val + ' <span class="unit">bar</span>';
+    document.getElementById('rhc-p-out-f').innerHTML = fPsi === null
+      ? 'N/A'
+      : (function() { var v = fmtProPressure(fPsi, 'us'); var b = fmtProPressure(fPsi, 'metric');
+          return v.val + ' <span class="unit">psi</span> / ' + b.val + ' <span class="unit">bar</span>'; }());
+    document.getElementById('rhc-p-out-r').innerHTML = rPsi === null
+      ? 'N/A'
+      : (function() { var v = fmtProPressure(rPsi, 'us'); var b = fmtProPressure(rPsi, 'metric');
+          return v.val + ' <span class="unit">psi</span> / ' + b.val + ' <span class="unit">bar</span>'; }());
 
     var noteEl = document.getElementById('rhc-p-result-note');
     if (notes.length) {

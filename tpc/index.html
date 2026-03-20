@@ -17,7 +17,7 @@
 
 <div class="tool-header">
   <h1>Tire Pressure Calculator</h1>
-  <p>Rene Herse Cycles &mdash; Based on Real-Road Measurements</p>
+  <p>presented by Rene Herse Cycles and Cal Poly Pomona</p>
 </div>
 
 <div class="tab-nav">
@@ -91,6 +91,14 @@
         </div>
         <div id="rhc-s-result-note" class="result-note"></div>
       </div>
+    </div>
+
+    <div class="rhc-disclaimers">
+      <ul>
+        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
+        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
+        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
+      </ul>
     </div>
 
   </div>
@@ -196,7 +204,7 @@
 
     <div class="two-col">
       <div class="field">
-        <label>Front Panniers</label>
+        <label>Front Panniers / Handlebar Bag</label>
         <div class="weight-input-wrap">
           <input type="number" id="rhc-p-fp" min="0" max="100" step="0.5" placeholder="0">
           <select class="field-unit-sel" id="rhc-p-fp-unit"><option value="us">lb</option><option value="metric">kg</option></select>
@@ -227,19 +235,19 @@
       <div class="field">
         <label>Bike Style</label>
         <select id="rhc-p-bikestyle">
-          <option value="40/60">Road bike (40/60 F/R)</option>
-          <option value="40/60g">Gravel bike (40/60 F/R)</option>
-          <option value="38/62">Touring bike (38/62 F/R)</option>
-          <option value="35/65">City bike (35/65 F/R)</option>
+          <option value="40/60">Road bike</option>
+          <option value="40/60g">Gravel bike</option>
+          <option value="38/62">Touring bike</option>
+          <option value="35/65">City bike</option>
         </select>
       </div>
       <div class="field">
         <label>Riding Position</label>
         <select id="rhc-p-position">
-          <option value="aero">Aero / flat back (+3% front)</option>
-          <option value="low" selected>Low / stretched-out (neutral)</option>
-          <option value="intermediate">Intermediate (−4% front)</option>
-          <option value="upright">Upright (−8% front)</option>
+          <option value="aero">Aero / flat back</option>
+          <option value="low" selected>Low / stretched-out</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="upright">Upright</option>
         </select>
       </div>
     </div>
@@ -249,10 +257,10 @@
       <select id="rhc-p-terrain">
         <option value="smooth">Smooth asphalt</option>
         <option value="rough">Rough asphalt</option>
-        <option value="smooth-gravel">Smooth gravel (use Soft values)</option>
-        <option value="coarse-gravel">Coarse gravel (95% of Soft)</option>
-        <option value="rough-gravel">Rough gravel / large rocks (105% of Soft)</option>
-        <option value="mixed">Mixed paved / gravel (use Soft values)</option>
+        <option value="smooth-gravel">Smooth gravel</option>
+        <option value="coarse-gravel">Coarse gravel</option>
+        <option value="rough-gravel">Rough gravel / large rocks</option>
+        <option value="mixed">Mixed paved / gravel</option>
       </select>
     </div>
 
@@ -263,7 +271,7 @@
         <button class="toggle-btn" id="rhc-p-feel-firm" onclick="rhcTpcSetFeel('p','firm')">Firm</button>
         <button class="toggle-btn" id="rhc-p-feel-dk" onclick="rhcTpcSetFeel('p','dk')">Don't Know</button>
       </div>
-      <div class="hint">Terrain selection may override this setting.</div>
+      <div class="hint">Fastest-rolling pressure is same for 'firm' and 'soft' on rough surfaces.</div>
     </div>
 
 
@@ -282,6 +290,14 @@
         </div>
         <div id="rhc-p-result-note" class="result-note"></div>
       </div>
+    </div>
+
+    <div class="rhc-disclaimers">
+      <ul>
+        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
+        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
+        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
+      </ul>
     </div>
 
   </div>
@@ -327,10 +343,10 @@
     <div class="field">
       <label>Riding Style</label>
       <select id="rhc-f-style">
-        <option value="road">Road — smooth pavement, performance focus</option>
-        <option value="allroad">All-Road — mixed surfaces, everyday riding</option>
-        <option value="gravel">Gravel — dirt roads, light off-road</option>
-        <option value="adventure">Adventure — rough terrain, loaded touring</option>
+        <option value="road">Road — smooth pavement</option>
+        <option value="allroad">All-Road — mixed surfaces</option>
+        <option value="gravel">Gravel — dirt roads</option>
+        <option value="adventure">Adventure — rough terrain</option>
       </select>
     </div>
 
@@ -363,6 +379,14 @@
         </div>
         <div id="rhc-f-result-note" class="result-note"></div>
       </div>
+    </div>
+
+    <div class="rhc-disclaimers">
+      <ul>
+        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
+        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
+        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
+      </ul>
     </div>
 
   </div>
