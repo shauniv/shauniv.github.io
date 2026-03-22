@@ -288,7 +288,7 @@
 .rhc-tpc .result-header {
   background: rgba(255,255,255,0.05);
   padding: 12px 20px;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -307,7 +307,7 @@
 }
 .rhc-tpc .result-row:last-child { border-bottom: none; }
 .rhc-tpc .result-label {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -315,7 +315,7 @@
 }
 .rhc-tpc .result-value {
   font-family: var(--rhc-serif);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--rhc-paper);
   letter-spacing: -0.01em;
@@ -528,5 +528,5 @@
   .rhc-tpc .weight-row,
   .rhc-tpc .two-col { grid-template-columns: 1fr; }
   .rhc-tpc .panel-inner { padding: 24px 16px 40px; }
-  .rhc-tpc .result-value { font-size: 22px; }
+  .rhc-tpc .result-value { font-size: 18px; }
 }
