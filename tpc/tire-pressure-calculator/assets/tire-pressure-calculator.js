@@ -52,13 +52,34 @@
   var MAX_COMBINED_KG = 200;
 
   // ═══════════════════════════════════════════
+  // ═══════════════════════════════════════════
+  // LOCALE-BASED UNIT DETECTION
+  // ═══════════════════════════════════════════
+  function guessUnit() {
+    var langs = (navigator.languages && navigator.languages.length)
+      ? navigator.languages
+      : [navigator.language || ''];
+    for (var i = 0; i < langs.length; i++) {
+      var region = '';
+      try {
+        region = new Intl.Locale(langs[i]).maximize().region;
+      } catch (e) {
+        var parts = langs[i].split(/[-_]/);
+        if (parts.length > 1) region = parts[parts.length - 1].toUpperCase();
+      }
+      if (region) return region === 'US' ? 'us' : 'metric';
+    }
+    return 'metric';
+  }
+  var defaultUnit = guessUnit();
+
   // STATE
   // ═══════════════════════════════════════════
   var state = {
     activeTab: 's',
-    s: { unit:'us', feel:'soft' },
-    p: { unit:'us', feel:'soft', tube:'tubes' },
-    f: { unit:'us', feel:'soft' },
+    s: { unit: defaultUnit, feel:'soft' },
+    p: { unit: defaultUnit, feel:'soft', tube:'tubes' },
+    f: { unit: defaultUnit, feel:'soft' },
   };
 
   // Shared fields synced on tab switch
@@ -103,20 +124,27 @@
   // UNIT HELPERS
   // ═══════════════════════════════════════════
 
+  function fmtNum(value, decimals) {
+    return new Intl.NumberFormat(navigator.language, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }).format(value);
+  }
+
   // Simple / Finder rounding: nearest 1 psi or 0.1 bar
   function fmtPressureVal(psi, unit) {
     if (unit === 'metric') {
-      return { val: (psi * BAR_PER_PSI).toFixed(1), unit: 'bar' };
+      return { val: fmtNum(psi * BAR_PER_PSI, 1), unit: 'bar' };
     }
-    return { val: Math.round(psi), unit: 'psi' };
+    return { val: fmtNum(Math.round(psi), 0), unit: 'psi' };
   }
 
   // Pro rounding: 0.1 psi or 0.01 bar (spec §3 / §5.9)
   function fmtProPressure(psi, unit) {
     if (unit === 'metric') {
-      return { val: (psi * BAR_PER_PSI).toFixed(2), unit: 'bar' };
+      return { val: fmtNum(psi * BAR_PER_PSI, 2), unit: 'bar' };
     }
-    return { val: psi.toFixed(1), unit: 'psi' };
+    return { val: fmtNum(psi, 1), unit: 'psi' };
   }
 
   // Returns weight in lb. Reads per-field unit select (id + '-unit') if present,
@@ -157,7 +185,7 @@
     if (!el || !card) return;
     var totalLb = riderLb + bikeLb;
     var totalKg = totalLb / LB_PER_KG;
-    var kgStr = totalKg.toFixed(1) + ' kg / ' + Math.round(totalLb) + ' lb';
+    var kgStr = fmtNum(totalKg, 1) + ' kg / ' + fmtNum(Math.round(totalLb), 0) + ' lb';
     if (totalKg < MIN_COMBINED_KG) {
       el.textContent = 'Combined rider and bike weight (' + kgStr + ') is below the minimum of ' + MIN_COMBINED_KG + ' kg / ' + Math.round(MIN_COMBINED_KG * LB_PER_KG) + ' lb. We have no data for this weight range.';
       el.style.display = 'block';
@@ -266,7 +294,7 @@
 
     var note = state.s.feel === 'dk'
       ? 'Using Soft values since preferred feel was set to "Don\'t Know".'
-      : 'Using ' + feel.charAt(0).toUpperCase() + feel.slice(1) + ' values for a ' + width + ' mm tire at ' + Math.round(totalLb) + ' lb / ' + (totalLb / LB_PER_KG).toFixed(1) + ' kg total.';
+      : 'Using ' + feel.charAt(0).toUpperCase() + feel.slice(1) + ' values for a ' + width + ' mm tire at ' + fmtNum(Math.round(totalLb), 0) + ' lb / ' + fmtNum(totalLb / LB_PER_KG, 1) + ' kg total.';
     document.getElementById('rhc-s-result-note').textContent = note;
 
     document.getElementById('rhc-s-result').classList.add('visible');
@@ -446,7 +474,7 @@
     document.getElementById('rhc-f-out-psi').innerHTML =
       pv.val + ' <span class="unit">psi</span> / ' + bv.val + ' <span class="unit">bar</span>';
 
-    var note = 'Ideal width calculated: ' + idealWidth.toFixed(1) + ' mm → rounded to ' + RH_DISPLAY[best] + '. Pressure based on ' + feel + ' values at ' + Math.round(totalLb) + ' lb / ' + totalKg.toFixed(1) + ' kg total.';
+    var note = 'Ideal width calculated: ' + fmtNum(idealWidth, 1) + ' mm → rounded to ' + RH_DISPLAY[best] + '. Pressure based on ' + feel + ' values at ' + fmtNum(Math.round(totalLb), 0) + ' lb / ' + fmtNum(totalKg, 1) + ' kg total.';
     var noteEl = document.getElementById('rhc-f-result-note');
     noteEl.textContent = note;
     noteEl.style.display = 'block';
@@ -512,6 +540,9 @@
     onField('rhc-f-bike',       'f');
     onField('rhc-f-rider-unit', 'f', 'change');
     onField('rhc-f-bike-unit',  'f', 'change');
+
+    // Apply locale-guessed unit to all tabs (syncs toggle buttons + per-field selects)
+    ['s', 'p', 'f'].forEach(function(prefix) { rhcTpcSetUnit(prefix, defaultUnit); });
   });
 
 }() );
