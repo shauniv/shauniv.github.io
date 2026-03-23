@@ -8,15 +8,31 @@
 
   // Spreadsheet equations: y = slope*x + intercept  (x = wheel load in KG)
   // Keyed by nominal width → { firm: [slope, intercept], soft: [slope, intercept] }
-  var EQUATIONS = {
+
+  // NEW: 5-anchor set developed for this tool, extended to 25–55 mm at boundaries
+  var EQUATIONS_NEW = {
+    25: { firm: [0.8105, 6.0956], soft: [0.6762, 2.5409] }, // same as 28mm (clamped)
     28: { firm: [0.8105, 6.0956], soft: [0.6762, 2.5409] },
     35: { firm: [0.5846, 8.0286], soft: [0.4582, 4.4979] },
     38: { firm: [0.4683, 4.5270], soft: [0.3814, 5.6948] },
     44: { firm: [0.4167, 6.0000], soft: [0.3333, 7.0000] },
     48: { firm: [0.3750, 7.0000], soft: [0.2778, 8.6667] },
+    55: { firm: [0.3750, 7.0000], soft: [0.2778, 8.6667] }, // same as 48mm (clamped)
   };
+  var ANCHOR_WIDTHS_NEW = [25, 28, 35, 38, 44, 48, 55];
 
-  var ANCHOR_WIDTHS = [28, 35, 38, 44, 48];
+  // OLD: 8-anchor set from the original live calculator (widths 25–55 mm)
+  var EQUATIONS_OLD = {
+    25: { firm: [1.24722222222222,  0.733333333333327], soft: [1.00833333333333, -8                 ] },
+    28: { firm: [0.869444444444444, 2.76666666666667 ], soft: [0.7125,            0.800000000000004 ] },
+    32: { firm: [0.673611111111111, 2.66666666666666 ], soft: [0.530555555555555, 3.93333333333334  ] },
+    35: { firm: [0.586111111111111, 2.36666666666667 ], soft: [0.458333333333333, 3.8               ] },
+    38: { firm: [0.4875,            4.1              ], soft: [0.397222222222222, 3.63333333333333  ] },
+    42: { firm: [0.431944444444444, 3.96666666666667 ], soft: [0.345833333333333, 3.6               ] },
+    48: { firm: [0.365277777777778, 4.86666666666666 ], soft: [0.293055555555556, 4.13333333333333  ] },
+    55: { firm: [0.295833333333333, 6                ], soft: [0.244444444444444, 4.56666666666667  ] },
+  };
+  var ANCHOR_WIDTHS_OLD = [25, 28, 32, 35, 38, 42, 48, 55];
 
   // Rene Herse available widths (for tire finder output snapping)
   var RH_WIDTHS     = [26, 28, 31, 35, 38, 43, 48, 55];
@@ -77,6 +93,7 @@
   // ═══════════════════════════════════════════
   var state = {
     activeTab: 's',
+    eqSet: 'new',
     s: { unit: defaultUnit, feel:'soft' },
     p: { unit: defaultUnit, feel:'soft', tube:'tubes' },
     f: { unit: defaultUnit, feel:'soft' },
@@ -94,24 +111,36 @@
   // INTERPOLATION
   // ═══════════════════════════════════════════
   function getEquation(width, feel) {
-    if (width <= 28) return EQUATIONS[28][feel];
-    if (width >= 48) return EQUATIONS[48][feel];
+    var eqs     = state.eqSet === 'new' ? EQUATIONS_NEW     : EQUATIONS_OLD;
+    var anchors = state.eqSet === 'new' ? ANCHOR_WIDTHS_NEW : ANCHOR_WIDTHS_OLD;
+    var minW = anchors[0], maxW = anchors[anchors.length - 1];
 
-    var lower = 28, upper = 35;
-    for (var i = 0; i < ANCHOR_WIDTHS.length - 1; i++) {
-      if (width >= ANCHOR_WIDTHS[i] && width <= ANCHOR_WIDTHS[i+1]) {
-        lower = ANCHOR_WIDTHS[i];
-        upper = ANCHOR_WIDTHS[i+1];
+    if (width <= minW) return eqs[minW][feel];
+    if (width >= maxW) return eqs[maxW][feel];
+
+    var lower = anchors[0], upper = anchors[1];
+    for (var i = 0; i < anchors.length - 1; i++) {
+      if (width >= anchors[i] && width <= anchors[i+1]) {
+        lower = anchors[i];
+        upper = anchors[i+1];
         break;
       }
     }
-    if (lower === upper) return EQUATIONS[lower][feel];
+    if (lower === upper) return eqs[lower][feel];
 
     var t  = (width - lower) / (upper - lower);
-    var ls = EQUATIONS[lower][feel][0], li = EQUATIONS[lower][feel][1];
-    var us = EQUATIONS[upper][feel][0], ui = EQUATIONS[upper][feel][1];
+    var ls = eqs[lower][feel][0], li = eqs[lower][feel][1];
+    var us = eqs[upper][feel][0], ui = eqs[upper][feel][1];
     return [ls + t*(us-ls), li + t*(ui-li)];
   }
+
+  window.rhcTpcSetEqSet = function(set) {
+    state.eqSet = set;
+    document.querySelectorAll('.rhc-tpc .eq-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.set === set);
+    });
+    ['s', 'p', 'f'].forEach(function(prefix) { liveCalc(prefix); });
+  };
 
   // weightLb converted to kg internally; equation is m × kg + b
   function calcPSI(weightLb, width, feel) {

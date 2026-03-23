@@ -6,6 +6,11 @@
   <button class="tab-btn" onclick="rhcTpcSwitchTab('finder', this)">Tire Finder</button>
   <button class="tab-btn" onclick="rhcTpcSwitchTab('background', this)">Background</button>
 </div>
+<div class="eq-toggle">
+  <span class="eq-toggle-label">Equations:</span>
+  <button class="eq-btn active" data-set="new" onclick="rhcTpcSetEqSet('new')">New</button>
+  <button class="eq-btn"        data-set="old" onclick="rhcTpcSetEqSet('old')">Old</button>
+</div>
 
 <!-- ═══════════════════════════════════════════════
      TAB 1 · SIMPLE CALCULATOR

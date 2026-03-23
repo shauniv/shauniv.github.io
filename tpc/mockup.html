@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+		<link rel="profile" href="https://gmpg.org/xfn/11" />
+		<link rel="pingback" href="https://www.renehersecycles.com/xmlrpc.php" />
+		<title>Tire Pressure Calculator &#8211; Rene Herse Cycles</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//cdn.datatables.net' />
+<link rel='dns-prefetch' href='//unpkg.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel="alternate" type="application/rss+xml" title="Rene Herse Cycles &raquo; Feed" href="https://www.renehersecycles.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Rene Herse Cycles &raquo; Comments Feed" href="https://www.renehersecycles.com/comments/feed/" />
+<script id="wpp-js" src="https://www.renehersecycles.com/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?ver=7.3.8" data-sampling="0" data-sampling-rate="100" data-api-url="https://www.renehersecycles.com/wp-json/wordpress-popular-posts" data-post-id="180824" data-token="9b895994ac" data-lang="0" data-debug="0"></script>
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.renehersecycles.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.renehersecycles.com%2Fthe-science-behind-the-tire-pressure-calculator%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.renehersecycles.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.renehersecycles.com%2Fthe-science-behind-the-tire-pressure-calculator%2F&#038;format=xml" />
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:title" content="Tire Pressure and Performance"/>
+	<meta property="og:title" content="Tire Pressure and Performance"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://www.renehersecycles.com/the-science-behind-the-tire-pressure-calculator/"/>
+	<meta property="og:site_name" content="Rene Herse Cycles"/>
+	<meta property="og:description" content="When I was preparing my FKT ride over the notoriously rough gravel of the Oregon Outback last year, I needed to figure out what tire pressure to run. I looked at some online tire pressure calculators. One suggested to run my 54 mm-wide tires at&hellip;"/>
+
+						<meta property="og:image" content="https://www.renehersecycles.com/wp-content/uploads/2022/03/Tire_Pressure_Paso_Cortes_Cover.jpg"/>
+				<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='wc-authorize-net-cim-credit-card-checkout-block-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-gateway-authorize-net-cim/assets/css/blocks/wc-authorize-net-cim-checkout-block.css?ver=3.10.14' media='all' />
+<link rel='stylesheet' id='wc-authorize-net-cim-echeck-checkout-block-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-gateway-authorize-net-cim/assets/css/blocks/wc-authorize-net-cim-checkout-block.css?ver=3.10.14' media='all' />
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.renehersecycles.com/wp-includes/css/dist/block-library/style.min.css?ver=6.9.4' media='all' />
+
+<style id='wp-block-cover-inline-css'>
+.wp-block-cover,.wp-block-cover-image{align-items:center;background-position:50%;box-sizing:border-box;display:flex;justify-content:center;min-height:430px;overflow:hidden;overflow:clip;padding:1em;position:relative}.wp-block-cover .has-background-dim:not([class*=-background-color]),.wp-block-cover-image .has-background-dim:not([class*=-background-color]),.wp-block-cover-image.has-background-dim:not([class*=-background-color]),.wp-block-cover.has-background-dim:not([class*=-background-color]){background-color:#000}.wp-block-cover .has-background-dim.has-background-gradient,.wp-block-cover-image .has-background-dim.has-background-gradient{background-color:initial}.wp-block-cover-image.has-background-dim:before,.wp-block-cover.has-background-dim:before{background-color:inherit;content:""}.wp-block-cover .wp-block-cover__background,.wp-block-cover .wp-block-cover__gradient-background,.wp-block-cover-image .wp-block-cover__background,.wp-block-cover-image .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim:not(.has-background-gradient):before,.wp-block-cover.has-background-dim:not(.has-background-gradient):before{bottom:0;left:0;opacity:.5;position:absolute;right:0;top:0}.wp-block-cover-image.has-background-dim.has-background-dim-10 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-10 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-10:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-10 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-10 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-10:not(.has-background-gradient):before{opacity:.1}.wp-block-cover-image.has-background-dim.has-background-dim-20 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-20 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-20:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-20 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-20 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-20:not(.has-background-gradient):before{opacity:.2}.wp-block-cover-image.has-background-dim.has-background-dim-30 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-30 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-30:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-30 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-30 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-30:not(.has-background-gradient):before{opacity:.3}.wp-block-cover-image.has-background-dim.has-background-dim-40 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-40 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-40:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-40 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-40 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-40:not(.has-background-gradient):before{opacity:.4}.wp-block-cover-image.has-background-dim.has-background-dim-50 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-50 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-50:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-50 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-50 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-50:not(.has-background-gradient):before{opacity:.5}.wp-block-cover-image.has-background-dim.has-background-dim-60 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-60 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-60:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-60 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-60 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-60:not(.has-background-gradient):before{opacity:.6}.wp-block-cover-image.has-background-dim.has-background-dim-70 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-70 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-70:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-70 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-70 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-70:not(.has-background-gradient):before{opacity:.7}.wp-block-cover-image.has-background-dim.has-background-dim-80 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-80 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-80:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-80 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-80 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-80:not(.has-background-gradient):before{opacity:.8}.wp-block-cover-image.has-background-dim.has-background-dim-90 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-90 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-90:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-90 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-90 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-90:not(.has-background-gradient):before{opacity:.9}.wp-block-cover-image.has-background-dim.has-background-dim-100 .wp-block-cover__background,.wp-block-cover-image.has-background-dim.has-background-dim-100 .wp-block-cover__gradient-background,.wp-block-cover-image.has-background-dim.has-background-dim-100:not(.has-background-gradient):before,.wp-block-cover.has-background-dim.has-background-dim-100 .wp-block-cover__background,.wp-block-cover.has-background-dim.has-background-dim-100 .wp-block-cover__gradient-background,.wp-block-cover.has-background-dim.has-background-dim-100:not(.has-background-gradient):before{opacity:1}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-0,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-0,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-0,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-0{opacity:0}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-10,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-10,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-10,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-10{opacity:.1}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-20,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-20,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-20,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-20{opacity:.2}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-30,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-30,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-30,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-30{opacity:.3}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-40,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-40,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-40,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-40{opacity:.4}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-50,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-50,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-50,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-50{opacity:.5}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-60,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-60,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-60,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-60{opacity:.6}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-70,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-70,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-70,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-70{opacity:.7}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-80,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-80,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-80,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-80{opacity:.8}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-90,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-90,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-90,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-90{opacity:.9}.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-100,.wp-block-cover .wp-block-cover__gradient-background.has-background-dim.has-background-dim-100,.wp-block-cover-image .wp-block-cover__background.has-background-dim.has-background-dim-100,.wp-block-cover-image .wp-block-cover__gradient-background.has-background-dim.has-background-dim-100{opacity:1}.wp-block-cover-image.alignleft,.wp-block-cover-image.alignright,.wp-block-cover.alignleft,.wp-block-cover.alignright{max-width:420px;width:100%}.wp-block-cover-image.aligncenter,.wp-block-cover-image.alignleft,.wp-block-cover-image.alignright,.wp-block-cover.aligncenter,.wp-block-cover.alignleft,.wp-block-cover.alignright{display:flex}.wp-block-cover .wp-block-cover__inner-container,.wp-block-cover-image .wp-block-cover__inner-container{color:inherit;position:relative;width:100%}.wp-block-cover-image.is-position-top-left,.wp-block-cover.is-position-top-left{align-items:flex-start;justify-content:flex-start}.wp-block-cover-image.is-position-top-center,.wp-block-cover.is-position-top-center{align-items:flex-start;justify-content:center}.wp-block-cover-image.is-position-top-right,.wp-block-cover.is-position-top-right{align-items:flex-start;justify-content:flex-end}.wp-block-cover-image.is-position-center-left,.wp-block-cover.is-position-center-left{align-items:center;justify-content:flex-start}.wp-block-cover-image.is-position-center-center,.wp-block-cover.is-position-center-center{align-items:center;justify-content:center}.wp-block-cover-image.is-position-center-right,.wp-block-cover.is-position-center-right{align-items:center;justify-content:flex-end}.wp-block-cover-image.is-position-bottom-left,.wp-block-cover.is-position-bottom-left{align-items:flex-end;justify-content:flex-start}.wp-block-cover-image.is-position-bottom-center,.wp-block-cover.is-position-bottom-center{align-items:flex-end;justify-content:center}.wp-block-cover-image.is-position-bottom-right,.wp-block-cover.is-position-bottom-right{align-items:flex-end;justify-content:flex-end}.wp-block-cover-image.has-custom-content-position.has-custom-content-position .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position .wp-block-cover__inner-container{margin:0}.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-bottom-left .wp-block-cover__inner-container,.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-bottom-right .wp-block-cover__inner-container,.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-center-left .wp-block-cover__inner-container,.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-center-right .wp-block-cover__inner-container,.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-top-left .wp-block-cover__inner-container,.wp-block-cover-image.has-custom-content-position.has-custom-content-position.is-position-top-right .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-bottom-left .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-bottom-right .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-center-left .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-center-right .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-top-left .wp-block-cover__inner-container,.wp-block-cover.has-custom-content-position.has-custom-content-position.is-position-top-right .wp-block-cover__inner-container{margin:0;width:auto}.wp-block-cover .wp-block-cover__image-background,.wp-block-cover video.wp-block-cover__video-background,.wp-block-cover-image .wp-block-cover__image-background,.wp-block-cover-image video.wp-block-cover__video-background{border:none;bottom:0;box-shadow:none;height:100%;left:0;margin:0;max-height:none;max-width:none;object-fit:cover;outline:none;padding:0;position:absolute;right:0;top:0;width:100%}.wp-block-cover-image.has-parallax,.wp-block-cover.has-parallax,.wp-block-cover__image-background.has-parallax,video.wp-block-cover__video-background.has-parallax{background-attachment:fixed;background-repeat:no-repeat;background-size:cover}@supports (-webkit-touch-callout:inherit){.wp-block-cover-image.has-parallax,.wp-block-cover.has-parallax,.wp-block-cover__image-background.has-parallax,video.wp-block-cover__video-background.has-parallax{background-attachment:scroll}}@media (prefers-reduced-motion:reduce){.wp-block-cover-image.has-parallax,.wp-block-cover.has-parallax,.wp-block-cover__image-background.has-parallax,video.wp-block-cover__video-background.has-parallax{background-attachment:scroll}}.wp-block-cover-image.is-repeated,.wp-block-cover.is-repeated,.wp-block-cover__image-background.is-repeated,video.wp-block-cover__video-background.is-repeated{background-repeat:repeat;background-size:auto}.wp-block-cover-image-text,.wp-block-cover-image-text a,.wp-block-cover-image-text a:active,.wp-block-cover-image-text a:focus,.wp-block-cover-image-text a:hover,.wp-block-cover-text,.wp-block-cover-text a,.wp-block-cover-text a:active,.wp-block-cover-text a:focus,.wp-block-cover-text a:hover,section.wp-block-cover-image h2,section.wp-block-cover-image h2 a,section.wp-block-cover-image h2 a:active,section.wp-block-cover-image h2 a:focus,section.wp-block-cover-image h2 a:hover{color:#fff}.wp-block-cover-image .wp-block-cover.has-left-content{justify-content:flex-start}.wp-block-cover-image .wp-block-cover.has-right-content{justify-content:flex-end}.wp-block-cover-image.has-left-content .wp-block-cover-image-text,.wp-block-cover.has-left-content .wp-block-cover-text,section.wp-block-cover-image.has-left-content>h2{margin-left:0;text-align:left}.wp-block-cover-image.has-right-content .wp-block-cover-image-text,.wp-block-cover.has-right-content .wp-block-cover-text,section.wp-block-cover-image.has-right-content>h2{margin-right:0;text-align:right}.wp-block-cover .wp-block-cover-text,.wp-block-cover-image .wp-block-cover-image-text,section.wp-block-cover-image>h2{font-size:2em;line-height:1.25;margin-bottom:0;max-width:840px;padding:.44em;text-align:center;z-index:1}:where(.wp-block-cover-image:not(.has-text-color)),:where(.wp-block-cover:not(.has-text-color)){color:#fff}:where(.wp-block-cover-image.is-light:not(.has-text-color)),:where(.wp-block-cover.is-light:not(.has-text-color)){color:#000}:root :where(.wp-block-cover h1:not(.has-text-color)),:root :where(.wp-block-cover h2:not(.has-text-color)),:root :where(.wp-block-cover h3:not(.has-text-color)),:root :where(.wp-block-cover h4:not(.has-text-color)),:root :where(.wp-block-cover h5:not(.has-text-color)),:root :where(.wp-block-cover h6:not(.has-text-color)),:root :where(.wp-block-cover p:not(.has-text-color)){color:inherit}body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__image-background,body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__video-background{z-index:0}body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__background,body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__gradient-background,body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__inner-container,body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)).has-background-dim:not(.has-background-gradient):before{z-index:1}.has-modal-open body:not(.editor-styles-wrapper) .wp-block-cover:not(.wp-block-cover:has(.wp-block-cover__background+.wp-block-cover__inner-container)) .wp-block-cover__inner-container{z-index:auto}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/cover/style.min.css */
+</style>
+<style id='wp-block-heading-inline-css'>
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id='wp-block-image-inline-css'>
+.wp-block-image>a,.wp-block-image>figure>a{display:inline-block}.wp-block-image img{box-sizing:border-box;height:auto;max-width:100%;vertical-align:bottom}@media not (prefers-reduced-motion){.wp-block-image img.hide{visibility:hidden}.wp-block-image img.show{animation:show-content-image .4s}}.wp-block-image[style*=border-radius] img,.wp-block-image[style*=border-radius]>a{border-radius:inherit}.wp-block-image.has-custom-border img{box-sizing:border-box}.wp-block-image.aligncenter{text-align:center}.wp-block-image.alignfull>a,.wp-block-image.alignwide>a{width:100%}.wp-block-image.alignfull img,.wp-block-image.alignwide img{height:auto;width:100%}.wp-block-image .aligncenter,.wp-block-image .alignleft,.wp-block-image .alignright,.wp-block-image.aligncenter,.wp-block-image.alignleft,.wp-block-image.alignright{display:table}.wp-block-image .aligncenter>figcaption,.wp-block-image .alignleft>figcaption,.wp-block-image .alignright>figcaption,.wp-block-image.aligncenter>figcaption,.wp-block-image.alignleft>figcaption,.wp-block-image.alignright>figcaption{caption-side:bottom;display:table-caption}.wp-block-image .alignleft{float:left;margin:.5em 1em .5em 0}.wp-block-image .alignright{float:right;margin:.5em 0 .5em 1em}.wp-block-image .aligncenter{margin-left:auto;margin-right:auto}.wp-block-image :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-image.is-style-circle-mask img{border-radius:9999px}@supports ((-webkit-mask-image:none) or (mask-image:none)) or (-webkit-mask-image:none){.wp-block-image.is-style-circle-mask img{border-radius:0;-webkit-mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-mode:alpha;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}}:root :where(.wp-block-image.is-style-rounded img,.wp-block-image .is-style-rounded img){border-radius:9999px}.wp-block-image figure{margin:0}.wp-lightbox-container{display:flex;flex-direction:column;position:relative}.wp-lightbox-container img{cursor:zoom-in}.wp-lightbox-container img:hover+button{opacity:1}.wp-lightbox-container button{align-items:center;backdrop-filter:blur(16px) saturate(180%);background-color:#5a5a5a40;border:none;border-radius:4px;cursor:zoom-in;display:flex;height:20px;justify-content:center;opacity:0;padding:0;position:absolute;right:16px;text-align:center;top:16px;width:20px;z-index:100}@media not (prefers-reduced-motion){.wp-lightbox-container button{transition:opacity .2s ease}}.wp-lightbox-container button:focus-visible{outline:3px auto #5a5a5a40;outline:3px auto -webkit-focus-ring-color;outline-offset:3px}.wp-lightbox-container button:hover{cursor:pointer;opacity:1}.wp-lightbox-container button:focus{opacity:1}.wp-lightbox-container button:focus,.wp-lightbox-container button:hover,.wp-lightbox-container button:not(:hover):not(:active):not(.has-background){background-color:#5a5a5a40;border:none}.wp-lightbox-overlay{box-sizing:border-box;cursor:zoom-out;height:100vh;left:0;overflow:hidden;position:fixed;top:0;visibility:hidden;width:100%;z-index:100000}.wp-lightbox-overlay .close-button{align-items:center;cursor:pointer;display:flex;justify-content:center;min-height:40px;min-width:40px;padding:0;position:absolute;right:calc(env(safe-area-inset-right) + 16px);top:calc(env(safe-area-inset-top) + 16px);z-index:5000000}.wp-lightbox-overlay .close-button:focus,.wp-lightbox-overlay .close-button:hover,.wp-lightbox-overlay .close-button:not(:hover):not(:active):not(.has-background){background:none;border:none}.wp-lightbox-overlay .lightbox-image-container{height:var(--wp--lightbox-container-height);left:50%;overflow:hidden;position:absolute;top:50%;transform:translate(-50%,-50%);transform-origin:top left;width:var(--wp--lightbox-container-width);z-index:9999999999}.wp-lightbox-overlay .wp-block-image{align-items:center;box-sizing:border-box;display:flex;height:100%;justify-content:center;margin:0;position:relative;transform-origin:0 0;width:100%;z-index:3000000}.wp-lightbox-overlay .wp-block-image img{height:var(--wp--lightbox-image-height);min-height:var(--wp--lightbox-image-height);min-width:var(--wp--lightbox-image-width);width:var(--wp--lightbox-image-width)}.wp-lightbox-overlay .wp-block-image figcaption{display:none}.wp-lightbox-overlay button{background:none;border:none}.wp-lightbox-overlay .scrim{background-color:#fff;height:100%;opacity:.9;position:absolute;width:100%;z-index:2000000}.wp-lightbox-overlay.active{visibility:visible}@media not (prefers-reduced-motion){.wp-lightbox-overlay.active{animation:turn-on-visibility .25s both}.wp-lightbox-overlay.active img{animation:turn-on-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active){animation:turn-off-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active) img{animation:turn-off-visibility .25s both}.wp-lightbox-overlay.zoom.active{animation:none;opacity:1;visibility:visible}.wp-lightbox-overlay.zoom.active .lightbox-image-container{animation:lightbox-zoom-in .4s}.wp-lightbox-overlay.zoom.active .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.active .scrim{animation:turn-on-visibility .4s forwards}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active){animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container{animation:lightbox-zoom-out .4s}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .scrim{animation:turn-off-visibility .4s forwards}}@keyframes show-content-image{0%{visibility:hidden}99%{visibility:hidden}to{visibility:visible}}@keyframes turn-on-visibility{0%{opacity:0}to{opacity:1}}@keyframes turn-off-visibility{0%{opacity:1;visibility:visible}99%{opacity:0;visibility:visible}to{opacity:0;visibility:hidden}}@keyframes lightbox-zoom-in{0%{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale))}to{transform:translate(-50%,-50%) scale(1)}}@keyframes lightbox-zoom-out{0%{transform:translate(-50%,-50%) scale(1);visibility:visible}99%{visibility:visible}to{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));visibility:hidden}}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/image/style.min.css */
+</style>
+<style id='wp-block-image-theme-inline-css'>
+:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/image/theme.min.css */
+</style>
+<style id='wp-block-list-inline-css'>
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/list/style.min.css */
+</style>
+<style id='wp-block-post-navigation-link-inline-css'>
+.wp-block-post-navigation-link .wp-block-post-navigation-link__arrow-previous{display:inline-block;margin-right:1ch}.wp-block-post-navigation-link .wp-block-post-navigation-link__arrow-previous:not(.is-arrow-chevron){transform:scaleX(1)}.wp-block-post-navigation-link .wp-block-post-navigation-link__arrow-next{display:inline-block;margin-left:1ch}.wp-block-post-navigation-link .wp-block-post-navigation-link__arrow-next:not(.is-arrow-chevron){transform:scaleX(1)}.wp-block-post-navigation-link.has-text-align-left[style*="writing-mode: vertical-lr"],.wp-block-post-navigation-link.has-text-align-right[style*="writing-mode: vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/post-navigation-link/style.min.css */
+</style>
+<style id='wp-block-columns-inline-css'>
+.wp-block-columns{box-sizing:border-box;display:flex;flex-wrap:wrap!important}@media (min-width:782px){.wp-block-columns{flex-wrap:nowrap!important}}.wp-block-columns{align-items:normal!important}.wp-block-columns.are-vertically-aligned-top{align-items:flex-start}.wp-block-columns.are-vertically-aligned-center{align-items:center}.wp-block-columns.are-vertically-aligned-bottom{align-items:flex-end}@media (max-width:781px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:100%!important}}@media (min-width:782px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column[style*=flex-basis]{flex-grow:0}}.wp-block-columns.is-not-stacked-on-mobile{flex-wrap:nowrap!important}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column[style*=flex-basis]{flex-grow:0}:where(.wp-block-columns){margin-bottom:1.75em}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}.wp-block-column{flex-grow:1;min-width:0;overflow-wrap:break-word;word-break:break-word}.wp-block-column.is-vertically-aligned-top{align-self:flex-start}.wp-block-column.is-vertically-aligned-center{align-self:center}.wp-block-column.is-vertically-aligned-bottom{align-self:flex-end}.wp-block-column.is-vertically-aligned-stretch{align-self:stretch}.wp-block-column.is-vertically-aligned-bottom,.wp-block-column.is-vertically-aligned-center,.wp-block-column.is-vertically-aligned-top{width:100%}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/columns/style.min.css */
+</style>
+<style id='wp-block-paragraph-inline-css'>
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://www.renehersecycles.com/wp-includes/blocks/paragraph/style.min.css */
+</style>
+
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<link rel='stylesheet' id='wc-gift-cards-blocks-integration-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-gift-cards/assets/dist/frontend/blocks.css?ver=2.7.2' media='all' />
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: var(--porto-primary-color);--wp--preset--color--secondary: var(--porto-secondary-color);--wp--preset--color--tertiary: var(--porto-tertiary-color);--wp--preset--color--quaternary: var(--porto-quaternary-color);--wp--preset--color--dark: var(--porto-dark-color);--wp--preset--color--light: var(--porto-light-color);--wp--preset--color--primary-hover: var(--porto-primary-light-5);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='acoplw-style-css' href='https://www.renehersecycles.com/wp-content/plugins/aco-product-labels-for-woocommerce/includes/../assets/css/frontend.css?ver=1.5.13' media='all' />
+<link rel='stylesheet' id='cookie-notice-front-css' href='https://www.renehersecycles.com/wp-content/plugins/cookie-notice/css/front.min.css?ver=2.5.14' media='all' />
+<link rel='stylesheet' id='select2-css-css' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css?ver=4.0.13' media='all' />
+<link rel='stylesheet' id='datatable-css-css' href='https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css?ver=1.13.7' media='all' />
+<link rel='stylesheet' id='front-google-recaptcha-css' href='https://www.renehersecycles.com/wp-content/plugins/google-recaptcha-integration/view/frontend/web/css/front-google-reCaptcha.css?ver=1774264411' media='all' />
+<link rel='stylesheet' id='ttt-pnwc-css' href='https://www.renehersecycles.com/wp-content/plugins/popup-notices-for-woocommerce-pro/vendor/wpfactory/popup-notices-for-woocommerce/assets/css/pnwc-frontend.min.css?ver=251126-165149' media='all' />
+<style id='ttt-pnwc-inline-css'>
+
+			.ttt-pnwc-content{max-height:none}
+			.ttt-pnwc-message{text-align:left}
+            .ttt-pnwc-container{background-color:#ffffff;border:0px solid #c1c1c1;border-radius:4px;}
+            .ttt-pnwc-notice{
+                font-size:16px;
+                color:#6d6d6d !important;
+                justify-content:flex-start;
+            }
+            .ttt-pnwc-notice *{color:#6d6d6d ;}
+            .ttt-pnwc-notice a{color:#347AC3 ;}
+            .ttt-pnwc-notice a:hover{color:#54a9ff ;}
+            button.ttt-pnwc-close{
+                background-color:#ededed !important; color:#6d6d6d !important;
+                top:auto !important; right:auto !important;
+                right:-23px !important; top:-23px !important;
+                border-radius:50px !important;
+            }
+            button.ttt-pnwc-close::before{
+                color:#6d6d6d !important;
+            }
+            .ttt-pnwc-notice:after{background-color:#eeeeee}
+            .ttt-pnwc-notice.success .ttt-pnwc-notice-icon{color:#22bf21 ;}
+            .ttt-pnwc-notice.error .ttt-pnwc-notice-icon{color:#e21616 ;}
+            .ttt-pnwc-notice.info .ttt-pnwc-notice-icon{color:#347ac3 ;}
+            .ttt-pnwc-close-internal{                
+                color:#000000 ; background-color:#cccccc ;
+            }                        
+            @media (max-width: 550px) {
+			  .ttt-pnwc-notice-icon {
+			    display:inline-block !important;
+			  }
+			}
+			.ttt-pnwc-notice-icon {}
+            
+/*# sourceURL=ttt-pnwc-inline-css */
+</style>
+<link rel='stylesheet' id='wpfaipc-fontawesome-frontend-css' href='//use.fontawesome.com/releases/v5.5.0/css/all.css?ver=6.9.4' media='all' />
+<style id='woocommerce-inline-inline-css'>
+.woocommerce form .form-row .required { visibility: visible; }
+/*# sourceURL=woocommerce-inline-inline-css */
+</style>
+<link rel='stylesheet' id='wc-bis-css-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-back-in-stock-notifications/assets/css/frontend/woocommerce.css?ver=3.3.3' media='all' />
+<link rel='stylesheet' id='wc-gc-css-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-gift-cards/assets/css/frontend/woocommerce.css?ver=2.7.2' media='all' />
+<link rel='stylesheet' id='wordpress-popular-posts-css-css' href='https://www.renehersecycles.com/wp-content/plugins/wordpress-popular-posts/assets/css/wpp.css?ver=7.3.8' media='all' />
+<link rel='stylesheet' id='sv-wc-payment-gateway-payment-form-v5_15_12-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce-gateway-authorize-net-cim/vendor/skyverge/wc-plugin-framework/woocommerce/payment-gateway/assets/css/frontend/sv-wc-payment-gateway-payment-form.min.css?ver=5.15.12' media='all' />
+<link rel='stylesheet' id='porto-fs-progress-bar-css' href='https://www.renehersecycles.com/wp-content/themes/porto/inc/lib/woocommerce-shipping-progress-bar/shipping-progress-bar.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='woo_discount_pro_style-css' href='https://www.renehersecycles.com/wp-content/plugins/woo-discount-rules-pro/Assets/Css/awdr_style.css?ver=2.6.14' media='all' />
+<link rel='stylesheet' id='porto-css-vars-css' href='https://www.renehersecycles.com/wp-content/uploads/porto_styles/theme_css_vars.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='simple-line-icons-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/Simple-Line-Icons/Simple-Line-Icons.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='bootstrap-css' href='https://www.renehersecycles.com/wp-content/uploads/porto_styles/bootstrap.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-plugins-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/plugins.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-theme-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/theme.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-animate-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/animate.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-blog-legacy-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/blog-legacy.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-header-shop-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/header-shop.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-header-legacy-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/header-legacy.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-footer-legacy-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/footer-legacy.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-nav-panel-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/nav-panel.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-media-mobile-sidebar-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/media-mobile-sidebar.css?ver=7.8.4' media='(max-width:991px)' />
+<link rel='stylesheet' id='porto-theme-portfolio-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/theme_portfolio.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-shortcodes-css' href='https://www.renehersecycles.com/wp-content/uploads/porto_styles/shortcodes.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-theme-shop-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/theme_shop.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-shop-legacy-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/part/shop-legacy.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-dynamic-style-css' href='https://www.renehersecycles.com/wp-content/uploads/porto_styles/dynamic_style.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-type-builder-css' href='https://www.renehersecycles.com/wp-content/plugins/porto-functionality/builders/assets/type-builder.css?ver=3.8.4' media='all' />
+<link rel='stylesheet' id='porto-account-login-style-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/theme/shop/login-style/account-login.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-theme-woopage-css' href='https://www.renehersecycles.com/wp-content/themes/porto/css/theme/shop/other/woopage.css?ver=7.8.4' media='all' />
+<link rel='stylesheet' id='porto-style-css' href='https://www.renehersecycles.com/wp-content/themes/porto/style.css?ver=7.8.4' media='all' />
+<style id='porto-style-inline-css'>
+.side-header-narrow-bar-logo{max-width:256px}@media (min-width:992px){}.page-top .page-title-wrap{line-height:0}.page-top .page-title:not(.b-none):after{content:'';position:absolute;width:100%;left:0;border-bottom:5px solid var(--porto-primary-color);bottom:-32px}.mobile-nav-wrap{background-color:#ffffff}
+/*# sourceURL=porto-style-inline-css */
+</style>
+<link rel='stylesheet' id='styles-child-css' href='https://www.renehersecycles.com/wp-content/themes/reneherse/style.css?ver=6.9.4' media='all' />
+<script src="https://www.renehersecycles.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="https://www.renehersecycles.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script id="acoplw-script-js-extra">
+var acoplw_frontend_object = {"classname":"","enablejquery":"0"};
+//# sourceURL=acoplw-script-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/aco-product-labels-for-woocommerce/includes/../assets/js/frontend.js?ver=1.5.13" id="acoplw-script-js"></script>
+<script id="cookie-notice-front-js-before">
+var cnArgs = {"ajaxUrl":"https:\/\/www.renehersecycles.com\/wp-admin\/admin-ajax.php","nonce":"845d1c654d","hideEffect":"fade","position":"bottom","onScroll":false,"onScrollOffset":100,"onClick":false,"cookieName":"cookie_notice_accepted","cookieTime":2592000,"cookieTimeRejected":2592000,"globalCookie":false,"redirection":false,"cache":true,"revokeCookies":false,"revokeCookiesOpt":"automatic"};
+
+//# sourceURL=cookie-notice-front-js-before
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/cookie-notice/js/front.min.js?ver=2.5.14" id="cookie-notice-front-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.10.6.1" id="wc-jquery-blockui-js" defer data-wp-strategy="defer"></script>
+<script id="wc-add-to-cart-js-extra">
+var wc_add_to_cart_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_url":"/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https://www.renehersecycles.com/cart/","is_cart":"","cart_redirect_after_add":"no"};
+//# sourceURL=wc-add-to-cart-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=10.6.1" id="wc-add-to-cart-js" defer data-wp-strategy="defer"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.10.6.1" id="wc-js-cookie-js" defer data-wp-strategy="defer"></script>
+<script id="woocommerce-js-extra">
+var woocommerce_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_url":"/?wc-ajax=%%endpoint%%","i18n_password_show":"Show password","i18n_password_hide":"Hide password"};
+//# sourceURL=woocommerce-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=10.6.1" id="woocommerce-js" defer data-wp-strategy="defer"></script>
+<script id="enhanced-ecommerce-google-analytics-js-extra">
+var ConvAioGlobal = {"nonce":"9fcb0b294c"};
+//# sourceURL=enhanced-ecommerce-google-analytics-js-extra
+</script>
+<script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer src="https://www.renehersecycles.com/wp-content/plugins/enhanced-e-commerce-for-woocommerce-store/public/js/con-gtm-google-analytics.js?ver=7.2.15" id="enhanced-ecommerce-google-analytics-js"></script>
+<script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer id="enhanced-ecommerce-google-analytics-js-after">
+tvc_smd={"tvc_wcv":"10.6.1","tvc_wpv":"6.9.4","tvc_eev":"7.2.15","tvc_sub_data":{"sub_id":"84302","cu_id":"70203","pl_id":"1","ga_tra_option":"UA","ga_property_id":"","ga_measurement_id":"","ga_ads_id":"","ga_gmc_id":"","ga_gmc_id_p":"","op_gtag_js":"0","op_en_e_t":"0","op_rm_t_t":"0","op_dy_rm_t_t":"0","op_li_ga_wi_ads":"0","gmc_is_product_sync":"0","gmc_is_site_verified":"0","gmc_is_domain_claim":"0","gmc_product_count":"0","fb_pixel_id":""}};
+//# sourceURL=enhanced-ecommerce-google-analytics-js-after
+</script>
+<script id="wc-cart-fragments-js-extra">
+var wc_cart_fragments_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_url":"/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_c18cad83ef494da49fc2204ebab112fb","fragment_name":"wc_fragments_c18cad83ef494da49fc2204ebab112fb","request_timeout":"15000"};
+//# sourceURL=wc-cart-fragments-js-extra
+</script>
+<link rel="https://api.w.org/" href="https://www.renehersecycles.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.renehersecycles.com/wp-json/wp/v2/posts/180824" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.renehersecycles.com/xmlrpc.php?rsd" />
+<link rel="canonical" href="https://www.renehersecycles.com/the-science-behind-the-tire-pressure-calculator/" />
+<link rel='shortlink' href='https://www.renehersecycles.com/?p=180824' />
+            <style id="wpp-loading-animation-styles">@-webkit-keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}@keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}.wpp-widget-block-placeholder,.wpp-shortcode-placeholder{margin:0 auto;width:60px;height:3px;background:#dd3737;background:linear-gradient(90deg,#dd3737 0%,#571313 10%,#dd3737 100%);background-size:200% auto;border-radius:3px;-webkit-animation:bgslide 1s infinite linear;animation:bgslide 1s infinite linear}</style>
+            		<script type="text/javascript" id="webfont-queue">
+		WebFontConfig = {
+			google: { families: [ 'Open+Sans:400,500,600,700,800','Shadows+Into+Light:400,700','Playfair+Display:400,700' ] }
+		};
+		(function(d) {
+			var wf = d.createElement('script'), s = d.scripts[d.scripts.length - 1];
+			wf.src = 'https://www.renehersecycles.com/wp-content/themes/porto/js/libs/webfont.js';
+			wf.async = true;
+			s.parentNode.insertBefore(wf, s);
+		})(document);</script>
+			<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	        <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+            var tvc_lc = 'USD';
+        </script>
+        <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+            var tvc_lc = 'USD';
+        </script>
+<script data-cfasync="false" data-pagespeed-no-defer type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({"event":"begin_datalayer","conv_track_email":"1","conv_track_phone":"1","conv_track_address":"1","conv_track_page_scroll":"1","conv_track_file_download":"1","conv_track_author":"1","conv_track_signup":"1","conv_track_signin":"1"});
+    </script>    <!-- Google Tag Manager by Conversios-->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-NGTQ2D2P');
+    </script>
+    <!-- End Google Tag Manager -->
+      <script>
+      (window.gaDevIds = window.gaDevIds || []).push('5CDcaG');
+    </script>
+        <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'article_load',
+          article_id: '180824',
+          article_category: 'Testing and Tech, Tires',
+          author_id: '6',
+          author_name: 'Jan Heine',
+          article_title: 'Tire Pressure and Performance',
+          article_tags: "",
+          publication_date: '2022-03-28',
+          article_length: "1577",
+        });
+      </script>
+            <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+            var tvc_lc = 'USD';
+        </script>
+        <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+            var tvc_lc = 'USD';
+        </script>
+<link rel="icon" href="https://www.renehersecycles.com/wp-content/uploads/2025/05/cropped-RH-icon-badge-blue-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.renehersecycles.com/wp-content/uploads/2025/05/cropped-RH-icon-badge-blue-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.renehersecycles.com/wp-content/uploads/2025/05/cropped-RH-icon-badge-blue-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.renehersecycles.com/wp-content/uploads/2025/05/cropped-RH-icon-badge-blue-270x270.png" />
+		<style id="wp-custom-css">
+			section.portfolio-parallax {display: none;}
+
+form.woocommerce-ordering {display: none;}		</style>
+						<script>
+					<!-- Google tag (gtag.js) -->
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G9P26CE8PZ');
+</script>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/eebeab1b859456885e4f6967d/8489e112680494eba893400fa.js");				</script>
+					<link rel='stylesheet' id='wc-blocks-style-css' href='https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.6.1' media='all' />
+<style id='core-block-supports-inline-css'>
+.wp-container-core-columns-is-layout-9d6595d7{flex-wrap:nowrap;}
+/*# sourceURL=core-block-supports-inline-css */
+</style>
+
+</head>
+
+	<body class="wp-singular post-template-default single single-post postid-180824 single-format-standard wp-embed-responsive wp-theme-porto wp-child-theme-reneherse theme-porto cookies-not-set woocommerce-no-js porto-breadcrumbs-bb login-popup full blog-1">
+	    <!-- Google Tag Manager (noscript) conversios -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGTQ2D2P" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) conversios -->
+    
+	<div class="page-wrapper"><!-- page wrapper -->
+		
+											<!-- header wrapper -->
+				<div class="header-wrapper">
+										
+
+	<header  id="header" class="header-builder">
+	
+	<div class="header-top"><div class="header-row container"><div class="header-col visible-for-sm header-left"><div class="searchform-popup search-popup simple-search-layout search-dropdown search-rounded"><a  class="search-toggle" role="button" aria-label="Search Toggle" href="#"><i class="porto-icon-magnifier"></i><span class="search-text">Search</span></a>	<form action="https://www.renehersecycles.com/" method="get"
+		class="searchform search-layout-simple">
+		<div class="searchform-fields">
+			<span class="text"><input name="s" type="text" value="" placeholder="Search&hellip;" autocomplete="off" /></span>
+						<span class="button-wrap">
+				<button class="btn btn-special" aria-label="Search" title="Search" type="submit">
+					<i class="porto-icon-magnifier"></i>
+				</button>
+							</span>
+		</div>
+				<div class="search-lists">
+											</div>
+						<div class="live-search-list"></div>
+			</form>
+	</div></div><div class="header-col header-right hidden-for-sm"><ul id="menu-top-menu" class="secondary-menu main-menu mega-menu"><li id="nav-menu-item-180881" class="menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/tire-pressure-calculator/"><i class="porto-icon-category-electronics"></i>Tire Pressure Calculator</a></li>
+<li id="nav-menu-item-152420" class="menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/tech-info/"><i class="porto-icon-wrench"></i>Tech Info</a></li>
+<li id="nav-menu-item-152444" class="menu-item menu-item-type-taxonomy menu-item-object-faq_cat narrow"><a href="https://www.renehersecycles.com/faq_cat/orders-faq/"><i class="porto-icon-lifebuoy"></i>Order FAQ</a></li>
+<li id="nav-menu-item-186" class="menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/my-account/"><i class="porto-icon-user-2"></i>My Account</a></li>
+<li id="nav-menu-item-195050" class="visible-for-sm menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/contact/"><i class="porto-icon-chat"></i>Contact</a></li>
+</ul><div class="share-links">		<a target="_blank"  rel="nofollow noopener noreferrer" class="share-youtube" href="https://www.youtube.com/channel/UC5Kx4eY43MCSloTbghKMFiw/videos" aria-label="Youtube" title="Youtube"></a>
+				<a target="_blank"  rel="nofollow noopener noreferrer" class="share-instagram" href="https://www.instagram.com/reneherse/" aria-label="Instagram" title="Instagram"></a>
+		</div><a class="mobile-toggle" role="button" href="#" aria-label="Mobile Menu"><i class="fas fa-bars"></i></a></div><div class="header-col visible-for-sm header-right">		<div id="mini-cart" aria-haspopup="true" class="mini-cart simple">
+			<div class="cart-head">
+			<span class="cart-icon"><i class="minicart-icon minicart-icon-default"></i><span class="cart-items">0</span></span><span class="cart-items-text">0</span>			</div>
+			<div class="cart-popup widget_shopping_cart">
+				<div class="widget_shopping_cart_content">
+									<div class="cart-loading"></div>
+								</div>
+			</div>
+				</div>
+		<div class="share-links">		<a target="_blank"  rel="nofollow noopener noreferrer" class="share-youtube" href="https://www.youtube.com/channel/UC5Kx4eY43MCSloTbghKMFiw/videos" aria-label="Youtube" title="Youtube"></a>
+				<a target="_blank"  rel="nofollow noopener noreferrer" class="share-instagram" href="https://www.instagram.com/reneherse/" aria-label="Instagram" title="Instagram"></a>
+		</div><a class="mobile-toggle" role="button" href="#" aria-label="Mobile Menu"><i class="fas fa-bars"></i></a></div></div></div><div class="header-main"><div class="header-row container"><div class="header-col header-left hidden-for-sm">
+	<div class="logo">
+	<a aria-label="Site Logo" href="https://www.renehersecycles.com/" title="Rene Herse Cycles - "  rel="home">
+		<img class="img-responsive sticky-logo sticky-retina-logo" width="256" height="64" src="//www.renehersecycles.com/wp-content/uploads/2020/01/ReneHerseLogo_rgb_Logotype_NoHoldingShape_Primary_Black150.png" alt="Rene Herse Cycles" /><img class="img-responsive standard-logo retina-logo" width="256" height="64" src="//www.renehersecycles.com/wp-content/uploads/2020/12/ReneHerseLogo_r.png" alt="Rene Herse Cycles" />	</a>
+	</div>
+	</div></div>
+<nav id="nav-panel">
+	<div class="container">
+		<div class="mobile-nav-wrap">
+		<div class="menu-wrap"><ul id="menu-primary-navigation" class="mobile-menu accordion-menu"><li id="accordion-menu-item-152382" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub"><a href="https://www.renehersecycles.com/product-category/components/tires/">Tires</a>
+<span aria-label="Open Submenu" class="arrow" role="button"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-152385" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/tires/700c/">700C / 29&#8243;</a></li>
+	<li id="accordion-menu-item-152384" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/tires/650b/">650B / 27.5&#8243;</a></li>
+	<li id="accordion-menu-item-152383" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/tires/26-inch/">26&#8243;</a></li>
+	<li id="accordion-menu-item-152386" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/tires/tubular/">Tubulars</a></li>
+	<li id="accordion-menu-item-242070" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/tires/tubes/">Tubes</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-152370" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub"><a href="https://www.renehersecycles.com/product-category/components/">Components</a>
+<span aria-label="Open Submenu" class="arrow" role="button"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-152371" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/bottom-brackets/">Bottom Brackets</a></li>
+	<li id="accordion-menu-item-152372" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/brakes/">Brakes</a></li>
+	<li id="accordion-menu-item-152374" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/cranks/">Cranks</a></li>
+	<li id="accordion-menu-item-194141" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/derailleurs/">Derailleurs</a></li>
+	<li id="accordion-menu-item-152375" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/handlebars/">Handlebars</a></li>
+	<li id="accordion-menu-item-221795" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/headsets/">Headsets</a></li>
+	<li id="accordion-menu-item-152376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/hubs/">Hubs</a></li>
+	<li id="accordion-menu-item-152377" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/pedals/">Pedals</a></li>
+	<li id="accordion-menu-item-152379" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/rims/">Rims/Spokes</a></li>
+	<li id="accordion-menu-item-152380" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/saddles/">Saddles/Seatposts</a></li>
+	<li id="accordion-menu-item-152381" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/stems-decaleurs/">Stems/Decaleurs</a></li>
+	<li id="accordion-menu-item-152373" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/components/classic-herse-restoration/">Classic Herse Restoration</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-152387" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub"><a href="https://www.renehersecycles.com/product-category/equipment/">Equipment</a>
+<span aria-label="Open Submenu" class="arrow" role="button"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-152388" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/bags/">Bags</a></li>
+	<li id="accordion-menu-item-152389" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/bolts/">Bolts/Spare Parts</a></li>
+	<li id="accordion-menu-item-152390" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/bottlescages/">Bottles/Cages</a></li>
+	<li id="accordion-menu-item-152391" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/clothing/">Clothing</a></li>
+	<li id="accordion-menu-item-152392" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/fenders/">Fenders</a></li>
+	<li id="accordion-menu-item-152393" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/framebuilding/">Framebuilding</a></li>
+	<li id="accordion-menu-item-152394" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/lights/">Lights</a></li>
+	<li id="accordion-menu-item-152395" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/racks/">Racks</a></li>
+	<li id="accordion-menu-item-152396" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/equipment/tools/">Tools</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-152399" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub"><a href="https://www.renehersecycles.com/product-category/print/">Books / Bicycle Quarterly</a>
+<span aria-label="Open Submenu" class="arrow" role="button"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-152410" class="menu-item menu-item-type-post_type menu-item-object-product"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-subscription/">Subscriptions</a></li>
+	<li id="accordion-menu-item-152411" class="menu-item menu-item-type-post_type menu-item-object-product"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-wholesale-subscription/">Wholesale Subscription</a></li>
+	<li id="accordion-menu-item-152400" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/print/issues/">Single Copies / Past Editions</a></li>
+	<li id="accordion-menu-item-152402" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="https://www.renehersecycles.com/product-category/print/books/">Books</a></li>
+	<li id="accordion-menu-item-235279" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/bicycle-quarterly-address-change/">Address Change for Bicycle Quarterly</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-225192" class="menu-item menu-item-type-post_type menu-item-object-product"><a href="https://www.renehersecycles.com/shop/rene-herse/rene-herse-gift-card/">Gift Cards</a></li>
+<li id="accordion-menu-item-175774" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/routes/">Routes / Rides</a></li>
+<li id="accordion-menu-item-152412" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/journal/">Journal</a></li>
+</ul><ul id="menu-top-menu-1" class="mobile-menu accordion-menu"><li id="accordion-menu-item-180881" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/tire-pressure-calculator/"><i class="porto-icon-category-electronics"></i>Tire Pressure Calculator</a></li>
+<li id="accordion-menu-item-152420" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/tech-info/"><i class="porto-icon-wrench"></i>Tech Info</a></li>
+<li id="accordion-menu-item-152444" class="menu-item menu-item-type-taxonomy menu-item-object-faq_cat"><a href="https://www.renehersecycles.com/faq_cat/orders-faq/"><i class="porto-icon-lifebuoy"></i>Order FAQ</a></li>
+<li id="accordion-menu-item-186" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/my-account/"><i class="porto-icon-user-2"></i>My Account</a></li>
+<li id="accordion-menu-item-195050" class="visible-for-sm menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.renehersecycles.com/contact/"><i class="porto-icon-chat"></i>Contact</a></li>
+</ul></div>		</div>
+	</div>
+</nav>
+</div><div class="header-bottom main-menu-wrap"><div class="header-row container"><div class="header-col header-left hidden-for-sm"><ul id="menu-primary-navigation-1" class="main-menu mega-menu"><li id="nav-menu-item-152382" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub narrow"><a href="https://www.renehersecycles.com/product-category/components/tires/">Tires</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu porto-narrow-sub-menu">
+	<li id="nav-menu-item-152385" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/tires/700c/">700C / 29&#8243;</a></li>
+	<li id="nav-menu-item-152384" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/tires/650b/">650B / 27.5&#8243;</a></li>
+	<li id="nav-menu-item-152383" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/tires/26-inch/">26&#8243;</a></li>
+	<li id="nav-menu-item-152386" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/tires/tubular/">Tubulars</a></li>
+	<li id="nav-menu-item-242070" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/tires/tubes/">Tubes</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-152370" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub narrow"><a href="https://www.renehersecycles.com/product-category/components/">Components</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu porto-narrow-sub-menu">
+	<li id="nav-menu-item-152371" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/bottom-brackets/">Bottom Brackets</a></li>
+	<li id="nav-menu-item-152372" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/brakes/">Brakes</a></li>
+	<li id="nav-menu-item-152374" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/cranks/">Cranks</a></li>
+	<li id="nav-menu-item-194141" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/derailleurs/">Derailleurs</a></li>
+	<li id="nav-menu-item-152375" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/handlebars/">Handlebars</a></li>
+	<li id="nav-menu-item-221795" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/headsets/">Headsets</a></li>
+	<li id="nav-menu-item-152376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/hubs/">Hubs</a></li>
+	<li id="nav-menu-item-152377" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/pedals/">Pedals</a></li>
+	<li id="nav-menu-item-152379" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/rims/">Rims/Spokes</a></li>
+	<li id="nav-menu-item-152380" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/saddles/">Saddles/Seatposts</a></li>
+	<li id="nav-menu-item-152381" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/stems-decaleurs/">Stems/Decaleurs</a></li>
+	<li id="nav-menu-item-152373" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/components/classic-herse-restoration/">Classic Herse Restoration</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-152387" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub narrow"><a href="https://www.renehersecycles.com/product-category/equipment/">Equipment</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu porto-narrow-sub-menu">
+	<li id="nav-menu-item-152388" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/bags/">Bags</a></li>
+	<li id="nav-menu-item-152389" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/bolts/">Bolts/Spare Parts</a></li>
+	<li id="nav-menu-item-152390" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/bottlescages/">Bottles/Cages</a></li>
+	<li id="nav-menu-item-152391" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/clothing/">Clothing</a></li>
+	<li id="nav-menu-item-152392" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/fenders/">Fenders</a></li>
+	<li id="nav-menu-item-152393" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/framebuilding/">Framebuilding</a></li>
+	<li id="nav-menu-item-152394" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/lights/">Lights</a></li>
+	<li id="nav-menu-item-152395" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/racks/">Racks</a></li>
+	<li id="nav-menu-item-152396" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/equipment/tools/">Tools</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-152399" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children has-sub narrow"><a href="https://www.renehersecycles.com/product-category/print/">Books / Bicycle Quarterly</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu porto-narrow-sub-menu">
+	<li id="nav-menu-item-152410" class="menu-item menu-item-type-post_type menu-item-object-product" data-cols="1"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-subscription/">Subscriptions</a></li>
+	<li id="nav-menu-item-152411" class="menu-item menu-item-type-post_type menu-item-object-product" data-cols="1"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-wholesale-subscription/">Wholesale Subscription</a></li>
+	<li id="nav-menu-item-152400" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/print/issues/">Single Copies / Past Editions</a></li>
+	<li id="nav-menu-item-152402" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat" data-cols="1"><a href="https://www.renehersecycles.com/product-category/print/books/">Books</a></li>
+	<li id="nav-menu-item-235279" class="menu-item menu-item-type-post_type menu-item-object-page" data-cols="1"><a href="https://www.renehersecycles.com/bicycle-quarterly-address-change/">Address Change for Bicycle Quarterly</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-225192" class="menu-item menu-item-type-post_type menu-item-object-product narrow"><a href="https://www.renehersecycles.com/shop/rene-herse/rene-herse-gift-card/">Gift Cards</a></li>
+<li id="nav-menu-item-175774" class="menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/routes/">Routes / Rides</a></li>
+<li id="nav-menu-item-152412" class="menu-item menu-item-type-post_type menu-item-object-page narrow"><a href="https://www.renehersecycles.com/journal/">Journal</a></li>
+</ul></div><div class="header-col header-right hidden-for-sm"><div class="porto-block" data-id="195047"><style>.porto-btn-sp-10px i {margin-right:10px;}</style>
+<ul id="menu-top-menu" class="secondary-menu main-menu mega-menu">
+ 	<li class=" menu-item menu-item-type-custom menu-item-object-custom narrow"><a href="https://www.renehersecycles.com/contact/"><i class="porto-icon-chat"></i>Contact</a></li>
+</ul>
+</div>		<div id="mini-cart" aria-haspopup="true" class="mini-cart simple">
+			<div class="cart-head">
+			<span class="cart-icon"><i class="minicart-icon minicart-icon-default"></i><span class="cart-items">0</span></span><span class="cart-items-text">0</span>			</div>
+			<div class="cart-popup widget_shopping_cart">
+				<div class="widget_shopping_cart_content">
+									<div class="cart-loading"></div>
+								</div>
+			</div>
+				</div>
+		<div class="searchform-popup search-popup simple-search-layout search-dropdown search-rounded"><a  class="search-toggle" role="button" aria-label="Search Toggle" href="#"><i class="porto-icon-magnifier"></i><span class="search-text">Search</span></a>	<form action="https://www.renehersecycles.com/" method="get"
+		class="searchform search-layout-simple">
+		<div class="searchform-fields">
+			<span class="text"><input name="s" type="text" value="" placeholder="Search&hellip;" autocomplete="off" /></span>
+						<span class="button-wrap">
+				<button class="btn btn-special" aria-label="Search" title="Search" type="submit">
+					<i class="porto-icon-magnifier"></i>
+				</button>
+							</span>
+		</div>
+				<div class="search-lists">
+											</div>
+						<div class="live-search-list"></div>
+			</form>
+	</div></div></div></div>	</header>
+
+									</div>
+				<!-- end header wrapper -->
+			
+			
+					<section class="page-top page-header-1">
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+							<nav aria-label="breadcrumb" class="breadcrumbs-wrap">
+					<ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList"><li class="home" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.renehersecycles.com" title="Go to Home Page"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /><i class="delimiter"></i></li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.renehersecycles.com/journal/"><span itemprop="name">Journal</span></a><meta itemprop="position" content="2" /><i class="delimiter"></i></li><li><span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.renehersecycles.com/category/testing-and-tech/"><span itemprop="name">Testing and Tech</span></a><meta itemprop="position" content="3" /></span>, <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.renehersecycles.com/category/components/tires/"><span itemprop="name">Tires</span></a><meta itemprop="position" content="4" /></span><i class="delimiter"></i></li><li aria-current="page">Tire Pressure and Performance</li></ul>				</nav>
+						<div class="page-title-wrap">
+								<h1 class="page-title">Tire Pressure and Performance</h1>
+							</div>
+					</div>
+	</div>
+</div>
+	</section>
+	
+		<div id="main" class="column2 column2-right-sidebar boxed"><!-- main -->
+
+			<div class="container">
+			<div class="row main-content-wrap">
+
+			<!-- main content -->
+<div class="main-content col-lg-9">
+  <iframe src="index.html" style="width:100%; height:1100px; border:none; display:block;" title="Tire Pressure Calculator"></iframe>
+</div>
+	<div class="col-lg-3 sidebar porto-blog-sidebar right-sidebar"><!-- main sidebar -->
+						<div class="sidebar-content">
+						<aside id="search-2" class="widget widget_search"><h3 class="widget-title">Search</h3>
+<form method="get" id="searchform" class="searchform" action="https://www.renehersecycles.com/">
+	<div class="input-group">
+		<input class="form-control" placeholder="Search&hellip;" name="s" id="s" type="text">
+		<button aria-label="Search" type="submit" class="btn btn-dark p-2"><i class="d-inline-block porto-icon-search-3"></i></button>
+	</div>
+</form>
+</aside><aside id="custom_html-4" class="widget_text widget widget_custom_html"><h3 class="widget-title">About Rene Herse</h3><div class="textwidget custom-html-widget">Rene Herse Cycles makes high-performance tires, handlebars and other components for road, all-road and gravel bikes. 
+<p>
+<a href="https://www.renehersecycles.com/our-passion/">Find out more about us</a>
+</p></div></aside><aside id="block-4" class="widget widget_block">
+<h3 class="wp-block-heading widget-title">POPULAR RESOURCES</h3>
+</aside><aside id="block-5" class="widget widget_block widget_text">
+<p>Tires</p>
+</aside><aside id="block-6" class="widget widget_block">
+<ul class="wp-block-list">
+<li><a href="https://www.renehersecycles.com/scientific-guide-to-choosing-gravel-tires-2025-edition/">Scientific Guide to Gravel Tires (2025)</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/why-wider-tires-are-not-slower/">Why wider tires are not slower</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/how-wide-a-tire-should-i-ride/">How wide is right for me?</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/the-science-behind-the-tire-pressure-calculator/">Tire pressure and performance</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/bq-tire-test-results/">Results of Bicycle Quarterly's tire tests</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/we-won-the-test-why-no-celebration/">Tire testing: Lab vs. real-road</a></li>
+</ul>
+</aside><aside id="block-7" class="widget widget_block widget_text">
+<p>Bicycle Performance</p>
+</aside><aside id="block-8" class="widget widget_block">
+<ul class="wp-block-list">
+<li><a href="https://www.renehersecycles.com/what-makes-a-bike-fast/">What makes a bike fast?</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/are-gravel-bikes-slower-than-road-bikes/">Are gravel bikes slower than road bikes?</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/aerodynamics-of-gravel-bikes/">Aerodynamics of gravel bikes</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/performance-is-important-for-slow-riders-too/">Why performance is important for slow riders, too.</a></li>
+
+
+
+<li><a href="https://www.renehersecycles.com/which-hand-for-which-brake/">Which hand for which brake?</a></li>
+</ul>
+</aside><aside id="custom_html-2" class="widget_text widget widget_custom_html"><h3 class="widget-title">Get Updates</h3><div class="textwidget custom-html-widget"><p>Sign up for our newsletter.
+</p><!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://renehersecycles.us10.list-manage.com/subscribe/post?u=eebeab1b859456885e4f6967d&amp;id=f74fbd5ca8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding-top:0px;">
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required style="width:100%;">
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_eebeab1b859456885e4f6967d_f74fbd5ca8" tabindex="-1" value=""></div>
+    <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" style="width:130px; margin-top:5px;"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup--></div></aside>		</div>
+					</div><!-- end main sidebar -->
+
+
+	</div>
+	</div>
+
+<div class="porto-block" data-id="248010"><div class="container">
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-9d6595d7 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="post-navigation-link-previous wp-block-post-navigation-link has-medium-font-size"><span class="wp-block-post-navigation-link__arrow-previous is-arrow-chevron" aria-hidden="true">«</span><a href="https://www.renehersecycles.com/spring-2022-bicycle-quarterly/" rel="prev"><span class="post-navigation-link__label">Previous:</span> <span class="post-navigation-link__title">Spring 2022 Bicycle Quarterly</span></a></div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="post-navigation-link-next has-text-align-right wp-block-post-navigation-link has-medium-font-size"><a href="https://www.renehersecycles.com/cross-wind-spokes-and-self-truing-wheels/" rel="next"><span class="post-navigation-link__label">Next:</span> <span class="post-navigation-link__title">Cross-Wind Spokes and Self-Truing Wheels</span></a><span class="wp-block-post-navigation-link__arrow-next is-arrow-chevron" aria-hidden="true">»</span></div></div>
+</div>
+
+
+
+<p></p>
+</div></div><div class="porto-block" data-id="189412"><style>/* #mc_embed_signup .mc-field-group { clear: none !important; display: block !important; width:45% !important; margin: 0 2% 0 2% !important; float: left !important; padding: 0 !important; } */
+
+#mc_embed_signup .button { background-color: #5aaaf0 !important; margin:0 auto 1em auto !important; }
+
+#mc_mailchimp_embed form { padding: 0; }
+#mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: px;}
+
+
+.indicates-required {padding-right: 3em;}</style><div class="container">
+<div class="wp-block-cover is-light is-repeated"><div class="wp-block-cover__image-background wp-image-184822 is-repeated" style="background-position:50% 50%;background-image:url(https://devreneherse.wpengine.com/wp-content/uploads/2022/08/light-gray-247.png)"></div><span aria-hidden="true" class="wp-block-cover__background has-light-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
+<p class="has-text-align-center has-large-font-size">Are you on our list?</p>
+
+
+
+<p class="has-text-align-center">Every week, we bring you stories of great rides, new products, and fascinating tech. Sign up and enjoy the ride!</p>
+
+
+
+<div id="mc_embed_shell">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+<div id="mc_embed_signup">
+    <form action="https://renehersecycles.us10.list-manage.com/subscribe/post?u=eebeab1b859456885e4f6967d&amp;id=f74fbd5ca8&amp;f_id=00c2c2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll">
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span></label><input type="text" name="FNAME" class="required text" id="mce-FNAME" required="" value=""></div><div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div><div class="mc-field-group"><label for="mce-SMSPHONE">SMS Phone Number <span class="asterisk">*</span></label><div class="" style="display: flex; border: 1px solid rgb(171, 176, 178);"><div style="display: flex;"><span style="padding-left: 0px; padding-right: 4px; align-self: center;"><div style="display: flex; align-content: flex-start; align-items: center; gap: 10px;"><div id="flag-display-SMSPHONE" style="display: flex; align-items: center; gap: 4px; cursor: pointer; padding-left: 8px; position: relative;"><span id="flag-emoji-SMSPHONE">🇺🇸</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none"><path d="M8.0096 11.5649C7.9219 11.5649 7.83506 11.5476 7.75407 11.5139C7.67307 11.4803 7.59951 11.431 7.5376 11.3689L3.54293 7.36289C3.48099 7.30091 3.43186 7.22733 3.39836 7.14636C3.36485 7.06539 3.34763 6.97862 3.34766 6.89099C3.34769 6.80336 3.36498 6.7166 3.39854 6.63565C3.4321 6.55471 3.48128 6.48117 3.54326 6.41923C3.60525 6.35729 3.67882 6.30816 3.75979 6.27466C3.84076 6.24115 3.92754 6.22392 4.01517 6.22395C4.10279 6.22398 4.18956 6.24127 4.2705 6.27484C4.35145 6.3084 4.42499 6.35758 4.48693 6.41956L8.01093 9.95289L11.5443 6.42956C11.6694 6.30464 11.8391 6.23457 12.016 6.23476C12.1928 6.23495 12.3623 6.30538 12.4873 6.43056C12.6122 6.55574 12.6823 6.72542 12.6821 6.90227C12.6819 7.07911 12.6114 7.24864 12.4863 7.37356L8.48026 11.3702C8.35532 11.4949 8.18607 11.5649 8.0096 11.5649Z" fill="#21262A"></path></svg><select id="country-select-SMSPHONE" name="SMSPHONE[country]" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; border: medium; background: none; font-size: 0px; margin: 0px; padding: 0px; min-width: auto; max-width: none;"><option value="US" selected="">US+1</option></select></div></div></span></div><input type="text" name="SMSPHONE" class="REQ_CSS" id="mce-SMSPHONE" placeholder="+1 000 000 0000" value="" style="border: medium;"></div><div class="mc-sms-phone-group"><div><input type="checkbox" name="mc-SMSPHONE-ack" id="mc-SMSPHONE-ack" value="true"></div><div class="small-meta"><span id="legal-text-SMSPHONE">Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href="http://eepurl.com/jw-NiA" target="_blank">Terms</a> and <a href="http://eepurl.com/jw-M7M" target="_blank">Privacy Policy</a></span></div></div></div>
+        <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div><div aria-hidden="true" style="position: absolute; left: -5000px;"><input type="text" name="b_eebeab1b859456885e4f6967d_f74fbd5ca8" tabindex="-1" value=""></div><div class="clear"><input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe"></div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[3]='SMSPHONE';ftypes[3]='smsphone';fnames[2]='LNAME';ftypes[2]='text';fnames[4]='MMERGE4';ftypes[4]='text';fnames[5]='MMERGE5';ftypes[5]='text';fnames[6]='MMERGE6';ftypes[6]='text';fnames[10]='MMERGE10';ftypes[10]='text';fnames[13]='MMERGE13';ftypes[13]='text';fnames[9]='MMERGE9';ftypes[9]='text';fnames[14]='TYPE';ftypes[14]='text';fnames[15]='NOTICE';ftypes[15]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
+    // SMS Phone Multi-Country Functionality
+    if(!window.MC) {
+      window.MC = {};
+    }
+    window.MC.smsPhoneData = {
+      defaultCountryCode: 'US',
+      programs: [{"countryCode":"US","countryCallingCode":"+1","number":"+12067466449","imgSrc":"https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/forms-landing-pages/smsphone/flag-us.svg","requiredTemplate":"Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>","optionalTemplate":"Rene Herse Cycles - By providing your phone number, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>"}],
+      smsProgramDataCountryNames: [{"code":"US","name":"USA"}]
+    };
+
+    function getCountryUnicodeFlag(countryCode) {
+       return countryCode.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+    };
+
+    // HTML sanitization function to prevent XSS
+    function sanitizeHtml(str) {
+      if (typeof str !== 'string') return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;');
+    }
+
+    // URL sanitization function to prevent javascript: and data: URLs
+    function sanitizeUrl(url) {
+      if (typeof url !== 'string') return '';
+      const trimmedUrl = url.trim().toLowerCase();
+      if (trimmedUrl.startsWith('javascript:') || trimmedUrl.startsWith('data:') || trimmedUrl.startsWith('vbscript:')) {
+        return '#';
+      }
+      return url;
+    }
+
+    const getBrowserLanguage = () => {
+      if (!window?.navigator?.language?.split('-')[1]) {
+        return window?.navigator?.language?.toUpperCase();
+      }
+      return window?.navigator?.language?.split('-')[1];
+    };
+
+    function getDefaultCountryProgram(defaultCountryCode, smsProgramData) {
+      if (!smsProgramData || smsProgramData.length === 0) {
+        return null;
+      }
+
+      const browserLanguage = getBrowserLanguage();
+
+      if (browserLanguage) {
+        const foundProgram = smsProgramData.find(
+          (program) => program?.countryCode === browserLanguage,
+        );
+        if (foundProgram) {
+          return foundProgram;
+        }
+      }
+
+      if (defaultCountryCode) {
+        const foundProgram = smsProgramData.find(
+          (program) => program?.countryCode === defaultCountryCode,
+        );
+        if (foundProgram) {
+          return foundProgram;
+        }
+      }
+
+      return smsProgramData[0];
+    }
+
+    function updateSmsLegalText(countryCode, fieldName) {
+      if (!countryCode || !fieldName) {
+        return;
+      }
+      
+      const programs = window?.MC?.smsPhoneData?.programs;
+      if (!programs || !Array.isArray(programs)) {
+        return;
+      }
+      
+      const program = programs.find(program => program?.countryCode === countryCode);
+      if (!program || !program.requiredTemplate) {
+        return;
+      }
+      
+      const legalTextElement = document.querySelector('#legal-text-' + fieldName);
+      if (!legalTextElement) {
+        return;
+      }
+      
+      // Remove HTML tags and clean up the text
+      const divRegex = new RegExp('</?[div][^>]*>', 'gi');
+      const fullAnchorRegex = new RegExp('<a.*?</a>', 'g');
+      const anchorRegex = new RegExp('<a href="(.*?)" target="(.*?)">(.*?)</a>');
+      
+      const template = program.requiredTemplate.replace(divRegex, '');
+      
+      
+
+      legalTextElement.textContent = '';
+      const parts = template.split(/(<a href=".*?" target=".*?">.*?<\/a>)/g);
+      parts.forEach(function(part) {
+        if (!part) {
+          return;
+        }
+        const anchorMatch = part.match(/<a href="(.*?)" target="(.*?)">(.*?)<\/a>/);
+        if (anchorMatch) {
+          const linkElement = document.createElement('a');
+          linkElement.href = sanitizeUrl(anchorMatch[1]);
+          linkElement.target = sanitizeHtml(anchorMatch[2]);
+          linkElement.textContent = sanitizeHtml(anchorMatch[3]);
+          legalTextElement.appendChild(linkElement);
+        } else {
+          legalTextElement.appendChild(document.createTextNode(part));
+        }
+      });
+          
+    }
+
+    function generateDropdownOptions(smsProgramData) {
+      if (!smsProgramData || smsProgramData.length === 0) {
+        return '';
+      }
+      
+      return smsProgramData.map(program => {
+        const flag = getCountryUnicodeFlag(program.countryCode);
+        const countryName = getCountryName(program.countryCode);
+        const callingCode = program.countryCallingCode || '';
+        // Sanitize all values to prevent XSS
+        const sanitizedCountryCode = sanitizeHtml(program.countryCode || '');
+        const sanitizedCountryName = sanitizeHtml(countryName || '');
+        const sanitizedCallingCode = sanitizeHtml(callingCode || '');
+        return '<option value="' + sanitizedCountryCode + '">' + sanitizedCountryName + ' ' + sanitizedCallingCode + '</option>';
+      }).join('');
+    }
+
+    function getCountryName(countryCode) {
+      if (window.MC?.smsPhoneData?.smsProgramDataCountryNames && Array.isArray(window.MC.smsPhoneData.smsProgramDataCountryNames)) {
+        for (let i = 0; i < window.MC.smsPhoneData.smsProgramDataCountryNames.length; i++) {
+          if (window.MC.smsPhoneData.smsProgramDataCountryNames[i].code === countryCode) {
+            return window.MC.smsPhoneData.smsProgramDataCountryNames[i].name;
+          }
+        }
+      }
+      return countryCode;
+    }
+
+    function getDefaultPlaceholder(countryCode) {
+      if (!countryCode || typeof countryCode !== 'string') {
+        return '+1 000 000 0000'; // Default US placeholder
+      }
+      
+            var mockPlaceholders = [
+        {
+          countryCode: 'US',
+          placeholder: '+1 000 000 0000',
+          helpText: 'Include the US country code +1 before the phone number',
+        },
+        {
+          countryCode: 'GB',
+          placeholder: '+44 0000 000000',
+          helpText: 'Include the GB country code +44 before the phone number',
+        },
+        {
+          countryCode: 'CA',
+          placeholder: '+1 000 000 0000',
+          helpText: 'Include the CA country code +1 before the phone number',
+        },
+        {
+          countryCode: 'AU',
+          placeholder: '+61 000 000 000',
+          helpText: 'Include the AU country code +61 before the phone number',
+        },
+        {
+          countryCode: 'DE',
+          placeholder: '+49 000 0000000',
+          helpText: 'Fügen Sie vor der Telefonnummer die DE-Ländervorwahl +49 ein',
+        },
+        {
+          countryCode: 'FR',
+          placeholder: '+33 0 00 00 00 00',
+          helpText: 'Incluez le code pays FR +33 avant le numéro de téléphone',
+        },
+        {
+          countryCode: 'ES',
+          placeholder: '+34 000 000 000',
+          helpText: 'Incluya el código de país ES +34 antes del número de teléfono',
+        },
+        {
+          countryCode: 'NL',
+          placeholder: '+31 0 00000000',
+          helpText: 'Voeg de NL-landcode +31 toe vóór het telefoonnummer',
+        },
+        {
+          countryCode: 'BE',
+          placeholder: '+32 000 00 00 00',
+          helpText: 'Incluez le code pays BE +32 avant le numéro de téléphone',
+        },
+        {
+          countryCode: 'CH',
+          placeholder: '+41 00 000 00 00',
+          helpText: 'Fügen Sie vor der Telefonnummer die CH-Ländervorwahl +41 ein',
+        },
+        {
+          countryCode: 'AT',
+          placeholder: '+43 000 000 0000',
+          helpText: 'Fügen Sie vor der Telefonnummer die AT-Ländervorwahl +43 ein',
+        },
+        {
+          countryCode: 'IE',
+          placeholder: '+353 00 000 0000',
+          helpText: 'Include the IE country code +353 before the phone number',
+        },
+        {
+          countryCode: 'IT',
+          placeholder: '+39 000 000 0000',
+          helpText: 'Includere il prefisso internazionale IT +39 prima del numero di telefono',
+        },
+      ];
+
+      const selectedPlaceholder = mockPlaceholders.find(function(item) {
+        return item && item.countryCode === countryCode;
+      });
+      
+      return selectedPlaceholder ? selectedPlaceholder.placeholder : mockPlaceholders[0].placeholder;
+    }
+
+    function updatePlaceholder(countryCode, fieldName) {
+      if (!countryCode || !fieldName) {
+        return;
+      }
+      
+      const phoneInput = document.querySelector('#mce-' + fieldName);
+      if (!phoneInput) {
+        return;
+      }
+      
+      const placeholder = getDefaultPlaceholder(countryCode);
+      if (placeholder) {
+        phoneInput.placeholder = placeholder;
+      }
+    }
+
+    function updateCountryCodeInstruction(countryCode, fieldName) {
+      updatePlaceholder(countryCode, fieldName);
+      
+    }
+
+    function getDefaultHelpText(countryCode) {
+      var mockPlaceholders = [
+        {
+          countryCode: 'US',
+          placeholder: '+1 000 000 0000',
+          helpText: 'Include the US country code +1 before the phone number',
+        },
+        {
+          countryCode: 'GB',
+          placeholder: '+44 0000 000000',
+          helpText: 'Include the GB country code +44 before the phone number',
+        },
+        {
+          countryCode: 'CA',
+          placeholder: '+1 000 000 0000',
+          helpText: 'Include the CA country code +1 before the phone number',
+        },
+        {
+          countryCode: 'AU',
+          placeholder: '+61 000 000 000',
+          helpText: 'Include the AU country code +61 before the phone number',
+        },
+        {
+          countryCode: 'DE',
+          placeholder: '+49 000 0000000',
+          helpText: 'Fügen Sie vor der Telefonnummer die DE-Ländervorwahl +49 ein',
+        },
+        {
+          countryCode: 'FR',
+          placeholder: '+33 0 00 00 00 00',
+          helpText: 'Incluez le code pays FR +33 avant le numéro de téléphone',
+        },
+        {
+          countryCode: 'ES',
+          placeholder: '+34 000 000 000',
+          helpText: 'Incluya el código de país ES +34 antes del número de teléfono',
+        },
+        {
+          countryCode: 'NL',
+          placeholder: '+31 0 00000000',
+          helpText: 'Voeg de NL-landcode +31 toe vóór het telefoonnummer',
+        },
+        {
+          countryCode: 'BE',
+          placeholder: '+32 000 00 00 00',
+          helpText: 'Incluez le code pays BE +32 avant le numéro de téléphone',
+        },
+        {
+          countryCode: 'CH',
+          placeholder: '+41 00 000 00 00',
+          helpText: 'Fügen Sie vor der Telefonnummer die CH-Ländervorwahl +41 ein',
+        },
+        {
+          countryCode: 'AT',
+          placeholder: '+43 000 000 0000',
+          helpText: 'Fügen Sie vor der Telefonnummer die AT-Ländervorwahl +43 ein',
+        },
+        {
+          countryCode: 'IE',
+          placeholder: '+353 00 000 0000',
+          helpText: 'Include the IE country code +353 before the phone number',
+        },
+        {
+          countryCode: 'IT',
+          placeholder: '+39 000 000 0000',
+          helpText: 'Includere il prefisso internazionale IT +39 prima del numero di telefono',
+        },
+      ];
+      
+      if (!countryCode || typeof countryCode !== 'string') {
+        return mockPlaceholders[0].helpText;
+      }
+      
+      const selectedHelpText = mockPlaceholders.find(function(item) {
+          return item && item.countryCode === countryCode;
+        });
+        
+        return selectedHelpText ? selectedHelpText.helpText : mockPlaceholders[0].helpText;
+    }
+
+    function setDefaultHelpText(countryCode) {
+      const helpTextSpan = document.querySelector('#help-text');
+      if (!helpTextSpan) {
+        return;
+      }
+
+        
+    }
+
+    function updateHelpTextCountryCode(countryCode, fieldName) {
+      if (!countryCode || !fieldName) {
+        return;
+      }
+      
+      setDefaultHelpText(countryCode);
+    }
+
+    function initializeSmsPhoneDropdown(fieldName) {
+      if (!fieldName || typeof fieldName !== 'string') {
+        return;
+      }
+      
+      const dropdown = document.querySelector('#country-select-' + fieldName);
+      const displayFlag = document.querySelector('#flag-display-' + fieldName);
+      
+      if (!dropdown || !displayFlag) {
+        return;
+      }
+
+      const smsPhoneData = window.MC?.smsPhoneData;
+      if (smsPhoneData && smsPhoneData.programs && Array.isArray(smsPhoneData.programs)) {
+        dropdown.innerHTML = generateDropdownOptions(smsPhoneData.programs);
+      }
+
+      const defaultProgram = getDefaultCountryProgram(smsPhoneData?.defaultCountryCode, smsPhoneData?.programs);
+      if (defaultProgram && defaultProgram.countryCode) {
+        dropdown.value = defaultProgram.countryCode;
+        
+        const flagSpan = displayFlag?.querySelector('#flag-emoji-' + fieldName);
+        if (flagSpan) {
+          flagSpan.textContent = getCountryUnicodeFlag(defaultProgram.countryCode);
+          flagSpan.setAttribute('aria-label', sanitizeHtml(defaultProgram.countryCode) + ' flag');
+        }
+        
+        updateSmsLegalText(defaultProgram.countryCode, fieldName);
+        updatePlaceholder(defaultProgram.countryCode, fieldName);
+        updateCountryCodeInstruction(defaultProgram.countryCode, fieldName);
+      }
+
+     
+      var smsNotRequiredRemoveCountryCodeEnabled = true;
+      var smsField = Object.values({"EMAIL":{"name":"EMAIL","label":"Email Address","helper_text":"","type":"email","required":true,"audience_field_name":"Email Address","merge_id":0,"help_text_enabled":false,"enabled":true,"order":0,"field_type":"merge"},"FNAME":{"name":"FNAME","label":"First Name","helper_text":"","type":"text","required":true,"audience_field_name":"First Name","merge_id":1,"help_text_enabled":false,"enabled":true,"order":1,"field_type":"merge"},"SMSPHONE":{"name":"SMSPHONE","label":"SMS Phone Number","helper_text":"","type":"smsphone","required":true,"audience_field_name":"SMS Phone Number","legal":{"required":"Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>","optional":"Rene Herse Cycles - By providing your phone number, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>"},"smsProgramData":[{"countryCode":"US","countryCallingCode":"+1","number":"+12067466449","imgSrc":"https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/forms-landing-pages/smsphone/flag-us.svg","requiredTemplate":"Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>","optionalTemplate":"Rene Herse Cycles - By providing your phone number, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>"}],"defaultCountryCode":"US","countryNames":[{"code":"US","name":"USA"}],"multiCountryEnabled":true,"formsMultiCountryFastFollowsEnabled":true,"smsNotRequiredRemoveCountryCodeEnabled":true,"landingPagesInputStylesFixEnabled":true,"europeanSmsExpansionEnabled":false,"phoneformat":"","merge_id":3,"help_text_enabled":false,"enabled":true,"order":2,"field_type":"merge"},"LNAME":{"name":"LNAME","label":"Last Name","helper_text":"","type":"text","required":false,"audience_field_name":"Last Name","enabled":false,"order":null,"field_type":"merge","merge_id":2},"MMERGE4":{"name":"MMERGE4","label":"BQSpecial","helper_text":"","type":"text","required":false,"audience_field_name":"BQSpecial","enabled":false,"order":null,"field_type":"merge","merge_id":4},"MMERGE5":{"name":"MMERGE5","label":"wholesale_customer","helper_text":"","type":"text","required":false,"audience_field_name":"wholesale_customer","enabled":false,"order":null,"field_type":"merge","merge_id":5},"MMERGE6":{"name":"MMERGE6","label":"Knickers","helper_text":"","type":"text","required":false,"audience_field_name":"Knickers","enabled":false,"order":null,"field_type":"merge","merge_id":6},"MMERGE10":{"name":"MMERGE10","label":"last issue sent","helper_text":"","type":"text","required":false,"audience_field_name":"last issue sent","enabled":false,"order":null,"field_type":"merge","merge_id":10},"MMERGE13":{"name":"MMERGE13","label":"exclude","helper_text":"","type":"text","required":false,"audience_field_name":"exclude","enabled":false,"order":null,"field_type":"merge","merge_id":13},"MMERGE9":{"name":"MMERGE9","label":"ExpiryText","helper_text":"","type":"text","required":false,"audience_field_name":"ExpiryText","enabled":false,"order":null,"field_type":"merge","merge_id":9},"TYPE":{"name":"TYPE","label":"Type","helper_text":"","type":"text","required":false,"audience_field_name":"Type","enabled":false,"order":null,"field_type":"merge","merge_id":14},"NOTICE":{"name":"NOTICE","label":"Notice","helper_text":"","type":"text","required":false,"audience_field_name":"Notice","enabled":false,"order":null,"field_type":"merge","merge_id":15}}).find(function(f) { return f.name === fieldName && f.type === 'smsphone'; });
+      var isRequired = smsField ? smsField.required : false;
+      var shouldAppendCountryCode = smsNotRequiredRemoveCountryCodeEnabled ? isRequired : true;
+      
+      var phoneInput = document.querySelector('#mce-' + fieldName);
+      if (phoneInput && defaultProgram.countryCallingCode && shouldAppendCountryCode) {
+        phoneInput.value = defaultProgram.countryCallingCode;
+      }
+      
+
+
+      displayFlag?.addEventListener('click', function(e) {
+        dropdown.focus();
+      });
+
+
+      dropdown?.addEventListener('change', function() {
+        const selectedCountry = this.value;
+        
+        if (!selectedCountry || typeof selectedCountry !== 'string') {
+          return;
+        }
+        
+        const flagSpan = displayFlag?.querySelector('#flag-emoji-' + fieldName);
+        if (flagSpan) {
+          flagSpan.textContent = getCountryUnicodeFlag(selectedCountry);
+          flagSpan.setAttribute('aria-label', sanitizeHtml(selectedCountry) + ' flag');
+        }
+
+         
+        const selectedProgram = window.MC?.smsPhoneData?.programs.find(function(program) {
+          return program && program.countryCode === selectedCountry;
+        });
+
+        var smsNotRequiredRemoveCountryCodeEnabled = true;
+        var smsField = Object.values({"EMAIL":{"name":"EMAIL","label":"Email Address","helper_text":"","type":"email","required":true,"audience_field_name":"Email Address","merge_id":0,"help_text_enabled":false,"enabled":true,"order":0,"field_type":"merge"},"FNAME":{"name":"FNAME","label":"First Name","helper_text":"","type":"text","required":true,"audience_field_name":"First Name","merge_id":1,"help_text_enabled":false,"enabled":true,"order":1,"field_type":"merge"},"SMSPHONE":{"name":"SMSPHONE","label":"SMS Phone Number","helper_text":"","type":"smsphone","required":true,"audience_field_name":"SMS Phone Number","legal":{"required":"Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>","optional":"Rene Herse Cycles - By providing your phone number, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>"},"smsProgramData":[{"countryCode":"US","countryCallingCode":"+1","number":"+12067466449","imgSrc":"https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/forms-landing-pages/smsphone/flag-us.svg","requiredTemplate":"Rene Herse Cycles - By providing your phone number and checking the box, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>","optionalTemplate":"Rene Herse Cycles - By providing your phone number, you agree to receive promotional and marketing messages (e.g., abandoned carts), notifications, and customer service communications from Rene Herse Cycles. Message and data rates may apply. Consent is not a condition of purchase. Message frequency varies. Text HELP for help. Text STOP to cancel. See <a href=\"http://eepurl.com/jw-NiA\" target=\"_blank\">Terms</a> and <a href=\"http://eepurl.com/jw-M7M\" target=\"_blank\">Privacy Policy</a>"}],"defaultCountryCode":"US","countryNames":[{"code":"US","name":"USA"}],"multiCountryEnabled":true,"formsMultiCountryFastFollowsEnabled":true,"smsNotRequiredRemoveCountryCodeEnabled":true,"landingPagesInputStylesFixEnabled":true,"europeanSmsExpansionEnabled":false,"phoneformat":"","merge_id":3,"help_text_enabled":false,"enabled":true,"order":2,"field_type":"merge"},"LNAME":{"name":"LNAME","label":"Last Name","helper_text":"","type":"text","required":false,"audience_field_name":"Last Name","enabled":false,"order":null,"field_type":"merge","merge_id":2},"MMERGE4":{"name":"MMERGE4","label":"BQSpecial","helper_text":"","type":"text","required":false,"audience_field_name":"BQSpecial","enabled":false,"order":null,"field_type":"merge","merge_id":4},"MMERGE5":{"name":"MMERGE5","label":"wholesale_customer","helper_text":"","type":"text","required":false,"audience_field_name":"wholesale_customer","enabled":false,"order":null,"field_type":"merge","merge_id":5},"MMERGE6":{"name":"MMERGE6","label":"Knickers","helper_text":"","type":"text","required":false,"audience_field_name":"Knickers","enabled":false,"order":null,"field_type":"merge","merge_id":6},"MMERGE10":{"name":"MMERGE10","label":"last issue sent","helper_text":"","type":"text","required":false,"audience_field_name":"last issue sent","enabled":false,"order":null,"field_type":"merge","merge_id":10},"MMERGE13":{"name":"MMERGE13","label":"exclude","helper_text":"","type":"text","required":false,"audience_field_name":"exclude","enabled":false,"order":null,"field_type":"merge","merge_id":13},"MMERGE9":{"name":"MMERGE9","label":"ExpiryText","helper_text":"","type":"text","required":false,"audience_field_name":"ExpiryText","enabled":false,"order":null,"field_type":"merge","merge_id":9},"TYPE":{"name":"TYPE","label":"Type","helper_text":"","type":"text","required":false,"audience_field_name":"Type","enabled":false,"order":null,"field_type":"merge","merge_id":14},"NOTICE":{"name":"NOTICE","label":"Notice","helper_text":"","type":"text","required":false,"audience_field_name":"Notice","enabled":false,"order":null,"field_type":"merge","merge_id":15}}).find(function(f) { return f.name === fieldName && f.type === 'smsphone'; });
+        var isRequired = smsField ? smsField.required : false;
+        var shouldAppendCountryCode = smsNotRequiredRemoveCountryCodeEnabled ? isRequired : true;
+        
+        var phoneInput = document.querySelector('#mce-' + fieldName);
+        if (phoneInput && selectedProgram.countryCallingCode && shouldAppendCountryCode) {
+          phoneInput.value = selectedProgram.countryCallingCode;
+        }
+        
+        
+        updateSmsLegalText(selectedCountry, fieldName);
+        updatePlaceholder(selectedCountry, fieldName);
+        updateCountryCodeInstruction(selectedCountry, fieldName);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const smsPhoneFields = document.querySelectorAll('[id^="country-select-"]');
+      
+      smsPhoneFields.forEach(function(dropdown) {
+        const fieldName = dropdown?.id.replace('country-select-', '');
+        initializeSmsPhoneDropdown(fieldName);
+      });
+    });
+    </script></div>
+
+
+
+
+<p class="has-text-align-center has-small-font-size">(We’ll use your info only to deliver our newsletter. We won’t share it with anybody.)</p>
+</div></div>
+</div></div>					
+				
+				</div><!-- end main -->
+
+				
+				<div class="footer-wrapper">
+
+																												
+							<div id="footer" class="footer footer-1"
+>
+			<div class="footer-main">
+			<div class="container">
+				
+									<div class="row">
+														<div class="col-lg-3">
+									<aside id="nav_menu-2" class="widget widget_nav_menu"><h3 class="widget-title">Tires</h3><div class="menu-footer-tires-container"><ul id="menu-footer-tires" class="menu"><li id="menu-item-152456" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152456"><a href="https://www.renehersecycles.com/product-category/components/tires/700c/">700C / 29&#8243;</a></li>
+<li id="menu-item-152455" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152455"><a href="https://www.renehersecycles.com/product-category/components/tires/650b/">650B / 27.5&#8243;</a></li>
+<li id="menu-item-152454" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152454"><a href="https://www.renehersecycles.com/product-category/components/tires/26-inch/">26&#8243;</a></li>
+<li id="menu-item-152457" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152457"><a href="https://www.renehersecycles.com/product-category/components/tires/tubular/">Tubulars</a></li>
+<li id="menu-item-242071" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-242071"><a href="https://www.renehersecycles.com/product-category/components/tires/tubes/">Tubes</a></li>
+</ul></div></aside><aside id="nav_menu-8" class="widget widget_nav_menu"><h3 class="widget-title">Bikes</h3><div class="menu-footer-bikes-container"><ul id="menu-footer-bikes" class="menu"><li id="menu-item-167891" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-167891"><a href="https://www.renehersecycles.com/product-category/bikes/">80th Anniversary Rene Herse</a></li>
+<li id="menu-item-219903" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-219903"><a href="https://www.renehersecycles.com/product-category/bikes/">OPEN × Rene Herse Collaborations</a></li>
+</ul></div></aside><aside id="nav_menu-7" class="widget widget_nav_menu"><h3 class="widget-title">About Rene Herse</h3><div class="menu-footer-about-rh-container"><ul id="menu-footer-about-rh" class="menu"><li id="menu-item-152558" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152558"><a href="https://www.renehersecycles.com/our-passion/">About Us</a></li>
+<li id="menu-item-152562" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152562"><a href="https://www.renehersecycles.com/legend/">The Story of Rene Herse Cycles</a></li>
+<li id="menu-item-152563" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152563"><a href="https://www.renehersecycles.com/wide_tire/">Developing the Original All-Road Tires</a></li>
+<li id="menu-item-183074" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-183074"><a href="https://www.renehersecycles.com/riders/">Gravel Pioneers on Rene Herse</a></li>
+</ul></div></aside>								</div>
+																<div class="col-lg-3">
+									<aside id="nav_menu-3" class="widget widget_nav_menu"><h3 class="widget-title">Components</h3><div class="menu-footer-components-container"><ul id="menu-footer-components" class="menu"><li id="menu-item-152458" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152458"><a href="https://www.renehersecycles.com/product-category/components/bottom-brackets/">Bottom Brackets</a></li>
+<li id="menu-item-152459" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152459"><a href="https://www.renehersecycles.com/product-category/components/brakes/">Brakes</a></li>
+<li id="menu-item-152461" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152461"><a href="https://www.renehersecycles.com/product-category/components/cranks/">Cranks</a></li>
+<li id="menu-item-152462" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152462"><a href="https://www.renehersecycles.com/product-category/components/handlebars/">Handlebars</a></li>
+<li id="menu-item-221796" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-221796"><a href="https://www.renehersecycles.com/product-category/components/headsets/">Headsets</a></li>
+<li id="menu-item-152463" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152463"><a href="https://www.renehersecycles.com/product-category/components/hubs/">Hubs</a></li>
+<li id="menu-item-152464" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152464"><a href="https://www.renehersecycles.com/product-category/components/pedals/">Pedals</a></li>
+<li id="menu-item-152465" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152465"><a href="https://www.renehersecycles.com/product-category/components/rims/">Rims</a></li>
+<li id="menu-item-152466" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152466"><a href="https://www.renehersecycles.com/product-category/components/saddles/">Saddles/Seatposts</a></li>
+<li id="menu-item-152467" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152467"><a href="https://www.renehersecycles.com/product-category/components/stems-decaleurs/">Stems/Decaleurs</a></li>
+<li id="menu-item-152460" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152460"><a href="https://www.renehersecycles.com/product-category/components/classic-herse-restoration/">Classic Herse Restoration</a></li>
+</ul></div></aside><aside id="nav_menu-12" class="widget widget_nav_menu"><h3 class="widget-title">Routes / Rides</h3><div class="menu-footer-routes-rides-container"><ul id="menu-footer-routes-rides" class="menu"><li id="menu-item-244579" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244579"><a href="https://www.renehersecycles.com/routes/">Our Favorite Routes</a></li>
+<li id="menu-item-244578" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244578"><a href="https://www.renehersecycles.com/cyclos-montagnards/">Cyclos Montagnards </a></li>
+<li id="menu-item-244577" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-244577"><a href="https://www.renehersecycles.com/r80r70r60rulesresults/">R80/R70/R60 Honors</a></li>
+</ul></div></aside>								</div>
+																<div class="col-lg-3">
+									<aside id="nav_menu-4" class="widget widget_nav_menu"><h3 class="widget-title">Equipment</h3><div class="menu-footer-equipment-container"><ul id="menu-footer-equipment" class="menu"><li id="menu-item-152468" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152468"><a href="https://www.renehersecycles.com/product-category/equipment/bags/">Bags</a></li>
+<li id="menu-item-152469" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152469"><a href="https://www.renehersecycles.com/product-category/equipment/bolts/">Bolts/Spare Parts</a></li>
+<li id="menu-item-152470" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152470"><a href="https://www.renehersecycles.com/product-category/equipment/bottlescages/">Bottles/Cages</a></li>
+<li id="menu-item-152471" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152471"><a href="https://www.renehersecycles.com/product-category/equipment/clothing/">Clothing</a></li>
+<li id="menu-item-152472" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152472"><a href="https://www.renehersecycles.com/product-category/equipment/fenders/">Fenders</a></li>
+<li id="menu-item-152473" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152473"><a href="https://www.renehersecycles.com/product-category/equipment/framebuilding/">Framebuilding</a></li>
+<li id="menu-item-152474" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152474"><a href="https://www.renehersecycles.com/product-category/equipment/lights/">Lights</a></li>
+<li id="menu-item-152475" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152475"><a href="https://www.renehersecycles.com/product-category/equipment/racks/">Racks</a></li>
+<li id="menu-item-152476" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152476"><a href="https://www.renehersecycles.com/product-category/equipment/tools/">Tools</a></li>
+</ul></div></aside><aside id="nav_menu-10" class="widget widget_nav_menu"><h3 class="widget-title">Gift Cards</h3><div class="menu-footer-gift-cards-container"><ul id="menu-footer-gift-cards" class="menu"><li id="menu-item-209395" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-209395"><a href="https://www.renehersecycles.com/shop/rene-herse/rene-herse-gift-card/">Rene Herse Gift Card</a></li>
+</ul></div></aside>								</div>
+																<div class="col-lg-3">
+									<aside id="nav_menu-5" class="widget widget_nav_menu"><h3 class="widget-title">Books / Bicycle Quarterly</h3><div class="menu-footer-print-container"><ul id="menu-footer-print" class="menu"><li id="menu-item-152480" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-152480"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-subscription/">Subscription</a></li>
+<li id="menu-item-235446" class="menu-item menu-item-type-post_type menu-item-object-product menu-item-235446"><a href="https://www.renehersecycles.com/shop/print/print-subscriptions/bicycle-quarterly-subscription/">Gift Subscription</a></li>
+<li id="menu-item-152477" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152477"><a href="https://www.renehersecycles.com/product-category/print/issues/">Back Issues</a></li>
+<li id="menu-item-152478" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-152478"><a href="https://www.renehersecycles.com/product-category/print/books/">Books</a></li>
+<li id="menu-item-235281" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-235281"><a href="https://www.renehersecycles.com/bicycle-quarterly-address-change/">Change My Address</a></li>
+</ul></div></aside><aside id="nav_menu-6" class="widget widget_nav_menu"><h3 class="widget-title">Customer Support</h3><div class="menu-footer-support-container"><ul id="menu-footer-support" class="menu"><li id="menu-item-152481" class="menu-item menu-item-type-taxonomy menu-item-object-faq_cat menu-item-152481"><a href="https://www.renehersecycles.com/faq_cat/orders-faq/">Orders, Returns, Availability</a></li>
+<li id="menu-item-152482" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152482"><a href="https://www.renehersecycles.com/tech-info/">Technical Information</a></li>
+<li id="menu-item-152486" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152486"><a href="https://www.renehersecycles.com/tech-info/bq_faq/">Bicycle Quarterly Subscriptions</a></li>
+<li id="menu-item-155826" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155826"><a href="https://www.renehersecycles.com/tech-info/warranty/">Warranty</a></li>
+<li id="menu-item-152485" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152485"><a href="https://www.renehersecycles.com/wholesale-accounts/">Wholesale Account Application</a></li>
+<li id="menu-item-183922" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-183922"><a href="https://www.renehersecycles.com/press-center/">Press Center</a></li>
+<li id="menu-item-195044" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-195044"><a href="https://www.renehersecycles.com/contact/">Contact</a></li>
+</ul></div></aside>								</div>
+													</div>
+				
+							</div>
+		</div>
+	
+	<div class="footer-bottom">
+	<div class="container">
+				<div class="footer-left">
+							<span class="logo">
+					<a aria-label="Site Logo" href="https://www.renehersecycles.com/" title="Rene Herse Cycles - ">
+						<img class="img-responsive" src="//www.renehersecycles.com/wp-content/uploads/2020/12/ReneHerseLogo_rgb_Logotype_HoldingShape_Small_White.png" alt="Rene Herse Cycles" />					</a>
+				</span>
+						<span class="footer-copyright">&copy; 2026 Rene Herse Cycles | <a href="/terms-of-service/">Privacy and Terms</a> | <a href="/contact/">Contact Us</a></span>		</div>
+		
+		
+			</div>
+</div>
+</div>
+												
+					
+				</div>
+							
+					
+	</div><!-- end wrapper -->
+	
+    <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+      tvc_js = new TVC_GTM_Enhanced({"affiliation":"Rene Herse Cycles","is_admin":"","tracking_option":"UA","property_id":"UA-62763893-1","measurement_id":"","google_ads_id":"","fb_pixel_id":"","tvc_ajax_url":"https:\/\/www.renehersecycles.com\/wp-admin\/admin-ajax.php"});
+      
+      
+          </script>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/reneherse/*","/wp-content/themes/porto/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<div class="ttt-pnwc-modal micromodal-slide" id="ttt-pnwc-notice" aria-hidden="true">
+	<div class="ttt-pnwc-overlay" data-micromodal-close>
+		<div class="ttt-pnwc-container" role="dialog" aria-labelledby="modal-1-title">
+			<div class="ttt-pnwc-wrapper">
+				<header class="ttt-pnwc-header"><button class="ttt-pnwc-close" aria-label="Close modal" data-micromodal-close></button></header>
+				<div class="ttt-pnwc-content" id="modal-1-content" data-content="true"></div>
+				<footer class="ttt-pnwc-footer"></footer>
+			</div>
+		</div>
+	</div>
+</div><script type="text/javascript">jQuery(function($){		function load_authorize_net_cim_credit_card_payment_form_handler() {
+			window.wc_authorize_net_cim_credit_card_payment_form_handler = new WC_Authorize_Net_Payment_Form_Handler( {"plugin_id":"authorize_net_cim","id":"authorize_net_cim_credit_card","id_dasherized":"authorize-net-cim-credit-card","type":"credit-card","csc_required":true,"csc_required_for_tokens":false,"logging_enabled":false,"lightbox_enabled":false,"login_id":"92jP2w9GjuC","client_key":"8J7qxBVZ9TQh68guMAujh6v6JLa5dHtnqD393u5Y36nu3BYkubKJtr2Hw287vAUY","general_error":"An error occurred, please try again or try an alternate form of payment.","ajax_url":"https:\/\/www.renehersecycles.com\/wp-admin\/admin-ajax.php","ajax_log_nonce":"0cc24290ca","enabled_card_types":["visa","mastercard"]} );window.jQuery( document.body ).trigger( "update_checkout" );		}
+
+		try {
+
+			if ( 'undefined' !== typeof WC_Authorize_Net_Payment_Form_Handler ) {
+				load_authorize_net_cim_credit_card_payment_form_handler();
+			} else {
+				window.jQuery( document.body ).on( 'wc_authorize_net_payment_form_handler_loaded', load_authorize_net_cim_credit_card_payment_form_handler );
+			}
+
+		} catch ( err ) {
+
+			
+		var errorName    = '',
+		    errorMessage = '';
+
+		if ( 'undefined' === typeof err || 0 === err.length || ! err ) {
+			errorName    = 'A script error has occurred.';
+			errorMessage = 'The script WC_Authorize_Net_Payment_Form_Handler could not be loaded.';
+		} else {
+			errorName    = 'undefined' !== typeof err.name    ? err.name    : '';
+			errorMessage = 'undefined' !== typeof err.message ? err.message : '';
+		}
+
+		
+		jQuery.post( 'https://www.renehersecycles.com/wp-admin/admin-ajax.php', {
+			action:   'wc_authorize_net_cim_credit_card_payment_form_log_script_event',
+			security: 'b503956ae1',
+			name:     errorName,
+			message:  errorMessage,
+		} );
+
+				}
+		});</script><script type="text/javascript">jQuery(function($){		function load_authorize_net_cim_echeck_payment_form_handler() {
+			window.wc_authorize_net_cim_echeck_payment_form_handler = new WC_Authorize_Net_Payment_Form_Handler( {"plugin_id":"authorize_net_cim","id":"authorize_net_cim_echeck","id_dasherized":"authorize-net-cim-echeck","type":"echeck","csc_required":false,"csc_required_for_tokens":false,"logging_enabled":false,"lightbox_enabled":false,"login_id":"92jP2w9GjuC","client_key":"8J7qxBVZ9TQh68guMAujh6v6JLa5dHtnqD393u5Y36nu3BYkubKJtr2Hw287vAUY","general_error":"An error occurred, please try again or try an alternate form of payment.","ajax_url":"https:\/\/www.renehersecycles.com\/wp-admin\/admin-ajax.php","ajax_log_nonce":"adba89c1ed"} );window.jQuery( document.body ).trigger( "update_checkout" );		}
+
+		try {
+
+			if ( 'undefined' !== typeof WC_Authorize_Net_Payment_Form_Handler ) {
+				load_authorize_net_cim_echeck_payment_form_handler();
+			} else {
+				window.jQuery( document.body ).on( 'wc_authorize_net_payment_form_handler_loaded', load_authorize_net_cim_echeck_payment_form_handler );
+			}
+
+		} catch ( err ) {
+
+			
+		var errorName    = '',
+		    errorMessage = '';
+
+		if ( 'undefined' === typeof err || 0 === err.length || ! err ) {
+			errorName    = 'A script error has occurred.';
+			errorMessage = 'The script WC_Authorize_Net_Payment_Form_Handler could not be loaded.';
+		} else {
+			errorName    = 'undefined' !== typeof err.name    ? err.name    : '';
+			errorMessage = 'undefined' !== typeof err.message ? err.message : '';
+		}
+
+		
+		jQuery.post( 'https://www.renehersecycles.com/wp-admin/admin-ajax.php', {
+			action:   'wc_authorize_net_cim_echeck_payment_form_log_script_event',
+			security: 'c95141bf1f',
+			name:     errorName,
+			message:  errorMessage,
+		} );
+
+				}
+		});</script>    <script data-cfasync="false" data-pagespeed-no-defer  type="text/javascript">
+      // Gravity - FormSubmit event
+
+      // when ajax method
+      jQuery(document).on('gform_confirmation_loaded', function(event, formId) {
+        //var form = window['gform'].forms[formId];
+        var datalayer = {
+          event: 'form_lead_submit',
+          cov_form_type: "Gravity Form Plugin",
+          cov_form_id: formId,
+          cov_form_name: jQuery(this).data('title') || jQuery('.gform_title').text() || 'Form id:' + formId,
+        };
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(datalayer);
+      });
+
+      // when no ajax
+      jQuery(document).on('gform_post_render', function(event, formId) {
+        jQuery('#gform_' + formId).on('submit', function() {
+          var datalayer = {
+            event: 'form_lead_submit',
+            cov_form_type: "Gravity Form Plugin",
+            cov_form_id: formId,
+            cov_form_name: jQuery(this).data('title') || jQuery('.gform_title').text() || 'Form id-' + formId,
+          };
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(datalayer);
+        });
+      });
+    </script>
+      <script data-cfasync="false" data-no-optimize="1" data-pagespeed-no-defer>
+      document.addEventListener('DOMContentLoaded', function() {
+        var downloadLinks = document.querySelectorAll('a[href]');
+
+        downloadLinks.forEach(function(link) {
+          link.addEventListener('click', function(event) {
+            var fileUrl = link.href;
+            var fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+            var linkText = link.innerText || link.textContent;
+            var linkUrl = link.href;
+
+            var fileExtensionPattern = /\.(pdf|xlsx?|docx?|txt|rtf|csv|exe|key|pptx?|ppt|7z|pkg|rar|gz|zip|avi|mov|mp4|mpe?g|wmv|midi?|mp3|wav|wma)$/i;
+
+            if (fileExtensionPattern.test(fileUrl)) {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'file_download',
+                file_name: fileName,
+                link_text: linkText,
+                link_url: linkUrl
+              });
+            }
+          });
+        });
+      });
+    </script>
+    	<script>
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<script src="https://www.renehersecycles.com/wp-content/plugins/addify-payment-gateway-fee-discounts/assets/js/front.js?ver=1.0.0" id="afpgbf_front_js-js"></script>
+<script src="https://www.google.com/recaptcha/api.js?ver=4.0.13" id="google-reCaptcha-js-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js?ver=4.0.13" id="select2-js-js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js?ver=1.13.7" id="datatable-js-js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js" id="ttt_pnwc_micromodal-js"></script>
+<script id="ttt-pnwc-js-before">
+const ttt_pnwc_info = {"themeURI":"https:\/\/www.renehersecycles.com\/wp-content\/themes\/reneherse","pluginURL":"https:\/\/www.renehersecycles.com\/wp-content\/plugins\/popup-notices-for-woocommerce-pro\/vendor\/wpfactory\/popup-notices-for-woocommerce","icon_default_class":"default-icon","error_icon_class":"fas fa-exclamation-triangle","info_icon_class":"fas fa-info-circle","success_icon_class":"fas fa-check-circle","click_inside_close":"yes","modulesRequired":[],"types":{"error":"yes","info":"no","success":"no"},"ajax_opt":"yes","cookie_opt":{"enabled":"no","time":"0.5","message_origin":"static"},"auto_close_time":"","auto_close_types":[],"ignored_msg":{"field":["<p><\/p>"],"search_method":"partial_comparison","regex_flags":"i"},"audio":{"enabled":"no","opening":"","closing":""}}
+//# sourceURL=ttt-pnwc-js-before
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/popup-notices-for-woocommerce-pro/vendor/wpfactory/popup-notices-for-woocommerce/assets/js/pnwc-frontend.min.js?ver=251126-165149" id="ttt-pnwc-js"></script>
+<script id="awdr-main-js-extra">
+var awdr_params = {"ajaxurl":"https://www.renehersecycles.com/wp-admin/admin-ajax.php","nonce":"f1c7cf1873","enable_update_price_with_qty":"show_when_matched","refresh_order_review":"0","custom_target_simple_product":"","custom_target_variable_product":"","js_init_trigger":"","awdr_opacity_to_bulk_table":"","awdr_dynamic_bulk_table_status":"0","awdr_dynamic_bulk_table_off":"on","custom_simple_product_id_selector":"","custom_variable_product_id_selector":""};
+//# sourceURL=awdr-main-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woo-discount-rules/v2/Assets/Js/site_main.js?ver=2.6.14" id="awdr-main-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woo-discount-rules/v2/Assets/Js/awdr-dynamic-price.js?ver=2.6.14" id="awdr-dynamic-price-js"></script>
+<script id="porto-live-search-js-extra">
+var porto_live_search = {"nonce":"74e81ef60e","sku":"SKU: ","product_tags":"Tags: "};
+//# sourceURL=porto-live-search-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/inc/lib/live-search/live-search.min.js?ver=7.8.4" id="porto-live-search-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/jquery-payment/jquery.payment.min.js?ver=3.0.0-wc.10.6.1" id="wc-jquery-payment-js" data-wp-strategy="defer"></script>
+<script id="sv-wc-payment-gateway-payment-form-v5_15_12-js-extra">
+var sv_wc_payment_gateway_payment_form_params = {"order_button_text":"Place order","card_number_missing":"Card number is missing","card_number_invalid":"Card number is invalid","card_number_digits_invalid":"Card number is invalid (only digits allowed)","card_number_length_invalid":"Card number is invalid (wrong length)","card_type_invalid":"Card is invalid","card_type_invalid_specific_type":"{card_type} card is invalid","cvv_missing":"Card security code is missing","cvv_digits_invalid":"Card security code is invalid (only digits are allowed)","cvv_length_invalid":"Card security code is invalid (must be 3 or 4 digits)","card_exp_date_invalid":"Card expiration date is invalid","check_number_digits_invalid":"Check Number is invalid (only digits are allowed)","check_number_missing":"Check Number is missing","drivers_license_state_missing":"Driver's license state is missing","drivers_license_number_missing":"Driver's license number is missing","drivers_license_number_invalid":"Driver's license number is invalid","account_number_missing":"Account Number is missing","account_number_invalid":"Account Number is invalid (only digits are allowed)","account_number_length_invalid":"Account Number is invalid (must be between 5 and 17 digits)","routing_number_missing":"Routing Number is missing","routing_number_digits_invalid":"Routing Number is invalid (only digits are allowed)","routing_number_length_invalid":"Routing Number is invalid (must be 9 digits)"};
+//# sourceURL=sv-wc-payment-gateway-payment-form-v5_15_12-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce-gateway-authorize-net-cim/vendor/skyverge/wc-plugin-framework/woocommerce/payment-gateway/assets/dist/frontend/sv-wc-payment-gateway-payment-form.js?ver=5.15.12" id="sv-wc-payment-gateway-payment-form-v5_15_12-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=10.6.1" id="sourcebuster-js-js"></script>
+<script id="wc-order-attribution-js-extra">
+var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"base64":false,"ajaxurl":"https://www.renehersecycles.com/wp-admin/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","utm_source_platform":"current.plt","utm_creative_format":"current.fmt","utm_marketing_tactic":"current.tct","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
+//# sourceURL=wc-order-attribution-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=10.6.1" id="wc-order-attribution-js"></script>
+<script id="livecart-cart-fragments-js-extra">
+var livecartCartFragments = {"scriptPath":"https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js"};
+//# sourceURL=livecart-cart-fragments-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/livecart-by-wp-engine/scripts/livecart-cart-fragments-min.js?ver=1.0.2" id="livecart-cart-fragments-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woo-discount-rules-pro/Assets/Js/awdr_pro.js?ver=2.6.14" id="woo_discount_pro_script-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/bootstrap.js?ver=5.0.1" id="bootstrap-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min.js?ver=1.4.1-wc.10.6.1" id="wc-jquery-cookie-js" defer data-wp-strategy="defer"></script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/libs/owl.carousel.min.js?ver=2.3.4" id="owl.carousel-js"></script>
+<script src="https://www.renehersecycles.com/wp-includes/js/imagesloaded.min.js?ver=5.0.0" id="imagesloaded-js"></script>
+<script async="async" src="https://www.renehersecycles.com/wp-content/themes/porto/js/libs/jquery.magnific-popup.min.js?ver=1.1.0" id="jquery-magnific-popup-js"></script>
+<script id="porto-theme-js-extra">
+var js_porto_vars = {"rtl":"","theme_url":"https://www.renehersecycles.com/wp-content/themes/reneherse","ajax_url":"https://www.renehersecycles.com/wp-admin/admin-ajax.php","cart_url":"https://www.renehersecycles.com/cart/","change_logo":"1","container_width":"1140","grid_gutter_width":"30","show_sticky_header":"1","show_sticky_header_tablet":"","show_sticky_header_mobile":"","ajax_loader_url":"//www.renehersecycles.com/wp-content/themes/porto/images/ajax-loader@2x.gif","category_ajax":"","compare_popup":"","compare_popup_title":"","prdctfltr_ajax":"","slider_loop":"","slider_autoplay":"","slider_autoheight":"1","slider_speed":"5000","slider_nav":"","slider_nav_hover":"1","slider_margin":"","slider_dots":"1","slider_animatein":"","slider_animateout":"","product_thumbs_count":"4","product_zoom":"1","product_zoom_mobile":"","product_image_popup":"1","zoom_type":"inner","zoom_scroll":"1","zoom_lens_size":"200","zoom_lens_shape":"square","zoom_contain_lens":"1","zoom_lens_border":"1","zoom_border_color":"#888888","zoom_border":"0","screen_xl":"1170","screen_xxl":"1420","mfp_counter":"%curr% of %total%","mfp_img_error":"\u003Ca href=\"%url%\"\u003EThe image\u003C/a\u003E could not be loaded.","mfp_ajax_error":"\u003Ca href=\"%url%\"\u003EThe content\u003C/a\u003E could not be loaded.","popup_close":"Close","popup_prev":"Previous","popup_next":"Next","request_error":"The requested content cannot be loaded.\u003Cbr/\u003EPlease try again later.","loader_text":"Loading...","submenu_back":"Back","porto_nonce":"bc7226035d","use_skeleton_screen":[],"user_edit_pages":"","quick_access":"Click to edit this element.","goto_type":"Go To the Type Builder.","legacy_mode":"1","home_url":"https://www.renehersecycles.com/","is_multisite":"","current_blog_id":"1","texts":{"search_history_title":"Search History","search_history_clear_all":"Clear"},"add_to_label":"Add to cart","login_popup_waiting_msg":"Please wait...","wc_placeholder_img":"https://www.renehersecycles.com/wp-content/uploads/woocommerce-placeholder-300x300.png","shop_filter_layout":null,"func_url":"https://www.renehersecycles.com/wp-content/plugins/porto-functionality/"};
+//# sourceURL=porto-theme-js-extra
+</script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/theme.js?ver=7.8.4" id="porto-theme-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/appearanimate.js?ver=7.8.4" id="porto-appear-animate-js"></script>
+<script async="async" src="https://www.renehersecycles.com/wp-content/themes/porto/js/theme-async.js?ver=7.8.4" id="porto-theme-async-js"></script>
+<script async="async" src="https://www.renehersecycles.com/wp-content/themes/porto/js/post-ajax-modal.min.js?ver=7.8.4" id="porto-post-ajax-modal-js"></script>
+<script async="async" src="https://www.renehersecycles.com/wp-content/themes/porto/js/portfolio-async.min.js?ver=7.8.4" id="porto-portfolio-async-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/woocommerce-theme.js?ver=7.8.4" id="porto-woocommerce-theme-js"></script>
+<script src="https://www.renehersecycles.com/wp-content/themes/porto/js/sidebar-menu.min.js?ver=7.8.4" id="porto-sidebar-menu-js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://www.renehersecycles.com/wp-includes/js/wp-emoji-release.min.js?ver=6.9.4"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=https://www.renehersecycles.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+<script>jQuery(document).ready(function(){});</script>
+		<!-- Cookie Notice plugin v2.5.14 by Hu-manity.co https://hu-manity.co/ -->
+		<div id="cookie-notice" role="dialog" class="cookie-notice-hidden cookie-revoke-hidden cn-position-bottom" aria-label="Cookie Notice" style="background-color: rgba(50,50,58,0.88);"><div class="cookie-notice-container" style="color: #fff"><span id="cn-notice-text" class="cn-text-container">This website uses only cookies that are necessary to enhance your experience. We never sell your personal information.</span><span id="cn-notice-buttons" class="cn-buttons-container"><button id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button cn-button-custom button" aria-label="Got it!">Got it!</button></span><button type="button" id="cn-close-notice" data-cookie-set="accept" class="cn-close-icon" aria-label="No"></button></div>
+			
+		</div>
+		<!-- / Cookie Notice plugin --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e0d0b371f177690',t:'MTc3NDI2NDc5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
