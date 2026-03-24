@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Calculator Field Reference — Rene Herse Cycles Tire Pressure Calculator</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #222529;
+    background: #ffffff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 2px solid #e36159;
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 36px;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #e36159;
+    margin: 36px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  p { margin: 0 0 10px; }
+  ul { margin: 6px 0 10px 20px; padding: 0; }
+  li { margin-bottom: 4px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 10px 0 16px;
+  }
+  th {
+    background: #f5f5f5;
+    text-align: left;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+  }
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .formula {
+    background: #f5f5f5;
+    border-left: 3px solid #e36159;
+    padding: 10px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 10px 0;
+    white-space: pre-wrap;
+  }
+
+  .note {
+    background: #fdecea;
+    border-left: 3px solid #e36159;
+    padding: 8px 14px;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+
+  .tag-na   { color: #c04040; font-weight: 600; }
+  .tag-auto { color: #555; font-style: italic; }
+
+  hr.section { border: none; border-top: 1px solid #ddd; margin: 40px 0 0; }
+
+  footer {
+    margin-top: 48px;
+    font-size: 12px;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Pro Calculator — Field Reference</h1>
+<p class="subtitle">Rene Herse Cycles Tire Pressure Calculator &nbsp;·&nbsp; How each input affects the pressure recommendation</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Overall Formula</h2>
+<p>Each wheel's pressure is calculated through a pipeline:</p>
+<div class="formula">Base pressure (from equations)
+  × scaling factor  (wheel load / total weight + complement)
+  × terrain multiplier
+  + casing adjustment
+  × rim width multiplier</div>
+<p>The base pressure equation is: <strong>P (psi) = slope × total weight (kg) + intercept</strong>, where slope and intercept depend on tire width and feel (firm vs. soft).</p>
+<p>For a standard road bike with neutral riding position and no panniers, the Pro calculator produces the same result as the Simple calculator.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Tire Width (Front / Rear)</h2>
+<p>Selects which set of equation coefficients to use. The equations are anchored at specific widths (25, 28, 35, 38, 44, 48, 55 mm) and linearly interpolated for values in between.</p>
+<ul>
+  <li>A wider tire → lower slope and different intercept → lower base pressure</li>
+  <li>Also divides the casing adjustment value, so a given casing type has a smaller absolute effect on wider tires</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Rider Weight / Bike Weight</h2>
+<ul>
+  <li>Together they form the <strong>total system weight</strong>, which is the input to the pressure equation — the same weight the Simple calculator uses</li>
+  <li>Also distributed front/rear via Bike Style and Riding Position to compute per-wheel loads</li>
+  <li>Higher total weight → higher base pressure</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Front Panniers / Rear Panniers</h2>
+<ul>
+  <li>Added <strong>directly</strong> to that wheel's load only — not distributed between wheels</li>
+  <li>Also included in the total system weight, so they raise the base pressure and increase that wheel's scaling factor</li>
+</ul>
+<div class="formula">frontLoad = (rider + bike + bikepacking) × (frontRatio + positionAdj) + frontPanniers
+rearLoad  = (rider + bike + bikepacking) × (rearRatio  + positionAdj) + rearPanniers</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Bikepacking Weight</h2>
+<ul>
+  <li>Distributed front/rear according to the Bike Style and Riding Position ratios — the same way rider and bike weight are split</li>
+  <li>Also included in the total system weight</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Bike Style</h2>
+<p>Controls the baseline front/rear weight split applied to rider + bike + bikepacking weight.</p>
+<table>
+  <tr><th>Option</th><th>Front ratio</th><th>Rear ratio</th><th>Effect vs. road (neutral)</th></tr>
+  <tr><td>Road</td><td>40%</td><td>60%</td><td>Baseline — matches Simple calculator</td></tr>
+  <tr><td>Gravel / All-road</td><td>40%</td><td>60%</td><td>Same ratio as road</td></tr>
+  <tr><td>Randonneur</td><td>38%</td><td>62%</td><td>Front −2%, rear +2%</td></tr>
+  <tr><td>Bikepacking / loaded</td><td>35%</td><td>65%</td><td>Front −5%, rear +5%</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Riding Position</h2>
+<p>Adds a delta to the Bike Style ratios to shift weight forward or backward.</p>
+<table>
+  <tr><th>Option</th><th>Front Δ</th><th>Rear Δ</th><th>Effect</th></tr>
+  <tr><td>Aero</td><td>+3%</td><td>−3%</td><td>More weight forward; front pressure up, rear down</td></tr>
+  <tr><td>Low / on hoods</td><td>0%</td><td>0%</td><td>No change</td></tr>
+  <tr><td>Intermediate</td><td>−4%</td><td>+4%</td><td>Slightly more weight back</td></tr>
+  <tr><td>Upright</td><td>−8%</td><td>+8%</td><td>Front pressure down, rear up</td></tr>
+</table>
+<p>The combined scaling factor for each wheel is:</p>
+<div class="formula">frontScale = frontLoad / totalWeight + 0.60  (road rear complement)
+rearScale  = rearLoad  / totalWeight + 0.40  (road front complement)</div>
+<p>A road bike with neutral position gives a scale of 1.00 for both wheels, identical to the Simple calculator.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Terrain</h2>
+<p>Overrides the Feel setting and applies a multiplier to the scaled base pressure.</p>
+<table>
+  <tr><th>Option</th><th>Feel override</th><th>Multiplier</th></tr>
+  <tr><td>Paved road</td><td>(uses Feel setting)</td><td>×1.00</td></tr>
+  <tr><td>Smooth gravel / Mixed</td><td>Forced soft</td><td>×1.00</td></tr>
+  <tr><td>Coarse gravel</td><td>Forced soft</td><td>×0.95 (−5%)</td></tr>
+  <tr><td>Rough gravel</td><td>Forced soft</td><td>×1.05 (+5%)</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Feel (Soft / Firm)</h2>
+<ul>
+  <li>Selects which equation coefficients to use — firm equations generally produce higher pressure than soft at the same weight and width</li>
+  <li><strong>Overridden to Soft</strong> whenever terrain is any gravel option</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Casing (Front / Rear)</h2>
+<p>An additive pressure adjustment applied after scaling and terrain, before the rim width multiplier.</p>
+<div class="formula">adjustment (psi) = casingValue / tireWidth</div>
+<table>
+  <tr><th>Option</th><th>Casing value</th><th>At 35 mm</th><th>At 48 mm</th></tr>
+  <tr><td>Standard</td><td>0</td><td>0 psi</td><td>0 psi</td></tr>
+  <tr><td>Extralight</td><td>−50</td><td>−1.4 psi</td><td>−1.0 psi</td></tr>
+  <tr><td>Light</td><td>−100</td><td>−2.9 psi</td><td>−2.1 psi</td></tr>
+  <tr><td>Ultralight</td><td>−150</td><td>−4.3 psi</td><td>−3.1 psi</td></tr>
+</table>
+<p>Wider tires receive a smaller absolute reduction for the same casing type.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Rim Width</h2>
+<p>Reduces pressure for rims wider than 19 mm. Capped at 32 mm (wider rims produce no further reduction).</p>
+<div class="formula">rimMultiplier = 1 − (min(rimWidth, 32) − 19) × 0.002   [only when rimWidth &gt; 19 mm, else 1.0]</div>
+<table>
+  <tr><th>Rim width</th><th>Multiplier</th><th>Pressure change</th></tr>
+  <tr><td>≤19 mm</td><td>1.000</td><td>0%</td></tr>
+  <tr><td>23 mm (default)</td><td>0.992</td><td>−0.8%</td></tr>
+  <tr><td>25 mm</td><td>0.988</td><td>−1.2%</td></tr>
+  <tr><td>28 mm</td><td>0.982</td><td>−1.8%</td></tr>
+  <tr><td>32 mm</td><td>0.974</td><td>−2.6%</td></tr>
+  <tr><td>&gt;32 mm</td><td>0.974</td><td>−2.6% (capped)</td></tr>
+</table>
+<p>The rim multiplier is applied last, to <code>(scaledBase + casingAdj)</code>.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Rim Type</h2>
+<table>
+  <tr><th>Option</th><th>Effect</th></tr>
+  <tr><td>Hooked</td><td>No pressure cap</td></tr>
+  <tr><td>Don't know</td><td>Applies hookless cap as a precaution</td></tr>
+  <tr><td>Hookless</td><td>If calculated pressure &gt; 72.5 psi → result is <span class="tag-na">N/A</span></td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Tire Construction</h2>
+<table>
+  <tr><th>Option</th><th>Effect</th></tr>
+  <tr><td>Tubes</td><td>No additional pressure cap</td></tr>
+  <tr><td>Tubeless</td><td>For tires wider than 31 mm: if calculated pressure &gt; 60 psi → result is <span class="tag-na">N/A</span></td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<hr class="section">
+<h2>Automatic Limits <span class="tag-auto">(not user-controlled)</span></h2>
+
+<p><strong>Front minimum pressure</strong></p>
+<p>After all other calculations, if the front pressure falls below the soft-feel pressure for 50% of total system weight, the front result is set to <span class="tag-na">N/A</span> with a braking performance warning.</p>
+<div class="formula">frontMinimum = softEquation(totalWeight × 0.5, frontTireWidth)</div>
+
+<div class="note">
+  <strong>Note:</strong> When a result shows N/A, it means the calculated pressure for that wheel exceeds a safety limit (hookless or tubeless cap) or falls below the front minimum. The calculator does not clamp to the nearest legal value — N/A means the recommended pressure cannot be safely achieved with the current setup.
+</div>
+
+<footer>
+  Rene Herse Cycles Tire Pressure Calculator &nbsp;·&nbsp; Pro Calculator Field Reference
+</footer>
+
+</body>
+</html>
