@@ -191,9 +191,18 @@
   function syncSharedFields(fromPrefix) {
     if (fromPrefix === 'b') return; // background tab has no shared fields
     SHARED_FIELDS.forEach(function(map) {
-      var val = document.getElementById(map[fromPrefix]).value;
+      var srcId  = map[fromPrefix];
+      var val    = document.getElementById(srcId).value;
+      var unitEl = document.getElementById(srcId + '-unit');
+      var unit   = unitEl ? unitEl.value : null;
       Object.keys(map).forEach(function(prefix) {
-        if (prefix !== fromPrefix) document.getElementById(map[prefix]).value = val;
+        if (prefix !== fromPrefix) {
+          document.getElementById(map[prefix]).value = val;
+          if (unit !== null) {
+            var destUnit = document.getElementById(map[prefix] + '-unit');
+            if (destUnit) destUnit.value = unit;
+          }
+        }
       });
     });
 

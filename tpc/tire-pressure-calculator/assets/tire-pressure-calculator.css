@@ -352,7 +352,6 @@
   color: rgba(245,242,237,0.55);
 }
 .rhc-tpc .result-value {
-  font-family: var(--rhc-serif);
   font-size: 20px;
   font-weight: 600;
   color: var(--rhc-paper);
