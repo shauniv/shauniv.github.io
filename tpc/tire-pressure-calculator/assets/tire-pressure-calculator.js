@@ -48,8 +48,9 @@
 
   // Bike type adjustments (front/rear % applied to base pressure)
   var BIKE_TYPE_ADJ = {
-    road:    { f: -3, r:  3 },
-    gravel:  { f: -4, r:  4 },
+    road:        { f: -3, r:  3 },
+    'allroad-bike': { f: -4, r:  4 },
+    gravel:      { f: -4, r:  4 },
     rando:   { f: -5, r:  5 },
     touring: { f: -5, r:  5 },
     country: { f: -5, r:  5 },
@@ -65,8 +66,9 @@
 
   // Allowed riding positions per bike type (intermediate is always valid)
   var BIKE_TYPE_POSITIONS = {
-    road:    ['aero', 'low', 'intermediate', 'upright'],
-    gravel:  ['aero', 'low', 'intermediate', 'upright'],
+    road:           ['aero', 'low', 'intermediate', 'upright'],
+    'allroad-bike': ['aero', 'low', 'intermediate', 'upright'],
+    gravel:         ['aero', 'low', 'intermediate', 'upright'],
     rando:   ['aero', 'low', 'intermediate', 'upright'],
     touring: ['low', 'intermediate', 'upright'],
     country: ['intermediate', 'upright'],
@@ -75,7 +77,7 @@
 
   // Default position when switching to a bike type that makes the current selection invalid
   var BIKE_TYPE_DEFAULT_POSITION = {
-    road: 'intermediate', gravel: 'intermediate', rando: 'intermediate',
+    road: 'intermediate', 'allroad-bike': 'intermediate', gravel: 'intermediate', rando: 'intermediate',
     touring: 'intermediate', country: 'upright', city: 'upright',
   };
 
