@@ -23,8 +23,8 @@
 </div>
 <div class="eq-toggle">
   <span class="eq-toggle-label">Equations:</span>
-  <button class="eq-btn active" data-set="new" onclick="rhcTpcSetEqSet('new')">New</button>
-  <button class="eq-btn"        data-set="old" onclick="rhcTpcSetEqSet('old')">Old</button>
+  <button class="eq-btn"        data-set="new" onclick="rhcTpcSetEqSet('new')">New</button>
+  <button class="eq-btn active" data-set="old" onclick="rhcTpcSetEqSet('old')">Old</button>
 </div>
 
 <!-- ═══════════════════════════════════════════════
@@ -78,7 +78,7 @@
 
     <div id="rhc-s-error" class="error-card"></div>
     <div id="rhc-s-result" class="result-card">
-      <div class="result-header">Recommended Tire Pressure</div>
+      <div class="result-header">Fastest-Rolling Tire Pressure</div>
       <div class="result-body">
         <div id="rhc-s-weight-warning" class="weight-warning"></div>
         <div id="rhc-s-out-psi-row" class="result-row">
@@ -136,21 +136,21 @@
       <div class="field">
         <label>Front Casing</label>
         <select id="rhc-p-fc">
-          <option value="0">Rene Herse Extralight / top-tier road</option>
-          <option value="-50">Rene Herse Standard / high-perf road</option>
-          <option value="-150">Rene Herse Endurance / high-perf gravel</option>
-          <option value="-150b">Rene Herse Endurance Plus / gravel &amp; touring</option>
-          <option value="-100">Other reinforced touring / city</option>
+          <option value="0">Rene Herse Extralight / Top-Tier Road</option>
+          <option value="-50">Rene Herse Standard / High-Perf Road</option>
+          <option value="-150">Rene Herse Endurance / High-Perf Gravel</option>
+          <option value="-150b">Rene Herse Endurance Plus / Gravel &amp; Touring</option>
+          <option value="-100">Other Reinforced Touring / City</option>
         </select>
       </div>
       <div class="field">
         <label>Rear Casing</label>
         <select id="rhc-p-rc">
-          <option value="0">Rene Herse Extralight / top-tier road</option>
-          <option value="-50">Rene Herse Standard / high-perf road</option>
-          <option value="-150">Rene Herse Endurance / high-perf gravel</option>
-          <option value="-150b">Rene Herse Endurance Plus / gravel &amp; touring</option>
-          <option value="-100">Other reinforced touring / city</option>
+          <option value="0">Rene Herse Extralight / Top-Tier Road</option>
+          <option value="-50">Rene Herse Standard / High-Perf Road</option>
+          <option value="-150">Rene Herse Endurance / High-Perf Gravel</option>
+          <option value="-150b">Rene Herse Endurance Plus / Gravel &amp; Touring</option>
+          <option value="-100">Other Reinforced Touring / City</option>
         </select>
       </div>
     </div>
@@ -167,7 +167,7 @@
       <div class="field">
         <label>Rim Type <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box"><strong>Hooked</strong> rims have a small lip inside the rim channel that locks the tire bead in place — the traditional standard, found on most wheels.<br><br><strong>Hookless</strong> rims have a straight inner wall with no lip, common on modern tubeless-ready carbon wheels.<br><br>Why it matters: hookless rims have a max pressure of 72.5 psi (5 bar). If your recommended pressure exceeds that, the calculator will adjust it down automatically.</span></i></label>
         <select id="rhc-p-rimtype">
-          <option value="hooks">Hooked (standard)</option>
+          <option value="hooks">Hooked (Standard)</option>
           <option value="hookless">Hookless</option>
           <option value="dk">Don't Know</option>
         </select>
@@ -233,19 +233,21 @@
 
     <div class="two-col">
       <div class="field">
-        <label>Bike Style</label>
-        <select id="rhc-p-bikestyle">
-          <option value="40/60">Road bike</option>
-          <option value="40/60g">Gravel bike</option>
-          <option value="38/62">Touring bike</option>
-          <option value="35/65">City bike</option>
+        <label>Bike Type</label>
+        <select id="rhc-p-biketype">
+          <option value="road">Road Bike</option>
+          <option value="gravel">Gravel Bike</option>
+          <option value="rando">Rando Bike</option>
+          <option value="touring">Touring Bike</option>
+          <option value="country">Country Bike</option>
+          <option value="city">City Bike</option>
         </select>
       </div>
       <div class="field">
         <label>Riding Position</label>
         <select id="rhc-p-position">
-          <option value="aero">Aero / flat back</option>
-          <option value="low" selected>Low / stretched-out</option>
+          <option value="aero">Aero / Flat Back</option>
+          <option value="low" selected>Low / Stretched-Out</option>
           <option value="intermediate">Intermediate</option>
           <option value="upright">Upright</option>
         </select>
@@ -253,14 +255,23 @@
     </div>
 
     <div class="field">
+      <label>Frame Size</label>
+      <select id="rhc-p-framesize">
+        <option value="small">Small (Rider Height &lt;168 cm / 5'6")</option>
+        <option value="medium" selected>Medium (165–182 cm / 5'5"–6'0")</option>
+        <option value="tall">Tall (Rider Height &gt;182 cm / 6'0")</option>
+      </select>
+    </div>
+
+    <div class="field">
       <label>Terrain</label>
       <select id="rhc-p-terrain">
-        <option value="smooth">Smooth asphalt</option>
-        <option value="rough">Rough asphalt</option>
-        <option value="smooth-gravel">Smooth gravel</option>
-        <option value="coarse-gravel">Coarse gravel</option>
-        <option value="rough-gravel">Rough gravel / large rocks</option>
-        <option value="mixed">Mixed paved / gravel</option>
+        <option value="smooth">Smooth Asphalt</option>
+        <option value="rough">Rough Asphalt</option>
+        <option value="smooth-gravel">Smooth Gravel</option>
+        <option value="coarse-gravel">Coarse Gravel</option>
+        <option value="rough-gravel">Rough Gravel / Large Rocks</option>
+        <option value="mixed">Mixed Paved / Gravel</option>
       </select>
     </div>
 
@@ -277,7 +288,7 @@
 
     <div id="rhc-p-error" class="error-card"></div>
     <div id="rhc-p-result" class="result-card">
-      <div class="result-header">Recommended Tire Pressure</div>
+      <div class="result-header">Fastest-Rolling Tire Pressure</div>
       <div class="result-body">
         <div id="rhc-p-weight-warning" class="weight-warning"></div>
         <div class="result-row">
@@ -341,12 +352,21 @@
     </div>
 
     <div class="field">
-      <label>Riding Style</label>
+      <label>Bike / Terrain</label>
       <select id="rhc-f-style">
-        <option value="road">Road — smooth pavement</option>
-        <option value="allroad">All-Road — mixed surfaces</option>
-        <option value="gravel">Gravel — dirt roads</option>
-        <option value="adventure">Adventure — rough terrain</option>
+        <option value="road">Road (Smooth Pavement)</option>
+        <option value="allroad">All-Road (Bumpy Pavement, Some Gravel)</option>
+        <option value="gravel">Gravel or Mixed-Surface</option>
+        <option value="adventure">Adventure (Rough Gravel, Single-Track)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Riding Style</label>
+      <select id="rhc-f-ridingstyle">
+        <option value="smooth">I'm a smooth rider who picks the best lines.</option>
+        <option value="endurance">My tires need to handle whatever the trail throws at them.</option>
+        <option value="endurance-plus">I'm racing in a peloton on ultra-rough terrain and want to avoid flats at all costs.</option>
       </select>
     </div>
 
@@ -367,15 +387,19 @@
         <div id="rhc-f-weight-warning" class="weight-warning"></div>
         <div class="result-row">
           <span class="result-label">Recommended Width</span>
-          <span class="result-value" id="rhc-f-out-width">—</span>
+          <span class="result-value" id="rhc-f-out-width">— <span class="unit">mm</span></span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Recommended Casing</span>
+          <span class="result-value" id="rhc-f-out-casing">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Recommended Tread</span>
+          <span class="result-value" id="rhc-f-out-tread">—</span>
         </div>
         <div class="result-row">
           <span class="result-label">Recommended Pressure</span>
           <span class="result-value" id="rhc-f-out-psi">—</span>
-        </div>
-        <div id="rhc-f-out-bar-row" class="result-row" style="display:none">
-          <span class="result-label"></span>
-          <span class="result-value" id="rhc-f-out-bar">—</span>
         </div>
         <div id="rhc-f-result-note" class="result-note"></div>
       </div>
