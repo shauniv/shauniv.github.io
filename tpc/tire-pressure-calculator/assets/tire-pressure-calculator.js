@@ -8,21 +8,7 @@
 
   // Spreadsheet equations: y = slope*x + intercept  (x = wheel load in KG)
   // Keyed by nominal width → { firm: [slope, intercept], soft: [slope, intercept] }
-
-  // NEW: 5-anchor set developed for this tool, extended to 25–55 mm at boundaries
-  var EQUATIONS_NEW = {
-    25: { firm: [0.8105, 6.0956], soft: [0.6762, 2.5409] }, // same as 28mm (clamped)
-    28: { firm: [0.8105, 6.0956], soft: [0.6762, 2.5409] },
-    35: { firm: [0.5846, 8.0286], soft: [0.4582, 4.4979] },
-    38: { firm: [0.4683, 4.5270], soft: [0.3814, 5.6948] },
-    44: { firm: [0.4167, 6.0000], soft: [0.3333, 7.0000] },
-    48: { firm: [0.3750, 7.0000], soft: [0.2778, 8.6667] },
-    55: { firm: [0.3750, 7.0000], soft: [0.2778, 8.6667] }, // same as 48mm (clamped)
-  };
-  var ANCHOR_WIDTHS_NEW = [25, 28, 35, 38, 44, 48, 55];
-
-  // OLD: 8-anchor set from the original live calculator (widths 25–55 mm)
-  var EQUATIONS_OLD = {
+  var EQUATIONS = {
     25: { firm: [1.24722222222222,  0.733333333333327], soft: [1.00833333333333, -8                 ] },
     28: { firm: [0.869444444444444, 2.76666666666667 ], soft: [0.7125,            0.800000000000004 ] },
     32: { firm: [0.673611111111111, 2.66666666666666 ], soft: [0.530555555555555, 3.93333333333334  ] },
@@ -32,7 +18,7 @@
     48: { firm: [0.365277777777778, 4.86666666666666 ], soft: [0.293055555555556, 4.13333333333333  ] },
     55: { firm: [0.295833333333333, 6                ], soft: [0.244444444444444, 4.56666666666667  ] },
   };
-  var ANCHOR_WIDTHS_OLD = [25, 28, 32, 35, 38, 42, 48, 55];
+  var ANCHOR_WIDTHS = [25, 28, 32, 35, 38, 42, 48, 55];
 
   // Rene Herse available widths (for tire finder output snapping)
   var RH_WIDTHS     = [26, 28, 31, 35, 38, 43, 48, 55];
@@ -77,6 +63,29 @@
     tall:   { f: -3, r:  3 },
   };
 
+  // Allowed riding positions per bike type (intermediate is always valid)
+  var BIKE_TYPE_POSITIONS = {
+    road:    ['aero', 'low', 'intermediate', 'upright'],
+    gravel:  ['aero', 'low', 'intermediate', 'upright'],
+    rando:   ['aero', 'low', 'intermediate', 'upright'],
+    touring: ['low', 'intermediate', 'upright'],
+    country: ['intermediate', 'upright'],
+    city:    ['intermediate', 'upright'],
+  };
+
+  // Default position when switching to a bike type that makes the current selection invalid
+  var BIKE_TYPE_DEFAULT_POSITION = {
+    road: 'intermediate', gravel: 'intermediate', rando: 'intermediate',
+    touring: 'intermediate', country: 'upright', city: 'upright',
+  };
+
+  var POSITION_LABELS = {
+    aero:         'Aero / Flat Back',
+    low:          'Low / Stretched-Out',
+    intermediate: 'Intermediate',
+    upright:      'Upright',
+  };
+
   // Riding position adjustments (front/rear % applied to base pressure)
   var POSITION_ADJ = {
     aero:         { f:  2, r: -2 },
@@ -117,10 +126,9 @@
   // ═══════════════════════════════════════════
   var state = {
     activeTab: 's',
-    eqSet: 'old',
-    s: { unit: defaultUnit, feel:'soft' },
-    p: { unit: defaultUnit, feel:'soft', tube:'tubes' },
-    f: { unit: defaultUnit, feel:'soft' },
+    s: { unit: defaultUnit, feel:'soft',              outUnit: defaultUnit, lastPsi: null },
+    p: { unit: defaultUnit, feel:'soft', tube:'tubes', outUnit: defaultUnit, lastFPsi: null, lastRPsi: null },
+    f: { unit: defaultUnit, feel:'soft',              outUnit: defaultUnit, lastPsi: null },
   };
 
   // Shared fields synced on tab switch
@@ -135,8 +143,8 @@
   // INTERPOLATION
   // ═══════════════════════════════════════════
   function getEquation(width, feel) {
-    var eqs     = state.eqSet === 'new' ? EQUATIONS_NEW     : EQUATIONS_OLD;
-    var anchors = state.eqSet === 'new' ? ANCHOR_WIDTHS_NEW : ANCHOR_WIDTHS_OLD;
+    var eqs     = EQUATIONS;
+    var anchors = ANCHOR_WIDTHS;
     var minW = anchors[0], maxW = anchors[anchors.length - 1];
 
     if (width <= minW) return eqs[minW][feel];
@@ -157,14 +165,6 @@
     var us = eqs[upper][feel][0], ui = eqs[upper][feel][1];
     return [ls + t*(us-ls), li + t*(ui-li)];
   }
-
-  window.rhcTpcSetEqSet = function(set) {
-    state.eqSet = set;
-    document.querySelectorAll('.rhc-tpc .eq-btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.dataset.set === set);
-    });
-    ['s', 'p', 'f'].forEach(function(prefix) { liveCalc(prefix); });
-  };
 
   // weightLb converted to kg internally; equation is m × kg + b
   function calcPSI(weightLb, width, feel) {
@@ -298,8 +298,39 @@
     liveCalc(state.activeTab);
   };
 
+  function renderOutPressure(prefix) {
+    var u = state[prefix].outUnit;
+    var usBtn     = document.getElementById('rhc-' + prefix + '-out-unit-us');
+    var metricBtn = document.getElementById('rhc-' + prefix + '-out-unit-metric');
+    if (usBtn)     usBtn.classList.toggle('active',     u === 'us');
+    if (metricBtn) metricBtn.classList.toggle('active', u === 'metric');
+
+    if (prefix === 's') {
+      var pv = fmtPressureVal(state.s.lastPsi, u);
+      document.getElementById('rhc-s-out-psi').innerHTML =
+        pv.val + ' <span class="unit">' + pv.unit + '</span>';
+    } else if (prefix === 'p') {
+      document.getElementById('rhc-p-out-f').innerHTML = state.p.lastFPsi === null
+        ? 'N/A'
+        : (function(){ var v = fmtProPressure(state.p.lastFPsi, u); return v.val + ' <span class="unit">' + v.unit + '</span>'; }());
+      document.getElementById('rhc-p-out-r').innerHTML = state.p.lastRPsi === null
+        ? 'N/A'
+        : (function(){ var v = fmtProPressure(state.p.lastRPsi, u); return v.val + ' <span class="unit">' + v.unit + '</span>'; }());
+    } else if (prefix === 'f') {
+      var pv = fmtPressureVal(state.f.lastPsi, u);
+      document.getElementById('rhc-f-out-psi').innerHTML =
+        pv.val + ' <span class="unit">' + pv.unit + '</span>';
+    }
+  }
+
+  window.rhcTpcSetOutUnit = function(prefix, unit) {
+    state[prefix].outUnit = unit;
+    renderOutPressure(prefix);
+  };
+
   window.rhcTpcSetUnit = function(prefix, unit) {
     state[prefix].unit = unit;
+    state[prefix].outUnit = unit; // reset output unit to follow the new tab unit
     document.getElementById('rhc-' + prefix + '-unit-us').classList.toggle('active', unit === 'us');
     document.getElementById('rhc-' + prefix + '-unit-metric').classList.toggle('active', unit === 'metric');
     // Sync all per-field unit selects on this tab (convenience — user can override individually)
@@ -347,11 +378,11 @@
     var totalLb = rider + bike;
     var psi     = calcPSI(totalLb, width, feel);
 
-    setWeightWarning('s', rider, bike);
+    state.s.lastPsi = psi;
+    state.s.outUnit = unit;
 
-    var pv = fmtPressureVal(psi, unit);
-    document.getElementById('rhc-s-out-psi').innerHTML =
-      pv.val + ' <span class="unit">' + pv.unit + '</span>';
+    setWeightWarning('s', rider, bike);
+    renderOutPressure('s');
 
     var note = state.s.feel === 'dk'
       ? 'Using Soft values since preferred feel was set to "Don\'t Know".'
@@ -453,14 +484,12 @@
     }
 
     // 8. Format output — Pro: 0.1 psi / 0.01 bar
-    setWeightWarning('p', rider, bike);
+    state.p.lastFPsi = fPsi;
+    state.p.lastRPsi = rPsi;
+    state.p.outUnit  = unit;
 
-    document.getElementById('rhc-p-out-f').innerHTML = fPsi === null
-      ? 'N/A'
-      : (function() { var v = fmtProPressure(fPsi, unit); return v.val + ' <span class="unit">' + v.unit + '</span>'; }());
-    document.getElementById('rhc-p-out-r').innerHTML = rPsi === null
-      ? 'N/A'
-      : (function() { var v = fmtProPressure(rPsi, unit); return v.val + ' <span class="unit">' + v.unit + '</span>'; }());
+    setWeightWarning('p', rider, bike);
+    renderOutPressure('p');
 
     var noteEl = document.getElementById('rhc-p-result-note');
     if (notes.length) {
@@ -503,17 +532,18 @@
 
     var calcW   = RH_CALC_WIDTH[best];
     var psi     = calcPSI(totalLb, calcW, feel);
-    var pv      = fmtPressureVal(psi, unit);
     var casing  = FINDER_CASING[ridingStyle] || FINDER_CASING.smooth;
     var tread   = FINDER_TREAD[style]        || FINDER_TREAD.road;
+
+    state.f.lastPsi = psi;
+    state.f.outUnit = unit;
 
     setWeightWarning('f', rider, bike);
     document.getElementById('rhc-f-out-width').innerHTML =
       RH_DISPLAY[best] + ' <span class="unit">mm</span>';
-    document.getElementById('rhc-f-out-psi').innerHTML =
-      pv.val + ' <span class="unit">' + pv.unit + '</span>';
-    document.getElementById('rhc-f-out-casing').textContent  = casing;
-    document.getElementById('rhc-f-out-tread').textContent   = tread;
+    document.getElementById('rhc-f-out-casing').textContent = casing;
+    document.getElementById('rhc-f-out-tread').textContent  = tread;
+    renderOutPressure('f');
 
     var note = 'Ideal width calculated: ' + fmtNum(idealWidth, 1) + ' mm → rounded to ' + RH_DISPLAY[best] + ' mm. Pressure based on ' + feel + ' values at ' + fmtNum(Math.round(totalLb), 0) + ' lb / ' + fmtNum(totalKg, 1) + ' kg total.';
     var noteEl = document.getElementById('rhc-f-result-note');
@@ -526,6 +556,22 @@
   // ═══════════════════════════════════════════
   // INIT (DOM ready)
   // ═══════════════════════════════════════════
+  function updatePositionOptions(bikeType) {
+    var sel     = document.getElementById('rhc-p-position');
+    if (!sel) return;
+    var allowed = BIKE_TYPE_POSITIONS[bikeType] || BIKE_TYPE_POSITIONS.road;
+    var current = sel.value;
+    sel.innerHTML = '';
+    allowed.forEach(function(pos) {
+      var opt = document.createElement('option');
+      opt.value = pos;
+      opt.textContent = POSITION_LABELS[pos];
+      sel.appendChild(opt);
+    });
+    var fallback = BIKE_TYPE_DEFAULT_POSITION[bikeType] || 'intermediate';
+    sel.value = allowed.indexOf(current) !== -1 ? current : fallback;
+  }
+
   function buildWidthDropdown(id) {
     var sel = document.getElementById(id);
     if (!sel) return;
@@ -561,7 +607,12 @@
     onField('rhc-p-rc',         'p', 'change');
     onField('rhc-p-rimw',       'p');
     onField('rhc-p-rimtype',    'p', 'change');
-    onField('rhc-p-biketype',   'p', 'change');
+    var bikeTypeEl = document.getElementById('rhc-p-biketype');
+    if (bikeTypeEl) {
+      updatePositionOptions(bikeTypeEl.value); // set initial options
+      bikeTypeEl.addEventListener('change', function() { updatePositionOptions(this.value); });
+    }
+    onField('rhc-p-biketype',   'p', 'change'); // liveCalc fires after position is updated
     onField('rhc-p-framesize',  'p', 'change');
     onField('rhc-p-position',   'p', 'change');
     onField('rhc-p-terrain',    'p', 'change');

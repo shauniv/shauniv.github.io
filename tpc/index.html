@@ -21,11 +21,6 @@
   <button class="tab-btn" onclick="rhcTpcSwitchTab('finder', this)">Tire Finder</button>
   <button class="tab-btn" onclick="rhcTpcSwitchTab('background', this)">Background</button>
 </div>
-<div class="eq-toggle">
-  <span class="eq-toggle-label">Equations:</span>
-  <button class="eq-btn"        data-set="new" onclick="rhcTpcSetEqSet('new')">New</button>
-  <button class="eq-btn active" data-set="old" onclick="rhcTpcSetEqSet('old')">Old</button>
-</div>
 
 <!-- ═══════════════════════════════════════════════
      TAB 1 · SIMPLE CALCULATOR
@@ -78,7 +73,13 @@
 
     <div id="rhc-s-error" class="error-card"></div>
     <div id="rhc-s-result" class="result-card">
-      <div class="result-header">Fastest-Rolling Tire Pressure</div>
+      <div class="result-header">
+        <span>Fastest-Rolling Tire Pressure</span>
+        <div class="result-unit-toggle">
+          <button class="result-unit-btn" id="rhc-s-out-unit-us"     onclick="rhcTpcSetOutUnit('s','us')">psi</button>
+          <button class="result-unit-btn" id="rhc-s-out-unit-metric" onclick="rhcTpcSetOutUnit('s','metric')">bar</button>
+        </div>
+      </div>
       <div class="result-body">
         <div id="rhc-s-weight-warning" class="weight-warning"></div>
         <div id="rhc-s-out-psi-row" class="result-row">
@@ -237,18 +238,18 @@
         <select id="rhc-p-biketype">
           <option value="road">Road Bike</option>
           <option value="gravel">Gravel Bike</option>
-          <option value="rando">Rando Bike</option>
+          <option value="rando">Randonneur Bike</option>
           <option value="touring">Touring Bike</option>
-          <option value="country">Country Bike</option>
           <option value="city">City Bike</option>
+          <option value="country">Rivendell (long chainstays)</option>
         </select>
       </div>
       <div class="field">
         <label>Riding Position</label>
         <select id="rhc-p-position">
           <option value="aero">Aero / Flat Back</option>
-          <option value="low" selected>Low / Stretched-Out</option>
-          <option value="intermediate">Intermediate</option>
+          <option value="low">Low / Stretched-Out</option>
+          <option value="intermediate" selected>Intermediate</option>
           <option value="upright">Upright</option>
         </select>
       </div>
@@ -288,7 +289,13 @@
 
     <div id="rhc-p-error" class="error-card"></div>
     <div id="rhc-p-result" class="result-card">
-      <div class="result-header">Fastest-Rolling Tire Pressure</div>
+      <div class="result-header">
+        <span>Fastest-Rolling Tire Pressure</span>
+        <div class="result-unit-toggle">
+          <button class="result-unit-btn" id="rhc-p-out-unit-us"     onclick="rhcTpcSetOutUnit('p','us')">psi</button>
+          <button class="result-unit-btn" id="rhc-p-out-unit-metric" onclick="rhcTpcSetOutUnit('p','metric')">bar</button>
+        </div>
+      </div>
       <div class="result-body">
         <div id="rhc-p-weight-warning" class="weight-warning"></div>
         <div class="result-row">
@@ -382,7 +389,13 @@
 
     <div id="rhc-f-error" class="error-card"></div>
     <div id="rhc-f-result" class="result-card">
-      <div class="result-header">Tire Recommendation</div>
+      <div class="result-header">
+        <span>Tire Recommendation</span>
+        <div class="result-unit-toggle">
+          <button class="result-unit-btn" id="rhc-f-out-unit-us"     onclick="rhcTpcSetOutUnit('f','us')">psi</button>
+          <button class="result-unit-btn" id="rhc-f-out-unit-metric" onclick="rhcTpcSetOutUnit('f','metric')">bar</button>
+        </div>
+      </div>
       <div class="result-body">
         <div id="rhc-f-weight-warning" class="weight-warning"></div>
         <div class="result-row">
