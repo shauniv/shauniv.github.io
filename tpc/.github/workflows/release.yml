@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Build plugin ZIP
+        run: |
+          SLUG="tire-pressure-calculator"
+          mkdir -p dist/${SLUG}
+          cp  tire-pressure-calculator.php        dist/${SLUG}/
+          cp -r templates                         dist/${SLUG}/
+          cp -r tire-pressure-calculator          dist/${SLUG}/
+          cp -r vendor                            dist/${SLUG}/
+          cd dist
+          zip -r ${SLUG}.zip ${SLUG}
+
+      - name: Upload ZIP to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/tire-pressure-calculator.zip
+          generate_release_notes: true

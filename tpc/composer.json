@@ -1,0 +1,11 @@
+{
+    "name": "reneherse/tire-pressure-calculator",
+    "description": "Rene Herse Tire Pressure Calculator WordPress Plugin",
+    "type": "wordpress-plugin",
+    "require": {
+        "yahnis-elsts/plugin-update-checker": "^5.3"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

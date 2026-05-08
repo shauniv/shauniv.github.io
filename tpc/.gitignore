@@ -1,2 +1,10 @@
-~$re Pressure Calculator_20260312.docx
-~$re_pressure_spec.docx
+# Composer / build artifacts (generated on release, not stored in git)
+vendor/
+dist/
+*.zip
+
+# Microsoft Office temp files
+~$*
+
+# Claude Code local settings
+.claude/settings.local.json

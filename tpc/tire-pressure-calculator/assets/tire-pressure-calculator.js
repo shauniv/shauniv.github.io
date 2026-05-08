@@ -17,8 +17,9 @@
     42: { firm: [0.431944444444444, 3.96666666666667 ], soft: [0.345833333333333, 3.6               ] },
     48: { firm: [0.365277777777778, 4.86666666666666 ], soft: [0.293055555555556, 4.13333333333333  ] },
     55: { firm: [0.295833333333333, 6                ], soft: [0.244444444444444, 4.56666666666667  ] },
+    58: { firm: [0.266071428571429, 6.48571428571429 ], soft: [0.223611111111111, 4.75238095238096  ] },
   };
-  var ANCHOR_WIDTHS = [25, 28, 32, 35, 38, 42, 48, 55];
+  var ANCHOR_WIDTHS = [25, 28, 32, 35, 38, 42, 48, 55, 58];
 
   // Rene Herse available widths (for tire finder output snapping)
   var RH_WIDTHS     = [26, 28, 31, 35, 38, 43, 48, 55];
@@ -577,7 +578,7 @@
   function buildWidthDropdown(id) {
     var sel = document.getElementById(id);
     if (!sel) return;
-    for (var w = 25; w <= 55; w++) {
+    for (var w = 25; w <= 58; w++) {
       var opt = document.createElement('option');
       opt.value = w;
       opt.textContent = w + ' mm';
