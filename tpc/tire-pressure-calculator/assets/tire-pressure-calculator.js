@@ -370,11 +370,12 @@
   // ═══════════════════════════════════════════
   window.rhcTpcCalcSimple = function() {
     clearError('s');
-    var unit  = state.s.unit;
-    var width = parseInt(document.getElementById('rhc-s-width').value);
-    var rider = getWeight('rhc-s-rider', unit);
-    var bike  = getWeight('rhc-s-bike', unit);
-    var feel  = state.s.feel === 'dk' ? 'soft' : state.s.feel;
+    var unit    = state.s.unit;
+    var width   = parseInt(document.getElementById('rhc-s-width').value);
+    var rider   = getWeight('rhc-s-rider', unit);
+    var bike    = getWeight('rhc-s-bike', unit);
+    var terrain = document.getElementById('rhc-s-terrain').value;
+    var feel    = terrain === 'smooth' ? 'firm' : 'soft';
 
     if (!width || !rider || !bike) return hideResults('s');
 
@@ -386,11 +387,6 @@
 
     setWeightWarning('s', rider, bike);
     renderOutPressure('s');
-
-    var note = state.s.feel === 'dk'
-      ? 'Using Soft values since preferred feel was set to "Don\'t Know".'
-      : 'Using ' + feel.charAt(0).toUpperCase() + feel.slice(1) + ' values for a ' + width + ' mm tire at ' + fmtNum(Math.round(totalLb), 0) + ' lb / ' + fmtNum(totalLb / LB_PER_KG, 1) + ' kg total.';
-    document.getElementById('rhc-s-result-note').textContent = note;
 
     document.getElementById('rhc-s-result').classList.add('visible');
   };
@@ -548,10 +544,7 @@
     document.getElementById('rhc-f-out-tread').textContent  = tread;
     renderOutPressure('f');
 
-    var note = 'Ideal width calculated: ' + fmtNum(idealWidth, 1) + ' mm → rounded to ' + RH_DISPLAY[best] + ' mm. Pressure based on ' + feel + ' values at ' + fmtNum(Math.round(totalLb), 0) + ' lb / ' + fmtNum(totalKg, 1) + ' kg total.';
-    var noteEl = document.getElementById('rhc-f-result-note');
-    noteEl.textContent = note;
-    noteEl.style.display = 'block';
+    document.getElementById('rhc-f-result-note').style.display = 'none';
 
     document.getElementById('rhc-f-result').classList.add('visible');
   };
@@ -602,6 +595,7 @@
     onField('rhc-s-bike',       's');
     onField('rhc-s-rider-unit', 's', 'change');
     onField('rhc-s-bike-unit',  's', 'change');
+    onField('rhc-s-terrain',    's', 'change');
 
     // Pro tab
     onField('rhc-p-fw',         'p', 'change');

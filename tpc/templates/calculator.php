@@ -33,27 +33,29 @@
       <div class="field">
         <label>Rider Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-s-rider" min="0" max="500" step="0.5" placeholder="e.g. 160">
+          <input type="number" id="rhc-s-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-s-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
       <div class="field">
         <label>Bike Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-s-bike" min="0" max="100" step="0.5" placeholder="e.g. 22">
+          <input type="number" id="rhc-s-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-s-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
     </div>
 
     <div class="field">
-      <label>Preferred Feel</label>
-      <div class="toggle-group">
-        <button class="toggle-btn active" id="rhc-s-feel-soft" onclick="rhcTpcSetFeel('s','soft')">Soft</button>
-        <button class="toggle-btn" id="rhc-s-feel-firm" onclick="rhcTpcSetFeel('s','firm')">Firm</button>
-        <button class="toggle-btn" id="rhc-s-feel-dk" onclick="rhcTpcSetFeel('s','dk')">Don't Know</button>
-      </div>
-      <div class="hint">If unsure, "Don't Know" uses Soft values.</div>
+      <label>Terrain</label>
+      <select id="rhc-s-terrain">
+        <option value="smooth">Smooth Asphalt</option>
+        <option value="rough">Rough Asphalt</option>
+        <option value="smooth-gravel">Smooth Gravel</option>
+        <option value="coarse-gravel">Coarse Gravel</option>
+        <option value="rough-gravel">Rough Gravel / Large Rocks</option>
+        <option value="mixed">Mixed Paved / Gravel</option>
+      </select>
     </div>
 
     <div id="rhc-s-error" class="error-card"></div>
@@ -71,7 +73,6 @@
           <span class="result-label">Front &amp; Rear</span>
           <span class="result-value" id="rhc-s-out-psi">— <span class="unit">psi</span></span>
         </div>
-        <div id="rhc-s-result-note" class="result-note"></div>
       </div>
     </div>
 
@@ -143,7 +144,7 @@
     <div class="two-col">
       <div class="field">
         <label id="rhc-p-rimw-lbl">Rim Internal Width (mm) <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box">The <strong>internal width</strong> is the measurement inside the rim channel, from wall to wall — not the outer width of the rim. It's usually printed in your wheel's specs or stamped on the rim.<br><br>Why it matters: a wider rim spreads the tire, effectively increasing its contact patch. Each millimeter over 19 mm reduces recommended pressure by 0.2% to compensate.</span></i></label>
-        <input type="number" id="rhc-p-rimw" min="10" max="40" step="1" placeholder="e.g. 23">
+        <input type="number" id="rhc-p-rimw" min="10" max="40" step="1" placeholder="Enter Value">
         <div class="hint">Leave blank to use 23 mm default.</div>
       </div>
       <div class="field">
@@ -171,14 +172,14 @@
       <div class="field">
         <label>Rider Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-p-rider" min="0" max="500" step="0.5" placeholder="e.g. 160">
+          <input type="number" id="rhc-p-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-p-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
       <div class="field">
         <label>Bike Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-p-bike" min="0" max="100" step="0.5" placeholder="e.g. 22">
+          <input type="number" id="rhc-p-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-p-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
@@ -326,14 +327,14 @@
       <div class="field">
         <label>Rider Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-f-rider" min="0" max="500" step="0.5" placeholder="e.g. 160">
+          <input type="number" id="rhc-f-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-f-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
       <div class="field">
         <label>Bike Weight</label>
         <div class="weight-input-wrap">
-          <input type="number" id="rhc-f-bike" min="0" max="100" step="0.5" placeholder="e.g. 22">
+          <input type="number" id="rhc-f-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
           <select class="field-unit-sel" id="rhc-f-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
         </div>
       </div>
