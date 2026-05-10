@@ -374,13 +374,16 @@
     var width   = parseInt(document.getElementById('rhc-s-width').value);
     var rider   = getWeight('rhc-s-rider', unit);
     var bike    = getWeight('rhc-s-bike', unit);
-    var terrain = document.getElementById('rhc-s-terrain').value;
-    var feel    = terrain === 'smooth' ? 'firm' : 'soft';
+    var terrain     = document.getElementById('rhc-s-terrain').value;
+    var feel        = terrain === 'smooth' ? 'firm' : 'soft';
+    var terrainMult = terrain === 'coarse-gravel' ? 0.95
+                    : terrain === 'rough-gravel'  ? 1.05
+                    : 1;
 
     if (!width || !rider || !bike) return hideResults('s');
 
     var totalLb = rider + bike;
-    var psi     = calcPSI(totalLb, width, feel);
+    var psi     = calcPSI(totalLb, width, feel) * terrainMult;
 
     state.s.lastPsi = psi;
     state.s.outUnit = unit;
