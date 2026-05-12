@@ -216,7 +216,7 @@
   // UI HELPERS
   // ═══════════════════════════════════════════
   function syncSharedFields(fromPrefix) {
-    if (fromPrefix === 'b') return; // background tab has no shared fields
+    if (fromPrefix === 'b') return;
     SHARED_FIELDS.forEach(function(map) {
       var srcId  = map[fromPrefix];
       var val    = document.getElementById(srcId).value;
@@ -274,7 +274,6 @@
     if (prefix === 's') window.rhcTpcCalcSimple();
     else if (prefix === 'p') window.rhcTpcCalcPro();
     else if (prefix === 'f') window.rhcTpcCalcFinder();
-    // 'b' (background tab) has no calculation
   }
 
   function showError(prefix, msg) {
@@ -514,7 +513,7 @@
     var bike         = getWeight('rhc-f-bike', unit);
     var style        = document.getElementById('rhc-f-style').value;
     var ridingStyle  = document.getElementById('rhc-f-ridingstyle').value;
-    var feel         = state.f.feel === 'dk' ? 'soft' : state.f.feel;
+    var feel         = style === 'road' ? 'firm' : 'soft';
 
     if (!rider || !bike) return hideResults('f');
 

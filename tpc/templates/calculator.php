@@ -5,7 +5,6 @@
   <button class="tab-btn active" onclick="rhcTpcSwitchTab('simple', this)">Simple</button>
   <button class="tab-btn" onclick="rhcTpcSwitchTab('pro', this)">Pro</button>
   <button class="tab-btn" onclick="rhcTpcSwitchTab('finder', this)">Tire Finder</button>
-  <button class="tab-btn" onclick="rhcTpcSwitchTab('background', this)">Background</button>
 </div>
 
 <!-- ═══════════════════════════════════════════════
@@ -76,13 +75,7 @@
       </div>
     </div>
 
-    <div class="rhc-disclaimers">
-      <ul>
-        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
-        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
-        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
-      </ul>
-    </div>
+
 
   </div>
 </div>
@@ -152,7 +145,7 @@
         <select id="rhc-p-rimtype">
           <option value="hooks">Hooked (Standard)</option>
           <option value="hookless">Hookless</option>
-          <option value="dk">Don't Know</option>
+          <option value="dk">No Preference</option>
         </select>
       </div>
     </div>
@@ -264,7 +257,7 @@
       <div class="toggle-group">
         <button class="toggle-btn active" id="rhc-p-feel-soft" onclick="rhcTpcSetFeel('p','soft')">Soft</button>
         <button class="toggle-btn" id="rhc-p-feel-firm" onclick="rhcTpcSetFeel('p','firm')">Firm</button>
-        <button class="toggle-btn" id="rhc-p-feel-dk" onclick="rhcTpcSetFeel('p','dk')">Don't Know</button>
+        <button class="toggle-btn" id="rhc-p-feel-dk" onclick="rhcTpcSetFeel('p','dk')">No Preference</button>
       </div>
       <div class="hint">Fastest-rolling pressure is same for 'firm' and 'soft' on rough surfaces.</div>
     </div>
@@ -292,13 +285,7 @@
       </div>
     </div>
 
-    <div class="rhc-disclaimers">
-      <ul>
-        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
-        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
-        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
-      </ul>
-    </div>
+
 
   </div>
 </div>
@@ -359,15 +346,6 @@
       </select>
     </div>
 
-    <div class="field">
-      <label>Preferred Feel</label>
-      <div class="toggle-group">
-        <button class="toggle-btn active" id="rhc-f-feel-soft" onclick="rhcTpcSetFeel('f','soft')">Soft</button>
-        <button class="toggle-btn" id="rhc-f-feel-firm" onclick="rhcTpcSetFeel('f','firm')">Firm</button>
-        <button class="toggle-btn" id="rhc-f-feel-dk" onclick="rhcTpcSetFeel('f','dk')">Don't Know</button>
-      </div>
-    </div>
-
     <div id="rhc-f-error" class="error-card"></div>
     <div id="rhc-f-result" class="result-card">
       <div class="result-header">
@@ -399,82 +377,10 @@
       </div>
     </div>
 
-    <div class="rhc-disclaimers">
-      <ul>
-        <li>Never exceed the maximum pressures of your tires or rims (whichever is lowest).</li>
-        <li>Our pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for your bike, your terrain and your riding style.</li>
-        <li>Remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator and your gauge.</li>
-      </ul>
-    </div>
+
 
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     TAB 4 · BACKGROUND
-════════════════════════════════════════════════ -->
-<div id="rhc-tab-background" class="tab-panel">
-  <div class="panel-inner">
-
-    <p class="bg-intro">"Finally a tire pressure calculator based on real-road rolling resistance measurements."</p>
-
-    <div class="bg-section">
-      <p>On real roads—rather than on a steel drum in the lab—supple high-performance tires work best at considerably lower pressures than most cyclists are used to. Lower pressures roll as fast or faster, while optimizing comfort and tire grip. They also result in fewer flat tires: a soft tire often rolls over debris that would puncture a tire inflated to high pressure. Your ideal tire pressure depends on your tire size, your weight (and that of your bike), and your riding style and preferences.</p>
-      <img src="<?php echo esc_url( RHC_TPC_URL . 'tire-pressure-calculator/assets/Tire_Pressure_Paso_Cortes_MR-1024x675.jpg' ); ?>" alt="Cyclist riding on a gravel road at Paso Cortes" style="max-width:100%;height:auto;display:block;margin:1em 0;">
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section">
-      <h2>Soft or Firm?</h2>
-      <p>The calculator gives you <strong>two tire pressure recommendations</strong>. Use the <strong>Soft</strong> value for gravel, rough pavement, or if you prefer a more comfortable ride. Use the <strong>Firm</strong> value if you like your bike to have a firm feel. The Firm values also provide a considerable margin of safety if your pressure drops a bit. With the Soft pressure, you are stressing your tire casing more, and it may wear out faster.</p>
-      <p>For almost 20 years, we have tested tires in many widths, at many pressures, with many casings and tread patterns—on smooth roads, with a rider on the bike. We've found that supple high-performance tires roll at the same speed at either of these two pressures: soft or firm. Pressures between these two values roll a little slower. On rough surfaces, your bike will be faster at the Soft pressure.</p>
-      <p>These pressure recommendations optimize your bike for speed, but speed isn't everything. Use these values as starting points to find out which pressure feels best for <em>your</em> bike, <em>your</em> terrain and <em>your</em> riding style. Also remember that your pump's gauge may not be accurate. When in doubt, use a tire pressure that feels right and safe to you instead of values provided by the calculator.</p>
-      <div class="bg-warning"><strong>Do not exceed the maximum pressure for your tire and/or rim.</strong> For tubeless installation, many tires have lower maximum pressures than what's listed on the sidewall. Refer to the specifications of your tire and rim manufacturers. Maximum pressure for tubeless tires on hookless rims is defined by ETRTO standards: 73 psi (5 bar).</div>
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section">
-      <h2>Front vs. Rear Pressure</h2>
-      <p>Most bikes carry more weight on the rear wheel than the front. However, when you brake hard, almost the entire weight shifts to the front wheel. For that reason, it's not advisable to run a lower pressure in the front tire.</p>
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section">
-      <h2>Even Lower Pressure?</h2>
-      <p>On <strong>very rough</strong> surfaces, many riders run even lower pressures than the Soft values. This increases speed and comfort. It comes with trade-offs: there is less support for the weight of rider and bike. If these low pressures are used on firm, high-grip surfaces, the tire can collapse under hard cornering or braking. The tires also flex more at ultra-low pressures, so the sidewalls can wear out faster.</p>
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section">
-      <h2>Don't Sweat It!</h2>
-      <p>The 'right' pressure will make your bike a little faster and more comfortable, but the difference isn't huge. You won't get dropped by your friends because you're running your tires at too high pressures. More important than tire pressure is choosing supple tires that offer both more speed and more comfort than stiff tires.</p>
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section">
-      <h2>The Science</h2>
-      <p>Lower pressure means less vibration and less energy lost to suspension losses. That makes up for the higher hysteretic losses due to greater deformation of the tire.</p>
-      <img src="<?php echo esc_url( RHC_TPC_URL . 'tire-pressure-calculator/assets/Pressure_Suspension_Hysteresis.jpg' ); ?>" alt="Graph showing suspension losses vs. hysteretic losses vs. tire pressure" style="max-width:100%;height:auto;display:block;margin:1em 0;">
-      <p>These two factors—suspension losses and hysteretic losses—do not interact in a linear way. The result: mid-range pressures actually roll a little slower than either high or low pressures.</p>
-      <p>Based on <em>Bicycle Quarterly's</em> tests of rolling resistance for different tire widths and pressures, together with Frank Berto's measurements of tire drop under different weights, we have established two tire pressure charts. These charts were translated into this Tire Pressure Calculator.</p>
-    </div>
-
-    <hr class="bg-divider">
-
-    <div class="bg-section bg-further">
-      <h2>Further Reading</h2>
-      <ul>
-        <li><a href="https://www.renehersecycles.com/the-science-behind-the-tire-pressure-calculator/" target="_blank">Science behind the Tire Pressure Calculator</a></li>
-        <li><a href="https://www.renehersecycles.com/bq-tire-test-results/" target="_blank">Results of <em>Bicycle Quarterly's</em> tire tests</a></li>
-      </ul>
-    </div>
-
-  </div>
-</div>
 
 </div><!-- /.rhc-tpc -->

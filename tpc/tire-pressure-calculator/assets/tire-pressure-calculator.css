@@ -1,4 +1,5 @@
 .rhc-tpc {
+  overflow: visible;
   --rhc-ink: #222529;
   --rhc-ink-light: #777777;
   --rhc-ink-faint: #aaaaaa;
@@ -84,8 +85,10 @@
   min-width: 120px;
   padding: 14px 16px 12px;
   background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  outline: none;
+  box-shadow: none;
   cursor: pointer;
   font-family: var(--rhc-sans);
   font-size: 13px;
@@ -99,7 +102,7 @@
 .rhc-tpc .tab-btn:hover { color: var(--rhc-ink); }
 .rhc-tpc .tab-btn.active {
   color: var(--rhc-accent);
-  border-bottom-color: var(--rhc-accent);
+  border-bottom-color: var(--rhc-accent) !important;
   font-weight: 600;
 }
 
