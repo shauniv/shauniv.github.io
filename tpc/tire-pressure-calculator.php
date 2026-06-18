@@ -3,7 +3,7 @@
  * Plugin Name:  Rene Herse Tire Pressure Calculator
  * Plugin URI:   https://github.com/shauniv/TirePressureCalculator
  * Description:  Interactive tire pressure calculator for Rene Herse Cycles.
- * Version:      1.0.5
+ * Version:      1.0.6
  * Author:       Rene Herse Cycles
  * License:      Proprietary
  * Text Domain:  tire-pressure-calculator
@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'RHC_TPC_VERSION', '1.0.5' );
+define( 'RHC_TPC_VERSION', '1.0.6' );
 define( 'RHC_TPC_PATH',    plugin_dir_path( __FILE__ ) );
 define( 'RHC_TPC_URL',     plugin_dir_url( __FILE__ ) );
 

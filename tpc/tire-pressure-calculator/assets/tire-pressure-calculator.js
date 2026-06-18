@@ -44,6 +44,26 @@
     'endurance-plus': 'Endurance Plus',
   };
 
+  // Refine the casing recommendation so we don't suggest casings that aren't
+  // offered in the recommended width (e.g. Endurance Plus in narrow tires).
+  // totalLb = rider + bike (system weight); riderLb = rider weight alone.
+  function finderCasing(style, ridingStyle, totalLb, riderLb) {
+    // Heavy smooth riders on pavement: bump up from Extralight / Standard.
+    if (ridingStyle === 'smooth' && (style === 'road' || style === 'allroad') && riderLb > 250) {
+      return 'Standard or Endurance';
+    }
+
+    // Tougher casings (Endurance / Endurance Plus) aren't available in the narrow
+    // widths that lighter riders are recommended — downgrade based on system weight.
+    var tough = ridingStyle === 'endurance' || ridingStyle === 'endurance-plus';
+    if (style === 'road'      && tough)                          return totalLb < 160 ? 'Standard' : 'Endurance';
+    if (style === 'allroad'   && tough)                          return totalLb < 107 ? 'Standard' : 'Endurance';
+    if (style === 'gravel'    && ridingStyle === 'endurance-plus' && totalLb <  145) return 'Endurance';
+    if (style === 'adventure' && ridingStyle === 'endurance-plus' && totalLb <= 100) return 'Endurance';
+
+    return FINDER_CASING[ridingStyle] || FINDER_CASING.smooth;
+  }
+
   // Casing adjustments (psi numerator; divided by tire width)
   var CASING_ADJ = { '0':0, '-50':-50, '-150':-150, '-150b':-150, '-100':-100 };
 
@@ -533,7 +553,7 @@
 
     var calcW   = RH_CALC_WIDTH[best];
     var psi     = calcPSI(totalLb, calcW, feel);
-    var casing  = FINDER_CASING[ridingStyle] || FINDER_CASING.smooth;
+    var casing  = finderCasing(style, ridingStyle, totalLb, rider);
     var tread   = FINDER_TREAD[style]        || FINDER_TREAD.road;
 
     state.f.lastPsi = psi;
