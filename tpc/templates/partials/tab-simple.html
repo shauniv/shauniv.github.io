@@ -1,0 +1,61 @@
+<div class="field">
+  <label>Units</label>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="rhc-s-unit-us" onclick="rhcTpcSetUnit('s','us')">U.S. (lb)</button>
+    <button class="toggle-btn" id="rhc-s-unit-metric" onclick="rhcTpcSetUnit('s','metric')">Metric (kg)</button>
+  </div>
+</div>
+
+<div class="field">
+  <label>Tire Width (actual measured width)</label>
+  <select id="rhc-s-width">
+    <option value="">— select —</option>
+  </select>
+</div>
+
+<div class="weight-row">
+  <div class="field">
+    <label>Rider Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-s-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-s-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+  <div class="field">
+    <label>Bike Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-s-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-s-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Terrain</label>
+  <select id="rhc-s-terrain">
+    <option value="smooth">Smooth Asphalt</option>
+    <option value="rough">Rough Asphalt</option>
+    <option value="smooth-gravel">Smooth Gravel</option>
+    <option value="coarse-gravel">Coarse Gravel</option>
+    <option value="rough-gravel">Rough Gravel / Large Rocks</option>
+    <option value="mixed">Mixed Paved / Gravel</option>
+  </select>
+</div>
+
+<div id="rhc-s-error" class="error-card"></div>
+<div id="rhc-s-result" class="result-card">
+  <div class="result-header">
+    <span>Fastest-Rolling Tire Pressure</span>
+    <div class="result-unit-toggle">
+      <button class="result-unit-btn" id="rhc-s-out-unit-us"     onclick="rhcTpcSetOutUnit('s','us')">psi</button>
+      <button class="result-unit-btn" id="rhc-s-out-unit-metric" onclick="rhcTpcSetOutUnit('s','metric')">bar</button>
+    </div>
+  </div>
+  <div class="result-body">
+    <div id="rhc-s-weight-warning" class="weight-warning"></div>
+    <div id="rhc-s-out-psi-row" class="result-row">
+      <span class="result-label">Front &amp; Rear</span>
+      <span class="result-value" id="rhc-s-out-psi">— <span class="unit">psi</span></span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:12px; line-height:1.7;">
+  Tires are suspension. To enjoy the same ride and feel, a heavy rider/bike benefits from a wider tire than a lighter rider/bike.
+</p>
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:24px; line-height:1.7;">
+  Instead of starting with a tire size, tell us how you ride. Based on your input, we'll recommend a Rene Herse tire for your weight and riding style, then calculate your recommended pressure.
+</p>
+
+<div class="field">
+  <label>Units</label>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="rhc-wf-unit-us" onclick="rhcTpcSetUnit('wf','us')">U.S. (lb)</button>
+    <button class="toggle-btn" id="rhc-wf-unit-metric" onclick="rhcTpcSetUnit('wf','metric')">Metric (kg)</button>
+  </div>
+</div>
+
+<div class="weight-row">
+  <div class="field">
+    <label>Rider Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-wf-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-wf-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+  <div class="field">
+    <label>Bike Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-wf-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-wf-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label>Bike / Terrain</label>
+  <select id="rhc-wf-style">
+    <option value="road">Road (Smooth Pavement)</option>
+    <option value="allroad">All-Road (Bumpy Pavement, Some Gravel)</option>
+    <option value="gravel">Gravel or Mixed-Surface</option>
+    <option value="adventure">Adventure (Rough Gravel, Single-Track)</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Riding Style</label>
+  <select id="rhc-wf-ridingstyle">
+    <option value="smooth">I'm a smooth rider who picks the best lines.</option>
+    <option value="endurance">My tires need to handle whatever the trail throws at them.</option>
+    <option value="endurance-plus">I'm racing in a peloton on ultra-rough terrain and want to avoid flats at all costs.</option>
+  </select>
+</div>
+
+<div id="rhc-wf-error" class="error-card"></div>
+<div id="rhc-wf-result" class="result-card">
+  <div class="result-header">
+    <span>Tire Recommendation</span>
+    <div class="result-unit-toggle">
+      <button class="result-unit-btn" id="rhc-wf-out-unit-us"     onclick="rhcTpcSetOutUnit('wf','us')">psi</button>
+      <button class="result-unit-btn" id="rhc-wf-out-unit-metric" onclick="rhcTpcSetOutUnit('wf','metric')">bar</button>
+    </div>
+  </div>
+  <div class="result-body">
+    <div id="rhc-wf-weight-warning" class="weight-warning"></div>
+    <div class="result-row">
+      <span class="result-label">Recommended Width</span>
+      <span class="result-value" id="rhc-wf-out-width">— <span class="unit">mm</span></span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Recommended Casing</span>
+      <span class="result-value" id="rhc-wf-out-casing">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Recommended Tread</span>
+      <span class="result-value" id="rhc-wf-out-tread">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Recommended Pressure</span>
+      <span class="result-value" id="rhc-wf-out-psi">—</span>
+    </div>
+    <div id="rhc-wf-result-note" class="result-note"></div>
+  </div>
+</div>

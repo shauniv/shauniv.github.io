@@ -15,6 +15,24 @@ define( 'RHC_TPC_VERSION', '1.0.6' );
 define( 'RHC_TPC_PATH',    plugin_dir_path( __FILE__ ) );
 define( 'RHC_TPC_URL',     plugin_dir_url( __FILE__ ) );
 
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+// Slug → visible label. Each slug needs a matching templates/partials/tab-{slug}.html.
+// Slugs are also the DOM ids (rhc-tab-{slug}) and the argument to rhcTpcSwitchTab();
+// if a tab has inputs, the JS needs a matching entry in TAB_PREFIX / TAB_IDS.
+//
+define( 'RHC_TPC_TAB_LABELS', [
+    'simple'       => 'Simple',
+    'pro'          => 'Pro',
+    'tire-finder'  => 'Tire Finder',
+    'width-finder' => 'How Wide Should I Run?',
+] );
+
+// Which shortcode renders which tabs, in display order.
+define( 'RHC_TPC_SHORTCODES', [
+    'tire_pressure_calculator' => [ 'simple', 'pro' ],
+    'tire_finder'              => [ 'tire-finder', 'width-finder' ],
+] );
+
 // ── Update checker ────────────────────────────────────────────────────────────
 // Checks https://github.com/shauniv/TirePressureCalculator for new releases and
 // surfaces updates inside WP Admin → Plugins like any standard plugin.
@@ -43,7 +61,15 @@ add_action( 'init', function () {
 //
 add_action( 'wp_enqueue_scripts', function () {
     global $post;
-    $in_content = is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'tire_pressure_calculator' );
+    $in_content = false;
+    if ( is_a( $post, 'WP_Post' ) ) {
+        foreach ( array_keys( RHC_TPC_SHORTCODES ) as $tag ) {
+            if ( has_shortcode( $post->post_content, $tag ) ) {
+                $in_content = true;
+                break;
+            }
+        }
+    }
     if ( ! $in_content && ! ( defined( 'RHC_TPC_FORCE_ENQUEUE' ) && RHC_TPC_FORCE_ENQUEUE ) ) {
         return;
     }
@@ -69,9 +95,30 @@ add_action( 'wp_enqueue_scripts', function () {
     );
 } );
 
-// ── Shortcode: [tire_pressure_calculator] ────────────────────────────────────
-add_shortcode( 'tire_pressure_calculator', function () {
+// ── Shortcodes ────────────────────────────────────────────────────────────────
+// [tire_pressure_calculator] → Simple + Pro
+// [tire_finder]              → Tire Finder + How Wide Should I Run?
+//
+// Both render the same shell from the same partials; only the tab list differs.
+// The `tabs` attribute overrides the default set, e.g.
+//   [tire_finder tabs="width-finder"]
+// which lets tabs be moved between pages from the editor, without a release.
+//
+function rhc_tpc_render( array $tabs ) {
+    // Drop unknown slugs so a typo in the editor can't fatal on a missing partial.
+    $tabs = array_values( array_intersect( $tabs, array_keys( RHC_TPC_TAB_LABELS ) ) );
+    if ( ! $tabs ) {
+        return '';
+    }
     ob_start();
-    include RHC_TPC_PATH . 'templates/calculator.php';
+    include RHC_TPC_PATH . 'templates/shell.php'; // consumes $tabs
     return ob_get_clean();
-} );
+}
+
+foreach ( RHC_TPC_SHORTCODES as $rhc_tpc_tag => $rhc_tpc_default_tabs ) {
+    add_shortcode( $rhc_tpc_tag, function ( $atts ) use ( $rhc_tpc_default_tabs ) {
+        $atts = shortcode_atts( [ 'tabs' => implode( ',', $rhc_tpc_default_tabs ) ], $atts );
+        return rhc_tpc_render( array_map( 'trim', explode( ',', $atts['tabs'] ) ) );
+    } );
+}
+unset( $rhc_tpc_tag, $rhc_tpc_default_tabs );
