@@ -377,6 +377,21 @@
   line-height: 1.5;
 }
 
+/* Inline action inside a result note — the width finder's handoff to the tire
+   finder. Styled as a link so it doesn't compete with the result values. */
+.rhc-tpc .result-note .link-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--rhc-paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.rhc-tpc .result-note .link-btn:hover { color: #fff; }
+
 /* ── Weight range warning (inside result card) ── */
 .rhc-tpc .result-card.out-of-range .result-row,
 .rhc-tpc .result-card.out-of-range .result-note {

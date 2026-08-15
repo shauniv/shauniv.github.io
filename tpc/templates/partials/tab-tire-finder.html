@@ -1,3 +1,117 @@
-<!-- Placeholder. Design pending from Jan; drop the tab's fields and result card here.
-     Registered in RHC_TPC_TAB_LABELS as 'tire-finder'. When this tab gains inputs,
-     give it a state prefix in the JS (TAB_PREFIX / TAB_IDS / state) — 'tf' is free. -->
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:12px; line-height:1.7;">
+  Tell us the wheel size and width you have in mind, plus how and where you ride, and we'll pick the
+  Rene Herse tire that fits — then calculate the pressure for it.
+</p>
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:24px; line-height:1.7;">
+  Ask for any width you like. If nothing is made in exactly that size, we'll recommend the closest
+  tire we do make and tell you why.
+</p>
+
+<div class="field">
+  <label>Units</label>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="rhc-tf-unit-us" onclick="rhcTpcSetUnit('tf','us')">U.S. (lb)</button>
+    <button class="toggle-btn" id="rhc-tf-unit-metric" onclick="rhcTpcSetUnit('tf','metric')">Metric (kg)</button>
+  </div>
+</div>
+
+<div class="weight-row">
+  <div class="field">
+    <label>Rider Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-tf-rider" min="0" max="500" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-tf-rider-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+  <div class="field">
+    <label>Bike Weight</label>
+    <div class="weight-input-wrap">
+      <input type="number" id="rhc-tf-bike" min="0" max="100" step="0.5" placeholder="Enter Value">
+      <select class="field-unit-sel" id="rhc-tf-bike-unit"><option value="us">lb</option><option value="metric">kg</option></select>
+    </div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="field">
+    <label>Wheel Size</label>
+    <select id="rhc-tf-size"></select>
+  </div>
+  <div class="field">
+    <label>Tire Width You Want</label>
+    <select id="rhc-tf-width"></select>
+  </div>
+</div>
+
+<div class="field">
+  <label>Tubes or Tubeless</label>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="rhc-tf-tube-tubes" onclick="rhcTpcSetTube('tf','tubes')">Tubes</button>
+    <button class="toggle-btn" id="rhc-tf-tube-tubeless" onclick="rhcTpcSetTube('tf','tubeless')">Tubeless</button>
+  </div>
+</div>
+
+<div class="field">
+  <label>Bike / Terrain</label>
+  <select id="rhc-tf-terrain">
+    <option value="road">Road (Smooth Pavement)</option>
+    <option value="allroad">All-Road (Bumpy Pavement, Some Gravel)</option>
+    <option value="gravel">Gravel or Mixed-Surface</option>
+    <option value="adventure">Adventure (Rough Gravel, Single-Track)</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>How Often Do You Ride on Gravel?</label>
+  <select id="rhc-tf-gravel">
+    <option value="most">Most of the time</option>
+    <option value="often">Often</option>
+    <option value="occasional">Occasionally</option>
+    <option value="never">Never</option>
+  </select>
+  <div class="hint">Decides the tread pattern where more than one would suit your terrain.</div>
+</div>
+
+<div class="field">
+  <label>Riding Style</label>
+  <select id="rhc-tf-ridingstyle">
+    <option value="smooth">I'm a smooth rider who picks the best lines.</option>
+    <option value="endurance">My tires need to handle whatever the road or trail throws at them.</option>
+    <option value="endurance-plus">I'm racing in a peloton on ultra-rough terrain and want to avoid flats at all costs.</option>
+  </select>
+</div>
+
+<div id="rhc-tf-error" class="error-card"></div>
+<div id="rhc-tf-result" class="result-card">
+  <div class="result-header">
+    <span>Tire Recommendation</span>
+    <div class="result-unit-toggle">
+      <button class="result-unit-btn" id="rhc-tf-out-unit-us"     onclick="rhcTpcSetOutUnit('tf','us')">psi</button>
+      <button class="result-unit-btn" id="rhc-tf-out-unit-metric" onclick="rhcTpcSetOutUnit('tf','metric')">bar</button>
+    </div>
+  </div>
+  <div class="result-body">
+    <div id="rhc-tf-weight-warning" class="weight-warning"></div>
+    <div class="result-row">
+      <span class="result-label">Recommended Tire</span>
+      <span class="result-value" id="rhc-tf-out-tire">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Actual Width</span>
+      <span class="result-value" id="rhc-tf-out-width">— <span class="unit">mm</span></span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Recommended Casing</span>
+      <span class="result-value" id="rhc-tf-out-casing">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Tread</span>
+      <span class="result-value" id="rhc-tf-out-tread">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Recommended Pressure</span>
+      <span class="result-value" id="rhc-tf-out-psi">—</span>
+    </div>
+    <div id="rhc-tf-result-note" class="result-note"></div>
+  </div>
+</div>

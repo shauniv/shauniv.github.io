@@ -6,7 +6,7 @@ intended for its own page:
 | Shortcode | Tabs |
 | --- | --- |
 | `[tire_pressure_calculator]` | Simple · Pro |
-| `[tire_finder]` | Tire Finder (placeholder) · How Wide Should I Run? |
+| `[tire_finder]` | Tire Finder · How Wide Should I Run? |
 
 ## Project structure
 

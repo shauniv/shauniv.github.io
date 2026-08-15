@@ -64,6 +64,66 @@
     return WIDTH_FINDER_CASING[ridingStyle] || WIDTH_FINDER_CASING.smooth;
   }
 
+  // ── Tire finder catalog ─────────────────────────────────────────────────────
+  // Transcribed from Jan's "Tire Catalog Template_JH20260814.xlsx" (14 Aug 2026).
+  // One row per tire per tread pattern. Nothing below this line is wheel-size
+  // specific: adding 650B and 700C is a data change here and nothing else.
+  //
+  // `baseline` is the tire's measured width on its design rim, tubed, in a
+  // casing other than Extralight. The finder derives the real width from it —
+  // see tireActualWidth().
+  var TIRE_CATALOG = [
+    { size:'26', model:'Elk Pass',         nominal:'1.25"', designRim:20, baseline:29,
+      tread:'Smooth All-Road',     casings:['Extralight'],
+      tubeless:false, inProduction:true, priority:1 },
+    { size:'26', model:'Naches Pass',      nominal:'1.8"',  designRim:20, baseline:41,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,  inProduction:true, priority:1 },
+    { size:'26', model:'Rat Trap Pass',    nominal:'2.3"',  designRim:20, baseline:52,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,  inProduction:true, priority:1 },
+    { size:'26', model:'Humptulips Ridge', nominal:'2.3"',  designRim:20, baseline:52,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,  inProduction:true, priority:1 },
+  ];
+
+  // Wheel sizes actually present in the catalog, in catalog order.
+  var TIRE_SIZES = TIRE_CATALOG.reduce(function(acc, t) {
+    if (acc.indexOf(t.size) === -1) acc.push(t.size);
+    return acc;
+  }, []);
+
+  // Width factors, per Jan's 14 Aug note. Multiplicative, not additive:
+  // an Extralight tire set up tubeless is baseline × 1.03 × 1.01.
+  var TF_EXTRALIGHT_FACTOR = 1.03;
+  var TF_TUBELESS_FACTOR   = 1.01;
+
+  // Rim-width widening (0.3 mm per mm over the tire's design rim) is deliberately
+  // not implemented — the tab has no rim input yet, so every tire is treated as
+  // sitting on its design rim and the term is zero. See the 15 Aug follow-up.
+
+  // Casings, soft → tough. Only Extralight changes the measured width.
+  var TF_CASING_ORDER = ['Extralight', 'Standard', 'Endurance', 'Endurance Plus'];
+
+  // Treads, smooth → knobby.
+  var TF_TREAD_ORDER = ['Smooth All-Road', 'Semi-Slick', 'Dual-Purpose Knobby'];
+
+  // Q5: how far the recommended tire has to be from the requested width before
+  // we tell the rider the size moved. Below this, the difference comes from the
+  // casing and tubeless factors rather than from a different tire, and saying
+  // "you asked for 42 mm, this is 43 mm" about the 42 mm tire reads as a fault.
+  // Jan's "On your rims, ..." question in Q5 is the general form of this.
+  var TF_WIDTH_NOTE_THRESHOLD = 1.5;
+
+  // Terrain → candidate treads (smooth first). Q1: the rider's gravel frequency
+  // picks between the two where a terrain offers a choice.
+  var TF_TREAD_BY_TERRAIN = {
+    road:      ['Smooth All-Road'],
+    allroad:   ['Smooth All-Road', 'Semi-Slick'],
+    gravel:    ['Semi-Slick', 'Dual-Purpose Knobby'],
+    adventure: ['Dual-Purpose Knobby'],
+  };
+
   // Casing adjustments (psi numerator; divided by tire width)
   var CASING_ADJ = { '0':0, '-50':-50, '-150':-150, '-150b':-150, '-100':-100 };
 
@@ -151,13 +211,14 @@
     activeTab: null, // set from the DOM on init — which tabs exist varies by page
     s:  { unit: defaultUnit, feel:'soft',              outUnit: defaultUnit, lastPsi: null },
     p:  { unit: defaultUnit, feel:'soft', tube:'tubes', outUnit: defaultUnit, lastFPsi: null, lastRPsi: null },
-    wf: { unit: defaultUnit, feel:'soft',              outUnit: defaultUnit, lastPsi: null },
+    wf: { unit: defaultUnit, feel:'soft',              outUnit: defaultUnit, lastPsi: null, lastWidth: null },
+    tf: { unit: defaultUnit, feel:'soft', tube:'tubes', outUnit: defaultUnit, lastPsi: null },
   };
 
   // Shared fields synced on tab switch (only between tabs present on the page)
   var SHARED_FIELDS = [
-    { s: 'rhc-s-rider', p: 'rhc-p-rider', wf: 'rhc-wf-rider' },
-    { s: 'rhc-s-bike',  p: 'rhc-p-bike',  wf: 'rhc-wf-bike'  },
+    { s: 'rhc-s-rider', p: 'rhc-p-rider', wf: 'rhc-wf-rider', tf: 'rhc-tf-rider' },
+    { s: 'rhc-s-bike',  p: 'rhc-p-bike',  wf: 'rhc-wf-bike',  tf: 'rhc-tf-bike'  },
   ];
 
   // Tab slug (from the shortcode / DOM id) → internal state prefix.
@@ -166,10 +227,15 @@
     'simple':       's',
     'pro':          'p',
     'width-finder': 'wf',
-    'tire-finder':  null, // placeholder — design pending
+    'tire-finder':  'tf',
   };
 
-  var TAB_IDS = { s: 'rhc-tab-simple', p: 'rhc-tab-pro', wf: 'rhc-tab-width-finder' };
+  var TAB_IDS = {
+    s:  'rhc-tab-simple',
+    p:  'rhc-tab-pro',
+    wf: 'rhc-tab-width-finder',
+    tf: 'rhc-tab-tire-finder',
+  };
 
   function el(id) { return document.getElementById(id); }
 
@@ -316,6 +382,7 @@
     if (prefix === 's')       window.rhcTpcCalcSimple();
     else if (prefix === 'p')  window.rhcTpcCalcPro();
     else if (prefix === 'wf') window.rhcTpcCalcWidthFinder();
+    else if (prefix === 'tf') window.rhcTpcCalcTireFinder();
   }
 
   function showError(prefix, msg) {
@@ -413,13 +480,15 @@
     liveCalc(prefix);
   };
 
-  window.rhcTpcSetTube = function(type) {
-    state.p.tube = type;
-    var tubesBtn    = el('rhc-p-tube-tubes');
-    var tubelessBtn = el('rhc-p-tube-tubeless');
+  // Prefix first, to match rhcTpcSetUnit / rhcTpcSetFeel.
+  window.rhcTpcSetTube = function(prefix, type) {
+    if (!state[prefix]) return;
+    state[prefix].tube = type;
+    var tubesBtn    = el('rhc-' + prefix + '-tube-tubes');
+    var tubelessBtn = el('rhc-' + prefix + '-tube-tubeless');
     if (tubesBtn)    tubesBtn.classList.toggle('active',    type === 'tubes');
     if (tubelessBtn) tubelessBtn.classList.toggle('active', type === 'tubeless');
-    liveCalc('p');
+    liveCalc(prefix);
   };
 
   // ═══════════════════════════════════════════
@@ -594,8 +663,9 @@
     var casing  = widthFinderCasing(style, ridingStyle, totalLb, rider);
     var tread   = WIDTH_FINDER_TREAD[style]  || WIDTH_FINDER_TREAD.road;
 
-    state.wf.lastPsi = psi;
-    state.wf.outUnit = unit;
+    state.wf.lastPsi   = psi;
+    state.wf.lastWidth = calcW;
+    state.wf.outUnit   = unit;
 
     setWeightWarning('wf', rider, bike);
     document.getElementById('rhc-wf-out-width').innerHTML =
@@ -604,9 +674,222 @@
     document.getElementById('rhc-wf-out-tread').textContent  = tread;
     renderOutPressure('wf');
 
-    document.getElementById('rhc-wf-result-note').style.display = 'none';
+    // Q13: offer the handoff only when the tire finder is actually on this page.
+    var wfNote = document.getElementById('rhc-wf-result-note');
+    if (el(TAB_IDS.tf)) {
+      wfNote.style.display = 'block';
+      wfNote.innerHTML = 'Looking for a specific tire? ' +
+        '<button type="button" class="link-btn" onclick="rhcTpcSendToFinder(this)">' +
+        'Find Rene Herse tires this width</button>';
+    } else {
+      wfNote.style.display = 'none';
+    }
 
     document.getElementById('rhc-wf-result').classList.add('visible');
+  };
+
+  // ═══════════════════════════════════════════
+  // TIRE FINDER
+  // ═══════════════════════════════════════════
+  // Terrain narrows the tread to one or two candidates; gravel frequency picks
+  // between them. 'often' resolves to Semi-Slick, which is a member of both
+  // two-tread terrains, so it means the same thing whichever terrain is chosen.
+  function tireFinderTread(terrain, gravelFreq) {
+    var candidates = TF_TREAD_BY_TERRAIN[terrain] || TF_TREAD_BY_TERRAIN.road;
+    if (candidates.length === 1) return candidates[0];
+    if (gravelFreq === 'most')  return candidates[1];  // knobbier of the two
+    if (gravelFreq === 'often') return 'Semi-Slick';
+    return candidates[0];                              // occasional / never
+  }
+
+  // The casing recommendation is a phrase ('Extralight or Standard'), and a tire
+  // may not be built in every casing it names. Keep the ones it is built in; if
+  // that leaves nothing, step down the toughness order — the draft's only stated
+  // casing substitution is "instead of Endurance Plus, recommend Endurance".
+  function tireFinderCasings(tire, phrase) {
+    var wanted = String(phrase).split(' or ');
+    var kept   = wanted.filter(function(c) { return tire.casings.indexOf(c) !== -1; });
+    if (kept.length) return { casings: kept, substituted: kept.length !== wanted.length };
+
+    var from = TF_CASING_ORDER.indexOf(wanted[0]);
+    if (from === -1) from = 0;
+    for (var d = from - 1; d >= 0; d--) {
+      if (tire.casings.indexOf(TF_CASING_ORDER[d]) !== -1) {
+        return { casings: [TF_CASING_ORDER[d]], substituted: true };
+      }
+    }
+    for (var u = from + 1; u < TF_CASING_ORDER.length; u++) {
+      if (tire.casings.indexOf(TF_CASING_ORDER[u]) !== -1) {
+        return { casings: [TF_CASING_ORDER[u]], substituted: true };
+      }
+    }
+    return { casings: tire.casings.slice(0, 1), substituted: true };
+  }
+
+  // Measured width for a tire in a given casing set, on its design rim.
+  //
+  // When the recommendation names two casings they measure differently, and only
+  // one number can drive the pressure. We take the Extralight width whenever
+  // Extralight is one of the options: that reproduces every display name in Jan's
+  // spreadsheet exactly (29→30, 41→42, 52→54), so it is the convention he is
+  // already using. Flagged in the 15 Aug follow-up — this is the one line to
+  // change if he wants the other end.
+  function tireActualWidth(tire, casings, tubeless) {
+    var w = tire.baseline;
+    if (casings.indexOf('Extralight') !== -1) w *= TF_EXTRALIGHT_FACTOR;
+    if (tubeless) w *= TF_TUBELESS_FACTOR;
+    return w;
+  }
+
+  // 'a, b or c' — casing lists read as prose in the explainer notes.
+  function joinList(items) {
+    if (items.length <= 1) return items[0] || '';
+    return items.slice(0, -1).join(', ') + ' or ' + items[items.length - 1];
+  }
+
+  // Q12: models sold in inch denominations get the metric width appended.
+  function tireDisplayName(tire, actualW) {
+    return tire.size + '" x ' + tire.nominal + ' ' + tire.model +
+           ' (' + Math.round(actualW) + ' mm)';
+  }
+
+  // Width decides the model; tread breaks ties between tires of the same width.
+  // On 26" that ordering matters: asking for 42 mm on knobby terrain still gets
+  // Naches Pass, because no knobby 26" tire is made anywhere near that width.
+  function tireFinderPick(pool, requestedW, casingPhrase, tubeless, wantTread) {
+    var best = null;
+    pool.forEach(function(tire) {
+      var resolved = tireFinderCasings(tire, casingPhrase);
+      var actualW  = tireActualWidth(tire, resolved.casings, tubeless);
+      var cand = {
+        tire: tire,
+        casings: resolved.casings,
+        casingSubstituted: resolved.substituted,
+        actualW: actualW,
+        widthDiff: Math.abs(actualW - requestedW),
+        treadMatch: tire.tread === wantTread ? 0 : 1,
+      };
+      if (!best) { best = cand; return; }
+      // Rounded to 0.1 mm so a rounding artefact can't outrank a tread match.
+      var dw = Math.round((cand.widthDiff - best.widthDiff) * 10) / 10;
+      if (dw < 0) { best = cand; return; }
+      if (dw > 0) return;
+      if (cand.treadMatch < best.treadMatch) { best = cand; return; }
+      if (cand.treadMatch === best.treadMatch && cand.tire.priority < best.tire.priority) best = cand;
+    });
+    return best;
+  }
+
+  window.rhcTpcCalcTireFinder = function() {
+    clearError('tf');
+    var unit        = state.tf.unit;
+    var rider       = getWeight('rhc-tf-rider', unit);
+    var bike        = getWeight('rhc-tf-bike', unit);
+    var size        = el('rhc-tf-size').value;
+    var requestedW  = parseInt(el('rhc-tf-width').value, 10);
+    var terrain     = el('rhc-tf-terrain').value;
+    var gravelFreq  = el('rhc-tf-gravel').value;
+    var ridingStyle = el('rhc-tf-ridingstyle').value;
+    var tubeless    = state.tf.tube === 'tubeless';
+    var feel        = terrain === 'road' ? 'firm' : 'soft';
+
+    if (!rider || !bike) return hideResults('tf');
+
+    var inSize = TIRE_CATALOG.filter(function(t) {
+      return t.size === size && t.inProduction;
+    });
+    if (!inSize.length) {
+      return showError('tf', 'No ' + size + '" tires are in the catalog yet.');
+    }
+
+    var totalLb      = rider + bike;
+    var casingPhrase = widthFinderCasing(terrain, ridingStyle, totalLb, rider);
+    var wantTread    = tireFinderTread(terrain, gravelFreq);
+
+    // Q8: tubeless narrows the pool first, so the answer is always the nearest
+    // tubeless tire rather than no tire at all.
+    var pool = tubeless ? inSize.filter(function(t) { return t.tubeless; }) : inSize;
+    if (!pool.length) {
+      return showError('tf', 'No tubeless-compatible ' + size + '" tires are in the catalog yet.');
+    }
+
+    var pick = tireFinderPick(pool, requestedW, casingPhrase, tubeless, wantTread);
+
+    // Did filtering to tubeless push us past a closer tire?
+    var tubelessDetour = false;
+    if (tubeless && pool.length !== inSize.length) {
+      var open = tireFinderPick(inSize, requestedW, casingPhrase, tubeless, wantTread);
+      tubelessDetour = open && open.tire !== pick.tire;
+    }
+
+    var casingText = pick.casings.join(' or ');
+    var psi        = calcPSI(totalLb, pick.actualW, feel);
+
+    state.tf.lastPsi = psi;
+    state.tf.outUnit = unit;
+
+    setWeightWarning('tf', rider, bike);
+    el('rhc-tf-out-tire').textContent   = tireDisplayName(pick.tire, pick.actualW);
+    el('rhc-tf-out-width').innerHTML    = fmtNum(pick.actualW, 1) + ' <span class="unit">mm</span>';
+    el('rhc-tf-out-casing').textContent = casingText;
+    el('rhc-tf-out-tread').textContent  = pick.tire.tread;
+    renderOutPressure('tf');
+
+    // ── Explainers ──
+    var notes = [];
+
+    // Q5: never let the rider wonder why the size moved.
+    if (Math.abs(pick.actualW - requestedW) >= TF_WIDTH_NOTE_THRESHOLD) {
+      notes.push('Closest size available — you asked for ' + requestedW + ' mm and the nearest ' +
+                 size + '" Rene Herse tire measures ' + Math.round(pick.actualW) + ' mm.');
+    }
+
+    // Q8
+    if (tubelessDetour) {
+      notes.push('Closest tubeless-compatible Rene Herse tire.');
+    }
+
+    // Q10: the catalog overrode an answer the rider gave, so say so rather than
+    // letting a forced result read as a bug. Only the parts that were actually
+    // forced get a clause — reciting a tire's whole casing list when nothing was
+    // overridden just contradicts the recommendation above it.
+    var forced = [];
+    if (pick.casingSubstituted || pick.tire.casings.length === 1) {
+      forced.push('in ' + joinList(pick.tire.casings));
+    }
+    if (pick.tire.tread !== wantTread) {
+      forced.push('with a ' + pick.tire.tread + ' tread');
+    }
+    if (forced.length) {
+      notes.push(pick.tire.model + ' is only available ' + forced.join(' ') + '.');
+    }
+
+    var noteEl = el('rhc-tf-result-note');
+    if (notes.length) {
+      noteEl.style.display = 'block';
+      noteEl.innerHTML = notes.map(function(n) { return '• ' + n; }).join('<br>');
+    } else {
+      noteEl.style.display = 'none';
+    }
+
+    el('rhc-tf-result').classList.add('visible');
+  };
+
+  // Q13: hand the width finder's recommendation across to the tire finder.
+  // Clicking the real tab button keeps tab switching in one place, and quietly
+  // does nothing if the tire finder isn't on this page.
+  window.rhcTpcSendToFinder = function(btn) {
+    var root = btn.closest('.rhc-tpc');
+    if (!root) return;
+    var widthSel = el('rhc-tf-width');
+    if (widthSel && state.wf.lastWidth) widthSel.value = String(Math.round(state.wf.lastWidth));
+    var navBtns = root.querySelectorAll('.tab-nav .tab-btn');
+    for (var i = 0; i < navBtns.length; i++) {
+      if ((navBtns[i].getAttribute('onclick') || '').indexOf("'tire-finder'") !== -1) {
+        navBtns[i].click();
+        return;
+      }
+    }
   };
 
   // ═══════════════════════════════════════════
@@ -683,6 +966,30 @@
     onField('rhc-p-fp-unit',    'p', 'change');
     onField('rhc-p-rp-unit',    'p', 'change');
     onField('rhc-p-bp-unit',    'p', 'change');
+
+    // Tire finder tab. Q7: the width list stays full for every wheel size —
+    // the rider may ask for anything and the finder answers with the best fit.
+    buildWidthDropdown('rhc-tf-width');
+    var tfWidth = el('rhc-tf-width');
+    if (tfWidth) tfWidth.value = '42'; // mid-range starting point, not the 25 mm floor
+    var sizeSel = el('rhc-tf-size');
+    if (sizeSel) {
+      TIRE_SIZES.forEach(function(size) {
+        var opt = document.createElement('option');
+        opt.value = size;
+        opt.textContent = size + '"';
+        sizeSel.appendChild(opt);
+      });
+    }
+    onField('rhc-tf-size',        'tf', 'change');
+    onField('rhc-tf-width',       'tf', 'change');
+    onField('rhc-tf-terrain',     'tf', 'change');
+    onField('rhc-tf-gravel',      'tf', 'change');
+    onField('rhc-tf-ridingstyle', 'tf', 'change');
+    onField('rhc-tf-rider',       'tf');
+    onField('rhc-tf-bike',        'tf');
+    onField('rhc-tf-rider-unit',  'tf', 'change');
+    onField('rhc-tf-bike-unit',   'tf', 'change');
 
     // Width finder tab
     onField('rhc-wf-style',        'wf', 'change');
