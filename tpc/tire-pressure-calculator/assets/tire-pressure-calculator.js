@@ -32,7 +32,11 @@
   // Width finder tread recommendations (keyed by style)
   var WIDTH_FINDER_TREAD = {
     road:      'Smooth All-Road',
-    allroad:   'Smooth All-Road',
+    // Two candidates, matching the draft and TF_TREAD_BY_TERRAIN below. The tire
+    // finder narrows this to one using the gravel-frequency answer; this tab has
+    // no such question, so it shows the pair. Both tabs can sit on one page, so
+    // they must not contradict each other.
+    allroad:   'Smooth All-Road or Semi-Slick',
     gravel:    'Semi-Slick or Dual-Purpose Knobby',
     adventure: 'Dual-Purpose Knobby',
   };
@@ -65,27 +69,30 @@
   }
 
   // ── Tire finder catalog ─────────────────────────────────────────────────────
-  // Transcribed from Jan's "Tire Catalog Template_JH20260814.xlsx" (14 Aug 2026).
-  // One row per tire per tread pattern. Nothing below this line is wheel-size
-  // specific: adding 650B and 700C is a data change here and nothing else.
+  // ── BEGIN GENERATED CATALOG — do not edit by hand ──────────────────────
+  // Generated from Tire Catalog.xlsx by tools/build-catalog.mjs. Jan maintains
+  // the spreadsheet; run `node tools/build-catalog.mjs` after he sends a new one.
   //
-  // `baseline` is the tire's measured width on its design rim, tubed, in a
-  // casing other than Extralight. The finder derives the real width from it —
-  // see tireActualWidth().
+  // One row per tire per tread pattern. `baseline` is the measured width on the
+  // design rim, tubed, in a casing other than Extralight — every width the
+  // finder shows is derived from it, see tireActualWidth().
+  //
+  // 4 tires across 1 wheel size: 26"
   var TIRE_CATALOG = [
-    { size:'26', model:'Elk Pass',         nominal:'1.25"', designRim:20, baseline:29,
+    { size:'26"', model:'Elk Pass',         nominal:'1.25"', designRim:20, baseline:29,
       tread:'Smooth All-Road',     casings:['Extralight'],
-      tubeless:false, inProduction:true, priority:1 },
-    { size:'26', model:'Naches Pass',      nominal:'1.8"',  designRim:20, baseline:41,
+      tubeless:false,  inProduction:true,   priority:1 },
+    { size:'26"', model:'Naches Pass',      nominal:'1.8"',  designRim:20, baseline:41,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,  inProduction:true, priority:1 },
-    { size:'26', model:'Rat Trap Pass',    nominal:'2.3"',  designRim:20, baseline:52,
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'26"', model:'Rat Trap Pass',    nominal:'2.3"',  designRim:20, baseline:52,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,  inProduction:true, priority:1 },
-    { size:'26', model:'Humptulips Ridge', nominal:'2.3"',  designRim:20, baseline:52,
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'26"', model:'Humptulips Ridge', nominal:'2.3"',  designRim:20, baseline:52,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,  inProduction:true, priority:1 },
+      tubeless:true,   inProduction:true,   priority:1 },
   ];
+  // ── END GENERATED CATALOG ────────────────────────────────────────────
 
   // Wheel sizes actually present in the catalog, in catalog order.
   var TIRE_SIZES = TIRE_CATALOG.reduce(function(acc, t) {
@@ -755,10 +762,21 @@
     return items.slice(0, -1).join(', ') + ' or ' + items[items.length - 1];
   }
 
-  // Q12: models sold in inch denominations get the metric width appended.
+  // Wheel sizes carry Jan's spreadsheet wording ('26"', '700C / 29"'), which
+  // suits a dropdown but is long for a tire name. Q12's examples name the tire
+  // '700C x 32 mm Stampede Pass', so the name takes the part before the slash.
+  function sizePrefix(size) {
+    return String(size).split(' / ')[0];
+  }
+
+  // Q12: a tire sold in inch denominations gets the metric width appended. One
+  // already quoted in mm would otherwise repeat itself, printing two different
+  // numbers on one line — exactly what Jan's Q16 note warns riders about.
   function tireDisplayName(tire, actualW) {
-    return tire.size + '" x ' + tire.nominal + ' ' + tire.model +
-           ' (' + Math.round(actualW) + ' mm)';
+    var name = sizePrefix(tire.size) + ' x ' + tire.nominal + ' ' + tire.model;
+    return tire.nominal.indexOf('"') === -1
+      ? name
+      : name + ' (' + Math.round(actualW) + ' mm)';
   }
 
   // Width decides the model; tread breaks ties between tires of the same width.
@@ -807,7 +825,7 @@
       return t.size === size && t.inProduction;
     });
     if (!inSize.length) {
-      return showError('tf', 'No ' + size + '" tires are in the catalog yet.');
+      return showError('tf', 'No ' + size + ' tires are in the catalog yet.');
     }
 
     var totalLb      = rider + bike;
@@ -818,7 +836,7 @@
     // tubeless tire rather than no tire at all.
     var pool = tubeless ? inSize.filter(function(t) { return t.tubeless; }) : inSize;
     if (!pool.length) {
-      return showError('tf', 'No tubeless-compatible ' + size + '" tires are in the catalog yet.');
+      return showError('tf', 'No tubeless-compatible ' + size + ' tires are in the catalog yet.');
     }
 
     var pick = tireFinderPick(pool, requestedW, casingPhrase, tubeless, wantTread);
@@ -849,7 +867,7 @@
     // Q5: never let the rider wonder why the size moved.
     if (Math.abs(pick.actualW - requestedW) >= TF_WIDTH_NOTE_THRESHOLD) {
       notes.push('Closest size available — you asked for ' + requestedW + ' mm and the nearest ' +
-                 size + '" Rene Herse tire measures ' + Math.round(pick.actualW) + ' mm.');
+                 sizePrefix(size) + ' Rene Herse tire measures ' + Math.round(pick.actualW) + ' mm.');
     }
 
     // Q8
@@ -985,7 +1003,7 @@
       TIRE_SIZES.forEach(function(size) {
         var opt = document.createElement('option');
         opt.value = size;
-        opt.textContent = size + '"';
+        opt.textContent = size;
         sizeSel.appendChild(opt);
       });
     }

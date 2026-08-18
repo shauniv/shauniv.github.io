@@ -16,6 +16,9 @@ intended for its own page:
 - `templates/partials/tab-{slug}.html` — one panel body per tab, **plain HTML, no PHP**
 - `tire-pressure-calculator/assets/` — CSS and JS, shared by both shortcodes
 - `tools/build-static.mjs` — dev-only generator for the standalone preview pages
+- `tools/build-catalog.mjs` — regenerates the tire catalog in the JS from the spreadsheet
+- `tools/xlsx-read.mjs` — minimal dependency-free .xlsx reader used by the above
+- `Tire Catalog.xlsx` — Jan's tire data, the source of truth for the Tire Finder
 - `index.html`, `calculator.html`, `finder.html` — **generated**, do not hand-edit
 - `composer.json` — declares the Plugin Update Checker dependency
 - `.github/workflows/release.yml` — builds the plugin ZIP and publishes the GitHub Release
@@ -38,6 +41,38 @@ If a partial ever genuinely needs PHP, the generator has to learn to strip it.
 The JS must tolerate any tab being absent, since the two shortcodes render different subsets.
 Guard shared helpers with null checks; `liveCalc()` is the single gate that stops a calculator
 running for a tab that isn't on the page.
+
+## The tire catalog
+
+`Tire Catalog.xlsx` is the source of truth for which tires exist. Jan maintains it; the
+`TIRE_CATALOG` array in the JS is **generated from it** and sits between two markers:
+
+```
+// ── BEGIN GENERATED CATALOG — do not edit by hand ──
+// ── END GENERATED CATALOG ──
+```
+
+After Jan sends a new spreadsheet, drop it in as `Tire Catalog.xlsx` and run:
+
+```
+node tools/build-catalog.mjs
+node tools/build-static.mjs      # the preview pages embed the same JS
+```
+
+The generator validates as it reads — unknown tread names, non-numeric or implausible
+baselines, bad Y/N values, a tire with no casings, duplicate model+tread within a wheel size.
+On any problem it writes nothing and lists what to fix, so a typo in the sheet can't reach the
+site silently. Rows with a single populated cell are skipped, which is how Jan's trailing
+provenance note survives without tripping it.
+
+Adding 650B and 700C really is rows in the spreadsheet. Two things depend on the sheet's
+wording rather than on code:
+
+- **Wheel Size** doubles as the dropdown label, so it appears verbatim — `26"`,
+  `700C / 29"`. `sizePrefix()` takes the part before the slash for use in tire names.
+- **Nominal Size** decides whether the metric width is appended (Q12). `1.8"` gets
+  `(42 mm)` added; `32 mm` does not, since it would otherwise print two different
+  numbers on one line.
 
 ## Standalone preview pages
 
