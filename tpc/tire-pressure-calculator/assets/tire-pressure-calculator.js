@@ -100,7 +100,10 @@
 
   // Rim-width widening (0.3 mm per mm over the tire's design rim) is deliberately
   // not implemented — the tab has no rim input yet, so every tire is treated as
-  // sitting on its design rim and the term is zero. See the 15 Aug follow-up.
+  // sitting on its design rim and the term is zero. Held for a second version,
+  // confirmed 18 Aug (Q21). Per-tire rim limits are deliberately NOT catalog data
+  // (Q22): they change as new rims reach the market, so the tab points riders at
+  // the product page instead.
 
   // Casings, soft → tough. Only Extralight changes the measured width.
   var TF_CASING_ORDER = ['Extralight', 'Standard', 'Endurance', 'Endurance Plus'];
@@ -108,11 +111,12 @@
   // Treads, smooth → knobby.
   var TF_TREAD_ORDER = ['Smooth All-Road', 'Semi-Slick', 'Dual-Purpose Knobby'];
 
-  // Q5: how far the recommended tire has to be from the requested width before
+  // Q5/Q17: how far the recommended tire has to be from the requested width before
   // we tell the rider the size moved. Below this, the difference comes from the
   // casing and tubeless factors rather than from a different tire, and saying
   // "you asked for 42 mm, this is 43 mm" about the 42 mm tire reads as a fault.
-  // Jan's "On your rims, ..." question in Q5 is the general form of this.
+  // Confirmed by Jan on 18 Aug: below 1.5 mm is inside the variation between
+  // individual tires anyway. His "On your rims, ..." idea waits for rim input.
   var TF_WIDTH_NOTE_THRESHOLD = 1.5;
 
   // Terrain → candidate treads (smooth first). Q1: the rider's gravel frequency
@@ -694,6 +698,10 @@
   // Terrain narrows the tread to one or two candidates; gravel frequency picks
   // between them. 'often' resolves to Semi-Slick, which is a member of both
   // two-tread terrains, so it means the same thing whichever terrain is chosen.
+  //
+  // 'occasional' and 'never' deliberately produce the same tread. Jan kept both
+  // (Q19) so riders who never touch gravel can say so; the answer is heard even
+  // though it doesn't change the recommendation. Don't "fix" it by merging them.
   function tireFinderTread(terrain, gravelFreq) {
     var candidates = TF_TREAD_BY_TERRAIN[terrain] || TF_TREAD_BY_TERRAIN.road;
     if (candidates.length === 1) return candidates[0];
@@ -731,9 +739,9 @@
   // When the recommendation names two casings they measure differently, and only
   // one number can drive the pressure. We take the Extralight width whenever
   // Extralight is one of the options: that reproduces every display name in Jan's
-  // spreadsheet exactly (29→30, 41→42, 52→54), so it is the convention he is
-  // already using. Flagged in the 15 Aug follow-up — this is the one line to
-  // change if he wants the other end.
+  // spreadsheet exactly (29→30, 41→42, 52→54). Confirmed by Jan on 18 Aug (Q15):
+  // quoting the wider of the two is the safe direction, because a tire that comes
+  // out slightly narrower than advertised still fits the frame.
   function tireActualWidth(tire, casings, tubeless) {
     var w = tire.baseline;
     if (casings.indexOf('Extralight') !== -1) w *= TF_EXTRALIGHT_FACTOR;

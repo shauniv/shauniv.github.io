@@ -76,7 +76,7 @@
   <label>Riding Style</label>
   <select id="rhc-tf-ridingstyle">
     <option value="smooth">I'm a smooth rider who picks the best lines.</option>
-    <option value="endurance">My tires need to handle whatever the road or trail throws at them.</option>
+    <option value="endurance">My tires need to handle whatever road or trail throws at them.</option>
     <option value="endurance-plus">I'm racing in a peloton on ultra-rough terrain and want to avoid flats at all costs.</option>
   </select>
 </div>
@@ -114,4 +114,14 @@
     </div>
     <div id="rhc-tf-result-note" class="result-note"></div>
   </div>
+</div>
+
+<!-- Standing notes, not per-result explainers: they belong outside the result
+     card so they survive the out-of-range state and don't crowd the bullets
+     that explain a particular recommendation. -->
+<div class="rhc-disclaimers">
+  <ul>
+    <li>The nominal width printed on a tire's sidewall may be slightly different from the actual width shown here.</li>
+    <li>Rim compatibility changes as new rims reach the market — check the tire's product page for the rim widths it's currently approved for.</li>
+  </ul>
 </div>
