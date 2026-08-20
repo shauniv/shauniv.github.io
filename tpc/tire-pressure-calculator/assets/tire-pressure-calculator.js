@@ -77,19 +77,111 @@
   // design rim, tubed, in a casing other than Extralight — every width the
   // finder shows is derived from it, see tireActualWidth().
   //
-  // 4 tires across 1 wheel size: 26"
+  // 26 tires across 3 wheel sizes: 26", 650B, 700C / 29"
   var TIRE_CATALOG = [
-    { size:'26"', model:'Elk Pass',         nominal:'1.25"', designRim:20, baseline:29,
+    { size:'26"',        model:'Elk Pass',         nominal:'1.25"', nominal2:'30 mm',
+      designRim:20, baseline:29,
       tread:'Smooth All-Road',     casings:['Extralight'],
       tubeless:false,  inProduction:true,   priority:1 },
-    { size:'26"', model:'Naches Pass',      nominal:'1.8"',  designRim:20, baseline:41,
+    { size:'26"',        model:'Naches Pass',      nominal:'1.8"',  nominal2:'42 mm',
+      designRim:20, baseline:41,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1 },
-    { size:'26"', model:'Rat Trap Pass',    nominal:'2.3"',  designRim:20, baseline:52,
+    { size:'26"',        model:'Rat Trap Pass',    nominal:'2.3"',  nominal2:'54 mm',
+      designRim:20, baseline:52,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1 },
-    { size:'26"', model:'Humptulips Ridge', nominal:'2.3"',  designRim:20, baseline:52,
+    { size:'26"',        model:'Humptulips Ridge', nominal:'2.3"',  nominal2:'54 mm',
+      designRim:20, baseline:52,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'650B',       model:'Loup Loup Pass',   nominal:'38 mm', nominal2:'',
+      designRim:20, baseline:37,
+      tread:'Smooth All-Road',     casings:['Extralight'],
+      tubeless:false,  inProduction:true,   priority:1 },
+    { size:'650B',       model:'Babyshoe Pass',    nominal:'42 mm', nominal2:'',
+      designRim:20, baseline:40,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'650B',       model:'Switchback Hill',  nominal:'48 mm', nominal2:'',
+      designRim:20, baseline:50,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'650B',       model:'Pumpkin Ridge',    nominal:'42 mm', nominal2:'',
+      designRim:20, baseline:40,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'650B',       model:'Juniper Ridge',    nominal:'48 mm', nominal2:'',
+      designRim:20, baseline:49,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'650B',       model:'Umtanum Ridge',    nominal:'2.3"',  nominal2:'54 mm',
+      designRim:21, baseline:53,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Cayuse Pass',      nominal:'26 mm', nominal2:'',
+      designRim:20, baseline:25.5,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard'],
+      tubeless:false,  inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Chinook Pass',     nominal:'28 mm', nominal2:'',
+      designRim:20, baseline:28,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard'],
+      tubeless:false,  inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Stampede Pass',    nominal:'32 mm', nominal2:'',
+      designRim:20, baseline:31,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard'],
+      tubeless:false,  inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Orondo Grade',     nominal:'31 mm', nominal2:'',
+      designRim:20, baseline:31,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Bon Jon Pass',     nominal:'35 mm', nominal2:'',
+      designRim:20, baseline:35,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Barlow Pass',      nominal:'38 mm', nominal2:'',
+      designRim:20, baseline:38,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Snoqualmie Pass',  nominal:'44 mm', nominal2:'',
+      designRim:20, baseline:42,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Hatcher Pass',     nominal:'48 mm', nominal2:'',
+      designRim:21, baseline:47,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Antelope Hill',    nominal:'55 mm', nominal2:'29" x 2.2"',
+      designRim:20, baseline:54,
+      tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Steilacoom',       nominal:'38 mm', nominal2:'',
+      designRim:20, baseline:36,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Hurricane Ridge',  nominal:'42 mm', nominal2:'',
+      designRim:20, baseline:42,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Manastash Ridge',  nominal:'44 mm', nominal2:'',
+      designRim:20, baseline:43,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Oracle Ridge',     nominal:'48 mm', nominal2:'',
+      designRim:21, baseline:47,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Fleecer Ridge',    nominal:'55 mm', nominal2:'29" x 2.2"',
+      designRim:21, baseline:56,
+      tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Corkscrew Climb',  nominal:'44 mm', nominal2:'',
+      designRim:20, baseline:43,
+      tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1 },
+    { size:'700C / 29"', model:'Poteau Mountain',  nominal:'48 mm', nominal2:'',
+      designRim:21, baseline:47,
+      tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1 },
   ];
   // ── END GENERATED CATALOG ────────────────────────────────────────────
@@ -769,14 +861,15 @@
     return String(size).split(' / ')[0];
   }
 
-  // Q12: a tire sold in inch denominations gets the metric width appended. One
-  // already quoted in mm would otherwise repeat itself, printing two different
-  // numbers on one line — exactly what Jan's Q16 note warns riders about.
-  function tireDisplayName(tire, actualW) {
+  // The parenthetical is catalog data, not a calculation: Jan's 'Nominal Size 2'
+  // column, printed verbatim, blank meaning none. He asked for it to stay fixed
+  // per tire (19 Aug) — Naches Pass is always "(42 mm)" even though the tire
+  // actually measures 41–43 depending on casing and tubeless. The measured
+  // figure has its own row in the result card, and the standing note under it
+  // explains that a sidewall number and a measured width need not agree.
+  function tireDisplayName(tire) {
     var name = sizePrefix(tire.size) + ' x ' + tire.nominal + ' ' + tire.model;
-    return tire.nominal.indexOf('"') === -1
-      ? name
-      : name + ' (' + Math.round(actualW) + ' mm)';
+    return tire.nominal2 ? name + ' (' + tire.nominal2 + ')' : name;
   }
 
   // Width decides the model; tread breaks ties between tires of the same width.
@@ -855,7 +948,7 @@
     state.tf.outUnit = unit;
 
     setWeightWarning('tf', rider, bike);
-    el('rhc-tf-out-tire').textContent   = tireDisplayName(pick.tire, pick.actualW);
+    el('rhc-tf-out-tire').textContent   = tireDisplayName(pick.tire);
     el('rhc-tf-out-width').innerHTML    = fmtNum(pick.actualW, 1) + ' <span class="unit">mm</span>';
     el('rhc-tf-out-casing').textContent = casingText;
     el('rhc-tf-out-tread').textContent  = pick.tire.tread;

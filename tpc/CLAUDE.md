@@ -65,14 +65,23 @@ On any problem it writes nothing and lists what to fix, so a typo in the sheet c
 site silently. Rows with a single populated cell are skipped, which is how Jan's trailing
 provenance note survives without tripping it.
 
-Adding 650B and 700C really is rows in the spreadsheet. Two things depend on the sheet's
-wording rather than on code:
+The sheet is located by its **headers**, not its tab name — Excel truncates long tab names
+to 31 characters and a Save As can rename it, so the first sheet carrying the required
+columns wins. Column order doesn't matter either; columns are looked up by name.
 
-- **Wheel Size** doubles as the dropdown label, so it appears verbatim — `26"`,
-  `700C / 29"`. `sizePrefix()` takes the part before the slash for use in tire names.
-- **Nominal Size** decides whether the metric width is appended (Q12). `1.8"` gets
-  `(42 mm)` added; `32 mm` does not, since it would otherwise print two different
-  numbers on one line.
+Three columns feed the rider-facing name, all verbatim from the sheet:
+
+- **Wheel Size** doubles as the dropdown label, so it appears exactly as typed — `26"`,
+  `650B`, `700C / 29"`. `sizePrefix()` takes the part before any ` / ` for tire names, so
+  `700C / 29"` becomes `700C x 26 mm Cayuse Pass`. It must be spelled identically on every
+  row of a size or the menu gets duplicate entries; the generator warns on near-misses.
+- **Nominal Size** is the size in the name: `700C x 32 mm Stampede Pass`.
+- **Nominal Size 2** is the parenthetical, printed verbatim, blank meaning none. It is
+  fixed per tire on purpose (Jan, 19 Aug): Naches Pass reads `(42 mm)` whether or not the
+  rider picked tubeless, even though the tire measures 41–43 depending on casing. The
+  measured figure has its own row in the result card.
+
+Pressure is still calculated from the derived width, never from these strings.
 
 ## Standalone preview pages
 

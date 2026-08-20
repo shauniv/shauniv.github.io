@@ -83,9 +83,22 @@ function colNum(letters) {
 
 /**
  * Reads one sheet as a dense array of rows of strings. Blank cells become ''.
- * `sheetName` matches the tab name shown in Excel.
+ * `sheetName` matches the tab name shown in Excel. Pass null for the first sheet.
  */
 export function readSheet(path, sheetName) {
+  return readSheets(path, sheetName).rows;
+}
+
+/**
+ * Every sheet in the workbook, as [{ name, rows }] in workbook order. Use this
+ * rather than readSheet when the tab name can't be relied on — Excel truncates
+ * long names to 31 characters and a "Save As" can rename the tab outright.
+ */
+export function readAllSheets(path) {
+  return readSheets(path, null, true);
+}
+
+function readSheets(path, sheetName, all = false) {
   const files = unzip(readFileSync(path));
 
   const get = (name) => {
@@ -98,12 +111,13 @@ export function readSheet(path, sheetName) {
   if (!workbook) throw new Error('xl/workbook.xml missing — not an xlsx?');
   const rels = get('xl/_rels/workbook.xml.rels') ?? '';
 
-  let target = null;
+  // Every sheet, in workbook order, with the part each one lives in.
+  const entries = [];
   for (const m of workbook.matchAll(/<sheet\b([^>]*)\/?>/g)) {
     const attrs = m[1];
     const name = decode(/name="([^"]*)"/.exec(attrs)?.[1] ?? '');
-    if (name !== sheetName) continue;
     const rid = /r:id="([^"]*)"/.exec(attrs)?.[1];
+    let target = null;
     // Scan the relationship tags rather than building a regex out of rid --
     // no escaping games, and a stray character in the id cannot break out.
     for (const rm of rels.matchAll(/<Relationship [^>]*>/g)) {
@@ -111,23 +125,27 @@ export function readSheet(path, sheetName) {
       target = /Target="([^"]*)"/.exec(rm[0])?.[1] ?? null;
       break;
     }
-    break;
+    if (target) entries.push({ name, target });
   }
-  if (!target) {
-    const names = [...workbook.matchAll(/<sheet\b[^>]*name="([^"]*)"/g)].map((m) => decode(m[1]));
-    throw new Error(`sheet "${sheetName}" not found. Sheets present: ${names.join(', ')}`);
-  }
+  if (!entries.length) throw new Error('workbook declares no sheets');
 
-  const sheetPath = target.startsWith('/')
-    ? target.slice(1)
-    : 'xl/' + target.replace(/^\.\//, '');
-  const sheet = get(sheetPath);
-  if (!sheet) throw new Error(`sheet part ${sheetPath} missing from archive`);
+  const chosen = all
+    ? entries
+    : [sheetName == null
+        ? entries[0]
+        : entries.find((e) => e.name === sheetName)];
+
+  if (!chosen[0]) {
+    throw new Error(
+      `sheet "${sheetName}" not found. Sheets present: ${entries.map((e) => e.name).join(', ')}`
+    );
+  }
 
   // Shared strings are referenced by index from cells with t="s".
   const sharedXml = get('xl/sharedStrings.xml') ?? '';
   const shared = [...sharedXml.matchAll(/<si\b[^>]*>([\s\S]*?)<\/si>/g)].map((m) => textOf(m[1]));
 
+  const parse = (sheet) => {
   const rows = [];
   for (const rowM of sheet.matchAll(/<row\b([^>]*)>([\s\S]*?)<\/row>/g)) {
     const rowNum = parseInt(/r="(\d+)"/.exec(rowM[1])?.[1] ?? String(rows.length + 1), 10);
@@ -160,4 +178,14 @@ export function readSheet(path, sheetName) {
     rows[rowNum - 1] = cells;
   }
   return rows;
+  };
+
+  const read = ({ name, target }) => {
+    const part = target.startsWith('/') ? target.slice(1) : 'xl/' + target.replace(/^\.\//, '');
+    const xml = get(part);
+    if (!xml) throw new Error(`sheet part ${part} missing from archive`);
+    return { name, rows: parse(xml) };
+  };
+
+  return all ? chosen.map(read) : read(chosen[0]);
 }

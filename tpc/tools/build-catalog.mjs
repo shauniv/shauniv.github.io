@@ -14,11 +14,10 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readSheet } from './xlsx-read.mjs';
+import { readAllSheets } from './xlsx-read.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const WORKBOOK = join(ROOT, 'Tire Catalog.xlsx');
-const SHEET = 'Tire Catalog';
 const TARGET = join(ROOT, 'tire-pressure-calculator', 'assets', 'tire-pressure-calculator.js');
 
 const BEGIN = '// ── BEGIN GENERATED CATALOG';
@@ -41,19 +40,33 @@ const fail = (row, msg) => problems.push(`row ${row}: ${msg}`);
 
 // ── Read ─────────────────────────────────────────────────────────────────────
 
-const rows = readSheet(WORKBOOK, SHEET);
-if (!rows.length) throw new Error(`${SHEET} is empty`);
+// Find the catalog by its headers, not by its tab name: Excel truncates long
+// sheet names to 31 characters and a "Save As" can rename the tab outright, and
+// the data is what matters. First sheet whose header row has the columns wins.
+const sheets = readAllSheets(WORKBOOK);
+const headerOf = (rows) => (rows[0] ?? []).map((h) => String(h).trim());
+const scored = sheets.map((s) => {
+  const header = headerOf(s.rows);
+  return { ...s, header, missing: REQUIRED.filter((h) => !header.includes(h)) };
+});
+const picked = scored.find((s) => s.missing.length === 0);
 
-const header = rows[0].map((h) => String(h).trim());
+if (!picked) {
+  const best = scored.slice().sort((a, b) => a.missing.length - b.missing.length)[0];
+  throw new Error(
+    `No sheet in Tire Catalog.xlsx has the required columns.\n` +
+    `Sheets: ${sheets.map((s) => `"${s.name}"`).join(', ')}\n` +
+    `Closest is "${best.name}", missing: ${best.missing.join(', ')}\n` +
+    `Columns it has: ${best.header.filter(Boolean).join(', ')}`
+  );
+}
+
+const rows = picked.rows;
+const header = picked.header;
 const col = {};
 header.forEach((h, i) => { if (h) col[h] = i; });
-
-const missing = REQUIRED.filter((h) => !(h in col));
-if (missing.length) {
-  throw new Error(
-    `Tire Catalog.xlsx is missing required column(s): ${missing.join(', ')}\n` +
-    `Columns found: ${header.filter(Boolean).join(', ')}`
-  );
+if (sheets.length > 1 || picked.name !== 'Tire Catalog') {
+  console.log(`sheet  "${picked.name}"`);
 }
 
 const cell = (r, name) => String(r[col[name]] ?? '').trim();
@@ -109,6 +122,11 @@ for (let i = 1; i < rows.length; i++) {
   const nominal = cell(r, 'Nominal Size');
   if (!nominal) fail(rowNum, 'Nominal Size is blank');
 
+  // Optional. Whatever Jan puts here becomes the parenthetical in the tire's
+  // name, verbatim and fixed -- '42 mm' for Naches Pass, '29" x 2.2"' for the
+  // wide 700C tires. Blank means no parenthetical at all.
+  const nominal2 = 'Nominal Size 2' in col ? cell(r, 'Nominal Size 2') : '';
+
   const baseline = number(r, rowNum, 'Actual Width Baseline (mm)');
   const designRim = number(r, rowNum, 'Design Rim Width');
   if (baseline !== null && (baseline < 15 || baseline > 120)) {
@@ -124,6 +142,7 @@ for (let i = 1; i < rows.length; i++) {
     size,
     model,
     nominal,
+    nominal2,
     designRim: designRim ?? 0,
     baseline: baseline ?? 0,
     tread,
@@ -149,13 +168,30 @@ for (const t of tires) {
   }
 }
 
-// Q12 relies on the nominal size telling us whether to append a metric width.
+// A parenthetical that repeats the nominal size prints the same number twice.
 for (const t of tires) {
-  if (!/"|mm/.test(t.nominal)) {
+  if (t.nominal2 && t.nominal2 === t.nominal) {
     warnings.push(
-      `row ${t.rowNum}: Nominal Size ${JSON.stringify(t.nominal)} says neither inches (") ` +
-      `nor mm, so the display name may append the wrong thing`
+      `row ${t.rowNum}: Nominal Size 2 repeats Nominal Size (${JSON.stringify(t.nominal)}), ` +
+      `so the name would print it twice -- leave it blank instead`
     );
+  }
+}
+
+// The wheel size doubles as the dropdown label, so near-misses become two menu
+// entries. Flag sizes that look like one another written two ways.
+const sizeKeys = [...new Set(tires.map((t) => t.size))];
+const norm = (x) => x.toLowerCase().replace(/[^a-z0-9]/g, '');
+for (let i = 0; i < sizeKeys.length; i++) {
+  for (let j = i + 1; j < sizeKeys.length; j++) {
+    const a = norm(sizeKeys[i]);
+    const b = norm(sizeKeys[j]);
+    if (a.startsWith(b) || b.startsWith(a)) {
+      warnings.push(
+        `Wheel Size ${JSON.stringify(sizeKeys[i])} and ${JSON.stringify(sizeKeys[j])} look like ` +
+        `one size written two ways -- they will appear as separate menu entries`
+      );
+    }
   }
 }
 
@@ -177,6 +213,7 @@ const pad = (s, n) => s + ' '.repeat(Math.max(0, n - s.length));
 
 const w = {
   size: Math.max(...tires.map((t) => q(t.size).length)),
+  nominal2: Math.max(...tires.map((t) => q(t.nominal2).length)),
   model: Math.max(...tires.map((t) => q(t.model).length)),
   nominal: Math.max(...tires.map((t) => q(t.nominal).length)),
   tread: Math.max(...tires.map((t) => q(t.tread).length)),
@@ -184,10 +221,11 @@ const w = {
 
 const body = tires.map((t) =>
   `    { size:${pad(q(t.size) + ',', w.size + 1)} model:${pad(q(t.model) + ',', w.model + 1)} ` +
-  `nominal:${pad(q(t.nominal) + ',', w.nominal + 1)} designRim:${t.designRim}, baseline:${t.baseline},\n` +
+  `nominal:${pad(q(t.nominal) + ',', w.nominal + 1)} nominal2:${pad(q(t.nominal2) + ',', w.nominal2 + 1)}\n` +
+  `      designRim:${t.designRim}, baseline:${t.baseline},\n` +
   `      tread:${pad(q(t.tread) + ',', w.tread + 1)} casings:[${t.casings.map(q).join(',')}],\n` +
   `      tubeless:${pad(t.tubeless + ',', 7)} inProduction:${pad(t.inProduction + ',', 7)} priority:${t.priority} },`
-).join('\n');
+).join('\n').replace(/[ \t]+$/gm, '');   // padding can leave line-end spaces
 
 const sizes = [...new Set(tires.map((t) => t.size))];
 
