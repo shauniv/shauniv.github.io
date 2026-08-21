@@ -233,27 +233,24 @@
   // individual tires anyway. His "On your rims, ..." idea waits for rim input.
   var TF_WIDTH_NOTE_THRESHOLD = 1.5;
 
-  // Tread is a scale, not a lookup: the bike says where a rider starts on it, and
-  // how often they ride gravel moves them along it. Indexes into TF_TREAD_ORDER.
+  // Bike × how often the rider rides gravel → tread. A table rather than a
+  // formula: Jan's 21 Aug correction — a Gravel bike ridden on gravel "often"
+  // wants a semi-slick, because that is what gravel racers choose — does not
+  // fall out of any arithmetic, and dressing it up as one would make the next
+  // correction harder instead of easier.
   //
-  // The previous version mapped a bike to one or two candidate treads and let the
-  // gravel answer choose between them — which meant that on a Road or Adventure
-  // bike, where only one tread was ever a candidate, the gravel question did
-  // nothing at all. Jan hit exactly that on 20 Aug: a Road bike answered "gravel
-  // often" and still got a smooth tire, with no clue why. Both answers now count,
-  // on every bike.
-  var TF_TREAD_BY_BIKE = {
-    road:      0,   // Smooth All-Road
-    allroad:   0,
-    gravel:    1,   // Semi-Slick
-    adventure: 2,   // Dual-Purpose Knobby
-  };
+  // The property to preserve is that every row varies. Whatever bike a rider
+  // picks, their gravel answer changes the answer. Its absence was the fault Jan
+  // hit on 20 Aug, when a Road bike ignored the question completely.
+  var TF_GRAVEL_ORDER = ['never', 'occasional', 'often', 'most'];
 
-  var TF_TREAD_BY_GRAVEL = {
-    never:      -1,
-    occasional:  0,
-    often:      +1,
-    most:       +2,
+  var SMOOTH = 'Smooth All-Road', SEMI = 'Semi-Slick', KNOBBY = 'Dual-Purpose Knobby';
+  var TF_TREAD = {
+    //          never    occasional  often    most
+    road:      [SMOOTH,  SMOOTH,     SEMI,    KNOBBY],
+    allroad:   [SMOOTH,  SMOOTH,     SEMI,    KNOBBY],
+    gravel:    [SMOOTH,  SEMI,       SEMI,    KNOBBY],
+    adventure: [SEMI,    KNOBBY,     KNOBBY,  KNOBBY],
   };
 
   // Casing adjustments (psi numerator; divided by tire width)
@@ -832,15 +829,10 @@
   // ═══════════════════════════════════════════
   // TIRE FINDER
   // ═══════════════════════════════════════════
-  // Ends of the scale clamp rather than wrap: an Adventure bike ridden on gravel
-  // "most of the time" is already as knobby as the range goes.
-  function tireFinderTread(bike, gravelFreq) {
-    var base  = TF_TREAD_BY_BIKE[bike];
-    var shift = TF_TREAD_BY_GRAVEL[gravelFreq];
-    if (base  === undefined) base  = TF_TREAD_BY_BIKE.road;
-    if (shift === undefined) shift = 0;
-    var at = Math.max(0, Math.min(TF_TREAD_ORDER.length - 1, base + shift));
-    return TF_TREAD_ORDER[at];
+  function tireFinderTread(bikeType, gravelFreq) {
+    var row = TF_TREAD[bikeType] || TF_TREAD.road;
+    var at  = TF_GRAVEL_ORDER.indexOf(gravelFreq);
+    return row[at === -1 ? 1 : at];   // an answer we don't know reads as "occasionally"
   }
 
   // The casing recommendation is a phrase ('Extralight or Standard'), and a tire
@@ -875,9 +867,22 @@
   // spreadsheet exactly (29→30, 41→42, 52→54). Confirmed by Jan on 18 Aug (Q15):
   // quoting the wider of the two is the safe direction, because a tire that comes
   // out slightly narrower than advertised still fits the frame.
-  function tireActualWidth(tire, casings, tubeless, rimW) {
+  // The width a tire is *matched* against: what it measures on the rider's rim,
+  // before casing and tubeless are taken into account. Riding style chooses the
+  // casing, and casing changes width — so matching on the finished width let
+  // riding style decide which tire, and therefore which tread, a rider was sent
+  // to. Jan asked for riding style to settle the casing and nothing else
+  // (21 Aug), so selection uses this and display uses the width below.
+  function tireFitWidth(tire, rimW) {
     var w = tire.baseline;
     if (rimW && rimW > tire.designRim) w += (rimW - tire.designRim) * TF_RIM_PER_MM;
+    return w;
+  }
+
+  // What the tire actually measures for this rider's setup — shown in the result
+  // and used for the pressure.
+  function tireActualWidth(tire, casings, tubeless, rimW) {
+    var w = tireFitWidth(tire, rimW);
     if (casings.indexOf('Extralight') !== -1) w *= TF_EXTRALIGHT_FACTOR;
     if (tubeless) w *= TF_TUBELESS_FACTOR;
     return w;
@@ -925,13 +930,15 @@
   function tireFinderCandidates(pool, requestedW, casingPhrase, tubeless, wantTread, rimW) {
     return pool.map(function(tire) {
       var resolved = tireFinderCasings(tire, casingPhrase);
+      var fitW     = tireFitWidth(tire, rimW);
       var actualW  = tireActualWidth(tire, resolved.casings, tubeless, rimW);
       return {
         tire: tire,
         casings: resolved.casings,
         casingSubstituted: resolved.substituted,
         actualW: actualW,
-        widthDiff: Math.abs(actualW - requestedW),
+        fitW: fitW,
+        widthDiff: Math.abs(fitW - requestedW),
         treadMatch: tire.tread === wantTread,
         // Q26: Orondo Grade is the tubeless build of Stampede Pass, so a rider on
         // tubes should be sent to the tubed one when both fit equally well. Only
@@ -973,12 +980,14 @@
     var bike        = getWeight('rhc-tf-bike', unit);
     var size        = el('rhc-tf-size').value;
     var requestedW  = parseInt(el('rhc-tf-width').value, 10);
-    // DOM id is historical — the field is labeled "Bike" since 21 Aug.
-    var bike        = el('rhc-tf-terrain').value;
+    // DOM id is historical — the field is labeled "Bike" since 21 Aug. Named
+    // bikeType, NOT bike: `bike` is the bike's weight three lines up, and `var`
+    // lets a second declaration quietly overwrite the first.
+    var bikeType    = el('rhc-tf-terrain').value;
     var gravelFreq  = el('rhc-tf-gravel').value;
     var ridingStyle = el('rhc-tf-ridingstyle').value;
     var tubeless    = state.tf.tube === 'tubeless';
-    var feel        = bike === 'road' ? 'firm' : 'soft';
+    var feel        = bikeType === 'road' ? 'firm' : 'soft';
     // Optional. Blank means "the rim this tire was designed around", which is the
     // honest default -- plenty of riders won't know their internal rim width.
     // Out-of-range numbers are ignored rather than clamped: clamping 200 down to
@@ -998,8 +1007,8 @@
     }
 
     var totalLb      = rider + bike;
-    var casingPhrase = widthFinderCasing(bike, ridingStyle, totalLb, rider);
-    var wantTread    = tireFinderTread(bike, gravelFreq);
+    var casingPhrase = widthFinderCasing(bikeType, ridingStyle, totalLb, rider);
+    var wantTread    = tireFinderTread(bikeType, gravelFreq);
 
     // Q8: tubeless narrows the pool first, so the answer is always the nearest
     // tubeless tire rather than no tire at all.
@@ -1019,7 +1028,7 @@
     // for them.
     var ladder = cands
       .filter(function(c) { return c.tire.tread === recommended.tire.tread; })
-      .sort(function(a, b) { return a.actualW - b.actualW; });
+      .sort(function(a, b) { return a.fitW - b.fitW; });
     state.tf.ladder = ladder.map(function(c) { return tireKey(c.tire); });
 
     // If the rider stepped away from our recommendation, show what they stepped
