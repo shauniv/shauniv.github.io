@@ -25,12 +25,13 @@ define( 'RHC_TPC_TAB_LABELS', [
     'pro'          => 'Pro',
     'tire-finder'  => 'Tire Finder',
     'width-finder' => 'How Wide Should I Run?',
+    'clearance'    => 'Will It Fit?',
 ] );
 
 // Which shortcode renders which tabs, in display order.
 define( 'RHC_TPC_SHORTCODES', [
     'tire_pressure_calculator' => [ 'simple', 'pro' ],
-    'tire_finder'              => [ 'tire-finder', 'width-finder' ],
+    'tire_finder'              => [ 'tire-finder', 'width-finder', 'clearance' ],
 ] );
 
 // ── Update checker ────────────────────────────────────────────────────────────

@@ -1,0 +1,42 @@
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:12px; line-height:1.7;">
+  Before you choose a tire, work out how wide a tire your frame will take. Measure the tightest gap
+  between your current tire and the frame or fork — usually at the chainstays or the fork crown —
+  and we'll work out the widest tire that will still clear.
+</p>
+<p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:24px; line-height:1.7;">
+  Not sure how to measure?
+  <a href="https://www.renehersecycles.com/how-wide-a-tire-can-i-run/" target="_blank" rel="noopener">Click here</a>
+  for instructions.
+</p>
+
+<div class="two-col">
+  <div class="field">
+    <label>Tightest Clearance (mm) <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box">The smallest gap between your tire and the frame or fork, measured on <strong>one side</strong> — not the total of both sides.<br><br>Check the chainstays, the seatstays, the fork crown and the fork legs, and use the tightest of them.</span></i></label>
+    <input type="number" id="rhc-cl-gap" min="0" max="60" step="0.5" placeholder="Enter Value">
+  </div>
+  <div class="field">
+    <label>Current Tire Width (mm) <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box">How wide the tire on the bike <strong>actually measures</strong> right now, not the size printed on the sidewall — the two are often a millimeter or two apart.</span></i></label>
+    <input type="number" id="rhc-cl-width" min="15" max="120" step="0.5" placeholder="Enter Value">
+  </div>
+</div>
+
+<div id="rhc-cl-error" class="error-card"></div>
+<div id="rhc-cl-result" class="result-card">
+  <div class="result-header">
+    <span>Maximum Tire Width</span>
+  </div>
+  <div class="result-body">
+    <div class="result-row">
+      <span class="result-label">Widest Tire That Fits</span>
+      <span class="result-value" id="rhc-cl-out-max">— <span class="unit">mm</span></span>
+    </div>
+    <div id="rhc-cl-result-note" class="result-note"></div>
+  </div>
+</div>
+
+<div class="rhc-disclaimers">
+  <ul>
+    <li>This leaves 3 mm of clearance on each side, which is the usual allowance for mud, a slightly out-of-true wheel and tire growth as it wears in.</li>
+    <li>It is a guide, not a guarantee: frames vary, and a tire's width depends on the rim it is mounted on. Check the clearance yourself before riding a new tire in anger.</li>
+  </ul>
+</div>

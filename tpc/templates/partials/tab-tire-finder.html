@@ -1,10 +1,13 @@
 <p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:12px; line-height:1.7;">
-  Tell us the wheel size and width you have in mind, plus how and where you ride, and we'll pick the
-  Rene Herse tire that fits — then calculate the pressure for it.
+  Tell us the wheel size and tire width you're looking for, plus how and where you ride, and we'll
+  pick the Rene Herse tire that'll work best for you — and calculate the pressure for it. If we
+  don't make a tire in exactly that size, we'll recommend the closest tire we do make and tell you
+  why.
 </p>
 <p style="font-size:14px; color:var(--rhc-ink-light); margin-bottom:24px; line-height:1.7;">
-  Ask for any width you like. If nothing is made in exactly that size, we'll recommend the closest
-  tire we do make and tell you why.
+  Wonder how wide a tire will fit your bike?
+  <a href="https://www.renehersecycles.com/how-wide-a-tire-can-i-run/" target="_blank" rel="noopener">Click here</a>
+  for instructions how to measure.
 </p>
 
 <div class="field">
@@ -44,6 +47,12 @@
 </div>
 
 <div class="field">
+  <label>Rim Internal Width (mm) <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box">The <strong>internal width</strong> is the measurement inside the rim channel, from wall to wall — not the outer width of the rim. It is usually in your wheel's specs or stamped on the rim.<br><br>A wider rim spreads the tire: every millimeter above the width the tire was designed around adds about 0.3 mm to how wide it actually measures. Leave this blank and we will assume the rim the tire was designed for.</span></i></label>
+  <input type="number" id="rhc-tf-rimw" min="10" max="45" step="0.5" placeholder="Optional">
+  <div class="hint">Leave blank if you don't know it — we'll assume the tire's design rim.</div>
+</div>
+
+<div class="field">
   <label>Tubes or Tubeless</label>
   <div class="toggle-group">
     <button class="toggle-btn active" id="rhc-tf-tube-tubes" onclick="rhcTpcSetTube('tf','tubes')">Tubes</button>
@@ -66,7 +75,7 @@
   <select id="rhc-tf-gravel">
     <option value="most">Most of the time</option>
     <option value="often">Often</option>
-    <option value="occasional">Occasionally</option>
+    <option value="occasional" selected>Occasionally</option>
     <option value="never">Never</option>
   </select>
   <div class="hint">Decides the tread pattern where more than one would suit your terrain.</div>
@@ -112,7 +121,12 @@
       <span class="result-label">Recommended Pressure</span>
       <span class="result-value" id="rhc-tf-out-psi">—</span>
     </div>
+    <div class="tf-steps">
+      <button type="button" class="tf-step" id="rhc-tf-step-narrower" onclick="rhcTpcStepTire(-1)">← Go narrower</button>
+      <button type="button" class="tf-step" id="rhc-tf-step-wider"    onclick="rhcTpcStepTire(1)">Go wider →</button>
+    </div>
     <div id="rhc-tf-result-note" class="result-note"></div>
+    <div class="tf-reset"><button type="button" class="link-btn" id="rhc-tf-step-reset" onclick="rhcTpcResetTire()">Show our recommendation</button></div>
   </div>
 </div>
 

@@ -392,8 +392,40 @@
 }
 .rhc-tpc .result-note .link-btn:hover { color: #fff; }
 
+/* ── Go wider / Go narrower (inside result card) ── */
+.rhc-tpc .tf-steps {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+.rhc-tpc .tf-step {
+  flex: 1;
+  appearance: none;
+  cursor: pointer;
+  padding: 11px 12px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  color: var(--rhc-paper);
+  font-family: var(--rhc-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  transition: background .15s;
+}
+.rhc-tpc .tf-step:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
+.rhc-tpc .tf-step:disabled { opacity: .3; cursor: default; }
+
+.rhc-tpc .tf-reset {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(245,242,237,0.65);
+}
+
 /* ── Weight range warning (inside result card) ── */
 .rhc-tpc .result-card.out-of-range .result-row,
+.rhc-tpc .result-card.out-of-range .tf-steps,
+.rhc-tpc .result-card.out-of-range .tf-reset,
 .rhc-tpc .result-card.out-of-range .result-note {
   display: none !important;
 }
@@ -576,7 +608,10 @@
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .rhc-tpc .tab-nav { flex-wrap: wrap; overflow-x: visible; }
-  .rhc-tpc .tab-btn { flex: 0 0 50%; min-width: 0; border-bottom: 1px solid var(--rhc-rule); }
+  /* Two tabs sit side by side; three or more get a row each, because the labels
+     are full questions and half a phone's width truncates them. */
+  .rhc-tpc .tab-btn { flex: 1 1 50%; min-width: 0; border-bottom: 1px solid var(--rhc-rule); }
+  .rhc-tpc .tab-nav:has(.tab-btn:nth-child(3)) .tab-btn { flex: 1 1 100%; text-align: left; }
 }
 @media (max-width: 500px) {
   .rhc-tpc .weight-row,

@@ -6,7 +6,7 @@ intended for its own page:
 | Shortcode | Tabs |
 | --- | --- |
 | `[tire_pressure_calculator]` | Simple · Pro |
-| `[tire_finder]` | Tire Finder · How Wide Should I Run? |
+| `[tire_finder]` | Tire Finder · How Wide Should I Run? · Will It Fit? |
 
 ## Project structure
 
@@ -82,6 +82,24 @@ Three columns feed the rider-facing name, all verbatim from the sheet:
   measured figure has its own row in the result card.
 
 Pressure is still calculated from the derived width, never from these strings.
+
+A tire's measured width is built up in this order, and only the first step is optional:
+
+```
+baseline
+  + max(0, rim width − design rim) × 0.3     rim field blank ⇒ this term is zero
+  × 1.03  if Extralight
+  × 1.01  if tubeless
+```
+
+## Result-card browsing
+
+The Tire Finder's Go wider / Go narrower buttons walk `state.tf.ladder`, every tire in the
+chosen wheel size ordered by measured width. `state.tf.browse` holds the tire the rider
+stepped to; it overrides the recommendation until any input changes, which is why the tab's
+fields are wired through `onTfField()` rather than `onField()`. Stepping can land on a tire
+of the same width but a different tread — that is deliberate, it is how a rider sees the
+casing and tread alternatives rather than only a different number.
 
 ## Standalone preview pages
 
