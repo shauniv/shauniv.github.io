@@ -32,10 +32,10 @@
   // Width finder tread recommendations (keyed by style)
   var WIDTH_FINDER_TREAD = {
     road:      'Smooth All-Road',
-    // Two candidates, matching the draft and TF_TREAD_BY_TERRAIN below. The tire
-    // finder narrows this to one using the gravel-frequency answer; this tab has
-    // no such question, so it shows the pair. Both tabs can sit on one page, so
-    // they must not contradict each other.
+    // Two candidates, spanning where the tire finder's tread scale can land an
+    // All-Road bike once the gravel answer is applied. This tab has no gravel
+    // question, so it shows the pair rather than picking one. Both tabs can sit
+    // on one page, so they must not contradict each other.
     allroad:   'Smooth All-Road or Semi-Slick',
     gravel:    'Semi-Slick or Dual-Purpose Knobby',
     adventure: 'Dual-Purpose Knobby',
@@ -162,7 +162,7 @@
     { size:'700C / 29"', model:'Hurricane Ridge',  nominal:'42 mm', nominal2:'',
       designRim:20, baseline:42,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:false,  priority:1 },
     { size:'700C / 29"', model:'Manastash Ridge',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:43,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
@@ -197,7 +197,7 @@
   var TF_EXTRALIGHT_FACTOR = 1.03;
   var TF_TUBELESS_FACTOR   = 1.01;
 
-  // A wider rim spreads the tire: 0.3 mm of extra width per millimetre of rim
+  // A wider rim spreads the tire: 0.3 mm of extra width per millimeter of rim
   // over the one the tire was designed around (Jan, 14 Aug; asked for again on
   // 20 Aug). A narrower rim does NOT make the tire narrower than its baseline,
   // so only rim width above the design figure counts.
@@ -233,13 +233,27 @@
   // individual tires anyway. His "On your rims, ..." idea waits for rim input.
   var TF_WIDTH_NOTE_THRESHOLD = 1.5;
 
-  // Terrain → candidate treads (smooth first). Q1: the rider's gravel frequency
-  // picks between the two where a terrain offers a choice.
-  var TF_TREAD_BY_TERRAIN = {
-    road:      ['Smooth All-Road'],
-    allroad:   ['Smooth All-Road', 'Semi-Slick'],
-    gravel:    ['Semi-Slick', 'Dual-Purpose Knobby'],
-    adventure: ['Dual-Purpose Knobby'],
+  // Tread is a scale, not a lookup: the bike says where a rider starts on it, and
+  // how often they ride gravel moves them along it. Indexes into TF_TREAD_ORDER.
+  //
+  // The previous version mapped a bike to one or two candidate treads and let the
+  // gravel answer choose between them — which meant that on a Road or Adventure
+  // bike, where only one tread was ever a candidate, the gravel question did
+  // nothing at all. Jan hit exactly that on 20 Aug: a Road bike answered "gravel
+  // often" and still got a smooth tire, with no clue why. Both answers now count,
+  // on every bike.
+  var TF_TREAD_BY_BIKE = {
+    road:      0,   // Smooth All-Road
+    allroad:   0,
+    gravel:    1,   // Semi-Slick
+    adventure: 2,   // Dual-Purpose Knobby
+  };
+
+  var TF_TREAD_BY_GRAVEL = {
+    never:      -1,
+    occasional:  0,
+    often:      +1,
+    most:       +2,
   };
 
   // Casing adjustments (psi numerator; divided by tire width)
@@ -818,19 +832,15 @@
   // ═══════════════════════════════════════════
   // TIRE FINDER
   // ═══════════════════════════════════════════
-  // Terrain narrows the tread to one or two candidates; gravel frequency picks
-  // between them. 'often' resolves to Semi-Slick, which is a member of both
-  // two-tread terrains, so it means the same thing whichever terrain is chosen.
-  //
-  // 'occasional' and 'never' deliberately produce the same tread. Jan kept both
-  // (Q19) so riders who never touch gravel can say so; the answer is heard even
-  // though it doesn't change the recommendation. Don't "fix" it by merging them.
-  function tireFinderTread(terrain, gravelFreq) {
-    var candidates = TF_TREAD_BY_TERRAIN[terrain] || TF_TREAD_BY_TERRAIN.road;
-    if (candidates.length === 1) return candidates[0];
-    if (gravelFreq === 'most')  return candidates[1];  // knobbier of the two
-    if (gravelFreq === 'often') return 'Semi-Slick';
-    return candidates[0];                              // occasional / never
+  // Ends of the scale clamp rather than wrap: an Adventure bike ridden on gravel
+  // "most of the time" is already as knobby as the range goes.
+  function tireFinderTread(bike, gravelFreq) {
+    var base  = TF_TREAD_BY_BIKE[bike];
+    var shift = TF_TREAD_BY_GRAVEL[gravelFreq];
+    if (base  === undefined) base  = TF_TREAD_BY_BIKE.road;
+    if (shift === undefined) shift = 0;
+    var at = Math.max(0, Math.min(TF_TREAD_ORDER.length - 1, base + shift));
+    return TF_TREAD_ORDER[at];
   }
 
   // The casing recommendation is a phrase ('Extralight or Standard'), and a tire
@@ -963,11 +973,12 @@
     var bike        = getWeight('rhc-tf-bike', unit);
     var size        = el('rhc-tf-size').value;
     var requestedW  = parseInt(el('rhc-tf-width').value, 10);
-    var terrain     = el('rhc-tf-terrain').value;
+    // DOM id is historical — the field is labeled "Bike" since 21 Aug.
+    var bike        = el('rhc-tf-terrain').value;
     var gravelFreq  = el('rhc-tf-gravel').value;
     var ridingStyle = el('rhc-tf-ridingstyle').value;
     var tubeless    = state.tf.tube === 'tubeless';
-    var feel        = terrain === 'road' ? 'firm' : 'soft';
+    var feel        = bike === 'road' ? 'firm' : 'soft';
     // Optional. Blank means "the rim this tire was designed around", which is the
     // honest default -- plenty of riders won't know their internal rim width.
     // Out-of-range numbers are ignored rather than clamped: clamping 200 down to
@@ -987,8 +998,8 @@
     }
 
     var totalLb      = rider + bike;
-    var casingPhrase = widthFinderCasing(terrain, ridingStyle, totalLb, rider);
-    var wantTread    = tireFinderTread(terrain, gravelFreq);
+    var casingPhrase = widthFinderCasing(bike, ridingStyle, totalLb, rider);
+    var wantTread    = tireFinderTread(bike, gravelFreq);
 
     // Q8: tubeless narrows the pool first, so the answer is always the nearest
     // tubeless tire rather than no tire at all.
@@ -1001,9 +1012,14 @@
     var pick  = tireFinderPick(pool, requestedW, casingPhrase, tubeless, wantTread, rimW);
     var recommended = pick;
 
-    // Every tire in this wheel size, narrowest first — the rungs the Go wider /
-    // Go narrower buttons climb.
-    var ladder = cands.slice().sort(function(a, b) { return a.actualW - b.actualW; });
+    // The rungs the Go wider / Go narrower buttons climb: tires of the same tread
+    // as the recommendation, narrowest first. Jan asked for the tread to hold
+    // while browsing (20 Aug) — stepping used to change tread as well as width,
+    // which asks the rider to weigh a trade-off the calculator exists to make
+    // for them.
+    var ladder = cands
+      .filter(function(c) { return c.tire.tread === recommended.tire.tread; })
+      .sort(function(a, b) { return a.actualW - b.actualW; });
     state.tf.ladder = ladder.map(function(c) { return tireKey(c.tire); });
 
     // If the rider stepped away from our recommendation, show what they stepped
@@ -1054,8 +1070,7 @@
 
     if (rimGiven && !rimOk) {
       notes.push('That rim width doesn\u2019t look like an internal measurement — those run ' +
-                 TF_RIM_MIN + ' to ' + TF_RIM_MAX + ' mm — so we\u2019ve ignored it and used the ' +
-                 pick.tire.designRim + ' mm rim this tire is designed around.');
+                 TF_RIM_MIN + ' to ' + TF_RIM_MAX + ' mm — so we\u2019ve ignored it.');
     }
 
     // Jan's "On your rims, ..." explainer from Q5, now that there is a rim field.
@@ -1063,8 +1078,7 @@
     if (rimGain >= 0.1) {
       notes.push('On your ' + fmtNum(rimW, 0) + ' mm rims this tire measures ' +
                  fmtNum(pick.actualW, 1) + ' mm — about ' + fmtNum(rimGain, 1) +
-                 ' mm wider than on the ' + pick.tire.designRim +
-                 ' mm rim it is designed around.');
+                 ' mm wider than on a ' + pick.tire.designRim + ' mm rim.');
     }
 
     // Say plainly that this is no longer our recommendation.
@@ -1134,7 +1148,9 @@
   // The gap is measured on one side, so the 3 mm allowance and the space freed
   // up both count twice. 3 mm a side is the usual margin for mud, a wheel that
   // is slightly out of true, and a tire growing as it wears in.
-  var CL_MARGIN_MM = 3;
+  // ISO standard, and Jan's preference from 21 Aug: modern frames have room, so
+  // there is less call to cram the widest possible tire into a tight one.
+  var CL_MARGIN_MM = 4;
   var CL_GAP_MAX   = 60;    // a gap larger than this is not a frame clearance
   var CL_WIDTH_MIN = 15;
   var CL_WIDTH_MAX = 120;
