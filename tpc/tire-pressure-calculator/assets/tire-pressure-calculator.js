@@ -215,6 +215,22 @@
   // Casings, soft → tough. Only Extralight changes the measured width.
   var TF_CASING_ORDER = ['Extralight', 'Standard', 'Endurance', 'Endurance Plus'];
 
+  // Riding style → casing, and nothing else feeds in (Jan, 21 Aug).
+  //
+  // The width finder adjusts this by rider weight, because tough casings aren't
+  // made in the narrow widths it recommends to light riders — a proxy for
+  // availability, and a reasonable one for a tab with no catalog behind it. This
+  // tab has the catalog: tireFinderCasings() below knows exactly which casings
+  // each tire is built in and substitutes when one isn't offered. Guessing from
+  // weight on top of that was wrong twice over — it denied Endurance Plus to a
+  // light rider who had asked for a tire that comes in it, and it made riding
+  // style the only input the rider could see moving the answer.
+  var TF_CASING_BY_STYLE = {
+    smooth:           'Extralight or Standard',
+    endurance:        'Endurance',
+    'endurance-plus': 'Endurance Plus',
+  };
+
   // Treads, smooth → knobby.
   var TF_TREAD_ORDER = ['Smooth All-Road', 'Semi-Slick', 'Dual-Purpose Knobby'];
 
@@ -1007,7 +1023,7 @@
     }
 
     var totalLb      = rider + bike;
-    var casingPhrase = widthFinderCasing(bikeType, ridingStyle, totalLb, rider);
+    var casingPhrase = TF_CASING_BY_STYLE[ridingStyle] || TF_CASING_BY_STYLE.smooth;
     var wantTread    = tireFinderTread(bikeType, gravelFreq);
 
     // Q8: tubeless narrows the pool first, so the answer is always the nearest
