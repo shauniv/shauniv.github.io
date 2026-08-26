@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1f2933">
+<base target="_blank">
+<title>Route 66 Information</title>
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --surface: #ffffff;
+    --text: #1f2933;
+    --muted: #5d6b78;
+    --accent: #b3441f;
+    --border: #ddd8cf;
+    --shadow: 0 1px 2px rgba(31, 41, 51, .08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181c;
+      --surface: #1e242b;
+      --text: #e8e6e1;
+      --muted: #9aa7b4;
+      --accent: #ff8f5e;
+      --border: #303941;
+      --shadow: none;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 1.25rem 1rem calc(2.5rem + env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+
+  h1 {
+    font-size: 1.55rem;
+    line-height: 1.2;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 2rem 0 0.75rem;
+    font-weight: 600;
+  }
+
+  ul.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  ul.links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: transform .12s ease, border-color .12s ease;
+  }
+
+  ul.links a::after {
+    content: "\203A";
+    color: var(--accent);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  ul.links a:active {
+    transform: scale(.985);
+    border-color: var(--accent);
+  }
+
+  ul.links a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    ul.links a:hover { border-color: var(--accent); }
+  }
+</style>
+</head>
+<body>
+<h1>Route 66 Information</h1>
+
+<h2>Addenda</h2>
+<ul class="links">
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=51&amp;mRelease=787">Section 6</a></li>
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=64&amp;mRelease=776">Section 5</a></li>
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=55&amp;mRelease=812">Section 4</a></li>
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=91&amp;mRelease=809">Section 3</a></li>
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=107&amp;mRelease=808">Section 2</a></li>
+<li><a rel="noopener" href="https://www.adventurecycling.org/routes-and-maps/map-updates-and-corrections/?mRoute=25&amp;mSection=59&amp;mRelease=785">Section 1</a></li>
+</ul>
+</body>
+</html>
