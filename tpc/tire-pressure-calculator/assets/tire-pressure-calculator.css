@@ -422,11 +422,45 @@
   color: rgba(245,242,237,0.65);
 }
 
+/* ── Product links (inside result card) ── */
+.rhc-tpc .result-value a,
+.rhc-tpc .tf-extras a {
+  color: var(--rhc-paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rhc-tpc .result-value a:hover,
+.rhc-tpc .tf-extras a:hover { color: #fff; }
+.rhc-tpc .tf-link-hint {
+  display: none;
+  margin: -4px 0 8px;
+  font-size: 13px;
+  color: rgba(245,242,237,0.65);
+  text-align: right;
+}
+.rhc-tpc .tf-extras:empty { display: none; }
+.rhc-tpc .tf-extras {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(245,242,237,0.8);
+}
+
+/* Over the tire's maximum pressure: the same look as the weight warning, at
+   reading size, because it replaces the number the rider came for. */
+.rhc-tpc .tf-pressure-warning {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+
 /* ── Weight range warning (inside result card) ── */
 .rhc-tpc .result-card.out-of-range .result-row,
 .rhc-tpc .result-card.out-of-range .tf-steps,
 .rhc-tpc .result-card.out-of-range .tf-reset,
-.rhc-tpc .result-card.out-of-range .result-note {
+.rhc-tpc .result-card.out-of-range .result-note,
+.rhc-tpc .result-card.out-of-range .tf-link-hint,
+.rhc-tpc .result-card.out-of-range .tf-pressure-warning,
+.rhc-tpc .result-card.out-of-range .tf-extras {
   display: none !important;
 }
 

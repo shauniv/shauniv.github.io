@@ -31,6 +31,13 @@ const REQUIRED = [
   'Tubeless Compatible', 'In Production',
 ];
 
+// Optional columns, added Oct 2026. A sheet without them still builds, and a
+// blank cell means "no limit" or "no link" for that tire -- so the columns can
+// be filled in gradually without holding anything else up.
+const MAX_PSI = 'Max Pressure (psi)';
+const LINK = 'Product Link';
+const TUBE_LINK = 'TPU Tube Link';
+
 const CASINGS = ['Extralight', 'Standard', 'Endurance', 'Endurance Plus'];
 const TREADS = ['Smooth All-Road', 'Semi-Slick', 'Dual-Purpose Knobby'];
 
@@ -94,6 +101,17 @@ function number(r, rowNum, name, { required = true } = {}) {
   return n;
 }
 
+/** Optional web address; must be a full https:// link so it can't break the page. */
+function url(r, rowNum, name) {
+  if (!(name in col)) return '';
+  const v = cell(r, name);
+  if (v && !/^https:\/\/[^\s"'<>]+$/.test(v)) {
+    fail(rowNum, `${name} should be a full https:// address, found ${JSON.stringify(v)}`);
+    return '';
+  }
+  return v;
+}
+
 // ── Parse ────────────────────────────────────────────────────────────────────
 
 const tires = [];
@@ -138,6 +156,13 @@ for (let i = 1; i < rows.length; i++) {
 
   const priority = number(r, rowNum, 'Priority', { required: false });
 
+  const maxPsi = MAX_PSI in col ? number(r, rowNum, MAX_PSI, { required: false }) : null;
+  if (maxPsi !== null && (maxPsi < 15 || maxPsi > 150)) {
+    fail(rowNum, `${MAX_PSI} of ${maxPsi} looks wrong (expected 15–150 psi)`);
+  }
+  const link = url(r, rowNum, LINK);
+  const tubeLink = url(r, rowNum, TUBE_LINK);
+
   tires.push({
     size,
     model,
@@ -150,6 +175,9 @@ for (let i = 1; i < rows.length; i++) {
     tubeless: yesNo(r, rowNum, 'Tubeless Compatible'),
     inProduction: yesNo(r, rowNum, 'In Production'),
     priority: priority ?? 1,
+    maxPsi,
+    link,
+    tubeLink,
     rowNum,
   });
 }
@@ -224,7 +252,9 @@ const body = tires.map((t) =>
   `nominal:${pad(q(t.nominal) + ',', w.nominal + 1)} nominal2:${pad(q(t.nominal2) + ',', w.nominal2 + 1)}\n` +
   `      designRim:${t.designRim}, baseline:${t.baseline},\n` +
   `      tread:${pad(q(t.tread) + ',', w.tread + 1)} casings:[${t.casings.map(q).join(',')}],\n` +
-  `      tubeless:${pad(t.tubeless + ',', 7)} inProduction:${pad(t.inProduction + ',', 7)} priority:${t.priority} },`
+  `      tubeless:${pad(t.tubeless + ',', 7)} inProduction:${pad(t.inProduction + ',', 7)} priority:${t.priority},
+` +
+  `      maxPsi:${t.maxPsi}, link:${q(t.link)}, tubeLink:${q(t.tubeLink)} },`
 ).join('\n').replace(/[ \t]+$/gm, '');   // padding can leave line-end spaces
 
 const sizes = [...new Set(tires.map((t) => t.size))];
@@ -261,4 +291,9 @@ if (live.length !== tires.length) {
   console.log(`note  ${tires.length - live.length} not in production (kept, never recommended)`);
 }
 warnings.forEach((warn) => console.log(`warn  ${warn}`));
+// Not a warning: blanks are allowed. A count, so a half-filled column is visible.
+for (const [name, key] of [[MAX_PSI, 'maxPsi'], [LINK, 'link'], [TUBE_LINK, 'tubeLink']]) {
+  const blank = live.filter((t) => !t[key]).length;
+  if (blank) console.log(`blank ${name}: ${blank} of ${live.length} tires in production`);
+}
 console.log(`wrote TIRE_CATALOG into tire-pressure-calculator.js`);

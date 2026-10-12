@@ -83,6 +83,15 @@ Three columns feed the rider-facing name, all verbatim from the sheet:
 
 Pressure is still calculated from the derived width, never from these strings.
 
+Three optional columns (Oct 2026) — a blank cell means "no limit" / "no link" for that tire:
+
+- **Max Pressure (psi)** drives `tireFinderPressure()`: over the max → soft pressure;
+  over 80% of it (`TF_ENDURANCE_SHARE`) → Endurance casing; still over → no pressure,
+  "select a wider tire" message.
+- **Product Link** makes the tire name a link; **TPU Tube Link** feeds the tube line
+  shown to riders on tubes. Tubeless riders get the sealant line, whose link is a
+  constant in the JS because it is the same for every tire.
+
 A tire's measured width is built up in this order, and only the first step is optional:
 
 ```

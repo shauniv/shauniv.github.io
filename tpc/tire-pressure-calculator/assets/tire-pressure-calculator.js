@@ -82,115 +82,152 @@
     { size:'26"',        model:'Elk Pass',         nominal:'1.25"', nominal2:'30 mm',
       designRim:20, baseline:29,
       tread:'Smooth All-Road',     casings:['Extralight'],
-      tubeless:false,  inProduction:true,   priority:1 },
+      tubeless:false,  inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'26"',        model:'Naches Pass',      nominal:'1.8"',  nominal2:'42 mm',
       designRim:20, baseline:41,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'26"',        model:'Rat Trap Pass',    nominal:'2.3"',  nominal2:'54 mm',
       designRim:20, baseline:52,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'26"',        model:'Humptulips Ridge', nominal:'2.3"',  nominal2:'54 mm',
       designRim:20, baseline:52,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Loup Loup Pass',   nominal:'38 mm', nominal2:'',
       designRim:20, baseline:37,
       tread:'Smooth All-Road',     casings:['Extralight'],
-      tubeless:false,  inProduction:true,   priority:1 },
+      tubeless:false,  inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Babyshoe Pass',    nominal:'42 mm', nominal2:'',
       designRim:20, baseline:40,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Switchback Hill',  nominal:'48 mm', nominal2:'',
       designRim:20, baseline:50,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Pumpkin Ridge',    nominal:'42 mm', nominal2:'',
       designRim:20, baseline:40,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Juniper Ridge',    nominal:'48 mm', nominal2:'',
       designRim:20, baseline:49,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'650B',       model:'Umtanum Ridge',    nominal:'2.3"',  nominal2:'54 mm',
       designRim:21, baseline:53,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Cayuse Pass',      nominal:'26 mm', nominal2:'',
       designRim:20, baseline:25.5,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
-      tubeless:false,  inProduction:true,   priority:1 },
+      tubeless:false,  inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Chinook Pass',     nominal:'28 mm', nominal2:'',
       designRim:20, baseline:28,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
-      tubeless:false,  inProduction:true,   priority:1 },
+      tubeless:false,  inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Stampede Pass',    nominal:'32 mm', nominal2:'',
       designRim:20, baseline:31,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
-      tubeless:false,  inProduction:true,   priority:1 },
+      tubeless:false,  inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Orondo Grade',     nominal:'31 mm', nominal2:'',
       designRim:20, baseline:31,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Bon Jon Pass',     nominal:'35 mm', nominal2:'',
       designRim:20, baseline:35,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Barlow Pass',      nominal:'38 mm', nominal2:'',
       designRim:20, baseline:38,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Snoqualmie Pass',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:42,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Hatcher Pass',     nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Antelope Hill',    nominal:'55 mm', nominal2:'29" x 2.2"',
       designRim:20, baseline:54,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Steilacoom',       nominal:'38 mm', nominal2:'',
       designRim:20, baseline:36,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Hurricane Ridge',  nominal:'42 mm', nominal2:'',
       designRim:20, baseline:42,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:false,  priority:1 },
+      tubeless:true,   inProduction:false,  priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Manastash Ridge',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:43,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Oracle Ridge',     nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Fleecer Ridge',    nominal:'55 mm', nominal2:'29" x 2.2"',
       designRim:21, baseline:56,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Corkscrew Climb',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:43,
       tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
     { size:'700C / 29"', model:'Poteau Mountain',  nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
-      tubeless:true,   inProduction:true,   priority:1 },
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:null, link:'', tubeLink:'' },
   ];
   // ── END GENERATED CATALOG ────────────────────────────────────────────
 
-  // Wheel sizes actually present in the catalog, in catalog order.
+  // Wheel sizes actually present in the catalog. The first is the default, so
+  // the most common size leads (Jan, 10 Oct): 700C, then 650B, then 26". A size
+  // not listed here -- a future 32", say -- follows in catalog order until
+  // someone decides where it belongs.
+  var TF_SIZE_ORDER = ['700C', '650B', '26"'];
   var TIRE_SIZES = TIRE_CATALOG.reduce(function(acc, t) {
     if (acc.indexOf(t.size) === -1) acc.push(t.size);
     return acc;
   }, []);
+  var catalogOrder = TIRE_SIZES.slice();
+  TIRE_SIZES.sort(function(a, b) {
+    var ia = TF_SIZE_ORDER.indexOf(sizePrefix(a)), ib = TF_SIZE_ORDER.indexOf(sizePrefix(b));
+    if (ia === -1) ia = TF_SIZE_ORDER.length;
+    if (ib === -1) ib = TF_SIZE_ORDER.length;
+    return ia - ib || catalogOrder.indexOf(a) - catalogOrder.indexOf(b);
+  });
 
   // Width factors, per Jan's 14 Aug note. Multiplicative, not additive:
   // an Extralight tire set up tubeless is baseline × 1.03 × 1.01.
@@ -234,12 +271,38 @@
   // Treads, smooth → knobby.
   var TF_TREAD_ORDER = ['Smooth All-Road', 'Semi-Slick', 'Dual-Purpose Knobby'];
 
+  // Which tread to fall back on when the one asked for isn't made near the
+  // rider's width: the rider's own first, then knobbier, then smoother. Jan
+  // (10 Oct): the finder suggested Smooth All-Road "in too many cases" -- a
+  // missing Semi-Slick used to fall to whichever tire came first in the catalog,
+  // which is the smooth one -- and a rider who wants some grip should get more,
+  // not less.
+  function tireFinderTreadPrefs(wantTread) {
+    var at = TF_TREAD_ORDER.indexOf(wantTread);
+    if (at === -1) return TF_TREAD_ORDER.slice();
+    return [wantTread]
+      .concat(TF_TREAD_ORDER.slice(at + 1))
+      .concat(TF_TREAD_ORDER.slice(0, at).reverse());
+  }
+
   // Q27: width still leads, but a tire carrying the tread the rider asked for
   // beats a marginally closer width. Jan set the band at 2.5 mm (20 Aug). Inside
   // it the two tires are closer together than individual tires of the same model
   // vary, so the tread is the more meaningful signal; outside it they really are
   // different sizes and the width the rider typed should win.
   var TF_TREAD_TOLERANCE = 2.5;
+
+  // Above this share of a tire's maximum pressure, recommend the Endurance
+  // casing (Jan, 10 Oct): a heavy rider on a narrow tire runs it hard, and the
+  // tougher casing is the one to do that in. Checked after the firm→soft step,
+  // on the pressure we actually recommend.
+  var TF_ENDURANCE_SHARE = 0.8;
+
+  // The same for every tire, so it lives here rather than in the spreadsheet.
+  var TF_SEALANT_URL = 'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tubeless-sealant/';
+
+  var TF_TOO_HIGH_MSG = 'For your bike/rider weight, the narrow tire you’ve selected requires ' +
+                        'a pressure that is higher than recommended. Please select a wider tire.';
 
   // Q5/Q17: how far the recommended tire has to be from the requested width before
   // we tell the rider the size moved. Below this, the difference comes from the
@@ -589,7 +652,9 @@
     } else {
       // Simple and width finder both render a single combined pressure.
       var outEl = el('rhc-' + prefix + '-out-psi');
-      if (outEl) {
+      if (outEl && state[prefix].lastPsi === null) {
+        outEl.innerHTML = '—';   // tire finder: over the tire's maximum, see tireFinderPressure()
+      } else if (outEl) {
         var pv = fmtPressureVal(state[prefix].lastPsi, u);
         outEl.innerHTML = pv.val + ' <span class="unit">' + pv.unit + '</span>';
       }
@@ -832,9 +897,9 @@
     var wfNote = document.getElementById('rhc-wf-result-note');
     if (el(TAB_IDS.tf)) {
       wfNote.style.display = 'block';
-      wfNote.innerHTML = 'Looking for a specific tire? ' +
+      wfNote.innerHTML =
         '<button type="button" class="link-btn" onclick="rhcTpcSendToFinder(this)">' +
-        'Find Rene Herse tires this width</button>';
+        'Find your Rene Herse tire based on this recommendation.</button>';
     } else {
       wfNote.style.display = 'none';
     }
@@ -944,6 +1009,7 @@
   function tireKey(t) { return t.size + '|' + t.model + '|' + t.tread; }
 
   function tireFinderCandidates(pool, requestedW, casingPhrase, tubeless, wantTread, rimW) {
+    var prefs = tireFinderTreadPrefs(wantTread);
     return pool.map(function(tire) {
       var resolved = tireFinderCasings(tire, casingPhrase);
       var fitW     = tireFitWidth(tire, rimW);
@@ -956,6 +1022,7 @@
         fitW: fitW,
         widthDiff: Math.abs(fitW - requestedW),
         treadMatch: tire.tread === wantTread,
+        treadRank: prefs.indexOf(tire.tread),
         // Q26: Orondo Grade is the tubeless build of Stampede Pass, so a rider on
         // tubes should be sent to the tubed one when both fit equally well. Only
         // a tie-break: it never overrides a better width or the right tread.
@@ -967,13 +1034,18 @@
   function tireFinderPick(pool, requestedW, casingPhrase, tubeless, wantTread, rimW) {
     var cands = tireFinderCandidates(pool, requestedW, casingPhrase, tubeless, wantTread, rimW);
 
-    // If the rider's tread is made anywhere near the width they asked for, choose
-    // from those alone — see TF_TREAD_TOLERANCE. Otherwise the whole pool is fair
-    // game and width decides, which is what Q18 settled.
-    var onTread = cands.filter(function(c) {
-      return c.treadMatch && c.widthDiff <= TF_TREAD_TOLERANCE;
-    });
-    var field = onTread.length ? onTread : cands;
+    // Take the most preferred tread that is made anywhere near the width asked
+    // for, and choose from those alone — see TF_TREAD_TOLERANCE and
+    // tireFinderTreadPrefs(). If no tread is, the whole pool is fair game and
+    // width decides, which is what Q18 settled.
+    var field = cands;
+    var prefs = tireFinderTreadPrefs(wantTread);
+    for (var i = 0; i < prefs.length; i++) {
+      var onTread = cands.filter(function(c) {
+        return c.tire.tread === prefs[i] && c.widthDiff <= TF_TREAD_TOLERANCE;
+      });
+      if (onTread.length) { field = onTread; break; }
+    }
 
     var best = null;
     field.forEach(function(cand) {
@@ -982,11 +1054,71 @@
       var dw = Math.round((cand.widthDiff - best.widthDiff) * 10) / 10;
       if (dw < 0) { best = cand; return; }
       if (dw > 0) return;
-      if (cand.treadMatch !== best.treadMatch) { if (cand.treadMatch) best = cand; return; }
+      if (cand.treadRank !== best.treadRank) { if (cand.treadRank < best.treadRank) best = cand; return; }
       if (cand.tubeMatch  !== best.tubeMatch)  { if (cand.tubeMatch)  best = cand; return; }
       if (cand.tire.priority < best.tire.priority) best = cand;
     });
     return best;
+  }
+
+  // Pressure for a tire, held under its maximum (Jan, 10 Oct). In order:
+  //   1. the pressure for the rider's feel (firm on a Road bike);
+  //   2. over the tire's maximum → the soft pressure instead, whatever else
+  //      the rider chose;
+  //   3. over TF_ENDURANCE_SHARE of the maximum → the Endurance casing, if the
+  //      rider hasn't already asked for something as tough. Leaving Extralight
+  //      makes the tire narrower, so the pressure is worked out again — and
+  //      step 2 again with it;
+  //   4. still over the maximum → no pressure at all; the card says to go wider.
+  // A tire with no maximum in the spreadsheet skips all of it.
+  function tireFinderPressure(cand, totalLb, feel, tubeless, rimW) {
+    var max     = cand.tire.maxPsi;
+    var casings = cand.casings;
+    var actualW = cand.actualW;
+    var psi     = calcPSI(totalLb, actualW, feel);
+    var plan    = { casings: casings, actualW: actualW, psi: psi,
+                    toughened: false, noEndurance: false, tooHigh: false };
+    if (!max) return plan;
+
+    function soften() {
+      if (psi > max && feel === 'firm') {
+        feel = 'soft';
+        psi  = calcPSI(totalLb, actualW, feel);
+      }
+    }
+    soften();
+
+    var tough = casings.some(function(c) { return TF_CASING_ORDER.indexOf(c) >= 2; });
+    if (psi > max * TF_ENDURANCE_SHARE && !tough) {
+      if (cand.tire.casings.indexOf('Endurance') !== -1) {
+        casings = ['Endurance'];
+        actualW = tireActualWidth(cand.tire, casings, tubeless, rimW);
+        psi     = calcPSI(totalLb, actualW, feel);
+        plan.toughened = true;
+        soften();
+      } else {
+        plan.noEndurance = true;
+      }
+    }
+
+    plan.casings = casings;
+    plan.actualW = actualW;
+    plan.psi     = psi;
+    plan.tooHigh = psi > max;
+    return plan;
+  }
+
+  // Tire name, linked to its product page when the spreadsheet has one.
+  function renderTireName(target, tire) {
+    target.textContent = '';
+    if (tire.link) {
+      var a = document.createElement('a');
+      a.href = tire.link;
+      a.textContent = tireDisplayName(tire);
+      target.appendChild(a);
+    } else {
+      target.textContent = tireDisplayName(tire);
+    }
   }
 
   window.rhcTpcCalcTireFinder = function() {
@@ -1063,18 +1195,45 @@
       tubelessDetour = open && open.tire !== pick.tire;
     }
 
-    var casingText = pick.casings.join(' or ');
-    var psi        = calcPSI(totalLb, pick.actualW, feel);
+    // The pressure rules can change the casing, and with it the width, so the
+    // card shows the planned figures rather than the candidate's.
+    var plan = tireFinderPressure(pick, totalLb, feel, tubeless, rimW);
+    var shown = {};
+    for (var k in pick) shown[k] = pick[k];
+    shown.casings = plan.casings;
+    shown.actualW = plan.actualW;
+    pick = shown;
 
-    state.tf.lastPsi = psi;
+    state.tf.lastPsi = plan.tooHigh ? null : plan.psi;
     state.tf.outUnit = unit;
 
     setWeightWarning('tf', rider, bike);
-    el('rhc-tf-out-tire').textContent   = tireDisplayName(pick.tire);
+    renderTireName(el('rhc-tf-out-tire'), pick.tire);
+    var hint = el('rhc-tf-link-hint');
+    if (hint) hint.style.display = pick.tire.link ? 'block' : 'none';
     el('rhc-tf-out-width').innerHTML    = fmtNum(pick.actualW, 1) + ' <span class="unit">mm</span>';
-    el('rhc-tf-out-casing').textContent = casingText;
+    el('rhc-tf-out-casing').textContent = pick.casings.join(' or ');
     el('rhc-tf-out-tread').textContent  = pick.tire.tread;
     renderOutPressure('tf');
+    var pWarn = el('rhc-tf-pressure-warning');
+    if (pWarn) {
+      pWarn.textContent   = plan.tooHigh ? TF_TOO_HIGH_MSG : '';
+      pWarn.style.display = plan.tooHigh ? 'block' : 'none';
+    }
+
+    // Sealant for tubeless, the tire's TPU tube otherwise (Jan, 10 Oct).
+    var extras = el('rhc-tf-extras');
+    if (extras) {
+      if (tubeless) {
+        extras.innerHTML = 'We recommend <a href="' + TF_SEALANT_URL + '">Rene Herse Supple Sealant</a>. ' +
+                           'It is specifically formulated for setting up supple tires tubeless.';
+      } else if (pick.tire.tubeLink) {
+        extras.innerHTML = 'We recommend <a href="' + pick.tire.tubeLink + '">Rene Herse TPU tubes</a> ' +
+                           'with patented all-metal valves.';
+      } else {
+        extras.innerHTML = '';
+      }
+    }
 
     // ── Explainers ──
     var notes = [];
@@ -1116,8 +1275,17 @@
     // letting a forced result read as a bug. Only the parts that were actually
     // forced get a clause — reciting a tire's whole casing list when nothing was
     // overridden just contradicts the recommendation above it.
+    // Casing moved by the pressure rules: say why, and don't also call it
+    // "only available" -- the tire comes in more than that.
+    if (plan.toughened && !plan.tooHigh) {
+      notes.push('At this pressure, we recommend the Endurance casing for its extra durability.');
+    } else if (plan.noEndurance && !plan.tooHigh) {
+      notes.push('At this pressure, we’d recommend the Endurance casing, which this tire isn’t ' +
+                 'made in. Go wider for a tire that is.');
+    }
+
     var forced = [];
-    if (pick.casingSubstituted || pick.tire.casings.length === 1) {
+    if (!plan.toughened && (pick.casingSubstituted || pick.tire.casings.length === 1)) {
       forced.push('in ' + joinList(pick.tire.casings));
     }
     if (pick.tire.tread !== wantTread) {
@@ -1223,11 +1391,31 @@
   // Q13: hand the width finder's recommendation across to the tire finder.
   // Clicking the real tab button keeps tab switching in one place, and quietly
   // does nothing if the tire finder isn't on this page.
+  // How Wide's riding surface → the Tire Finder's bike and gravel answers. Each
+  // pair lands on the tread How Wide shows, via TF_TREAD.
+  var WF_TO_TF = {
+    road:      { bike: 'road',      gravel: 'never' },
+    allroad:   { bike: 'allroad',   gravel: 'occasional' },
+    gravel:    { bike: 'gravel',    gravel: 'often' },
+    adventure: { bike: 'adventure', gravel: 'most' },
+  };
+
+  // Carry the How Wide answers across, overwriting whatever the rider chose in
+  // the Tire Finder earlier: otherwise a stale "gravel most of the time" turns
+  // a Road recommendation into a knobby (Jan, 10 Oct). Wheel size, rim and
+  // tubeless stay as they were -- How Wide doesn't ask about them.
   window.rhcTpcSendToFinder = function(btn) {
     var root = btn.closest('.rhc-tpc');
     if (!root) return;
     var widthSel = el('rhc-tf-width');
     if (widthSel && state.wf.lastWidth) widthSel.value = String(Math.round(state.wf.lastWidth));
+    var map = WF_TO_TF[el('rhc-wf-style').value];
+    if (map) {
+      el('rhc-tf-terrain').value = map.bike;
+      el('rhc-tf-gravel').value  = map.gravel;
+    }
+    el('rhc-tf-ridingstyle').value = el('rhc-wf-ridingstyle').value;
+    state.tf.browse = null;
     var navBtns = root.querySelectorAll('.tab-nav .tab-btn');
     for (var i = 0; i < navBtns.length; i++) {
       if ((navBtns[i].getAttribute('onclick') || '').indexOf("'tire-finder'") !== -1) {
