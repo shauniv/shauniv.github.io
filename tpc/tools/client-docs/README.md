@@ -16,6 +16,7 @@ block with its cream response box.
 | `make_record_docx.py` | Tire Finder - Where Things Stand (Q34) |
 | `make_limits_docx.py` | Tire Finder - Pressure Limits and Links (Q35–Q37) |
 | `make_hookless_docx.py` | Tire Finder - Hookless Rims (Q38–Q39) |
+| `make_install_docx.py` | Tire Calculators - Test Site Setup (for Jan's web person; no questions) |
 
 Run one with `python tools/client-docs/make_record_docx.py` from anywhere; each
 writes to a fixed path in the repo root. They need **python-docx**

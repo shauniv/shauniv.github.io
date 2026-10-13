@@ -351,6 +351,25 @@
   // different sizes and the width the rider typed should win.
   var TF_TREAD_TOLERANCE = 2.5;
 
+  // ETRTO maximum for hookless rims, by the width printed on the tire (Jan,
+  // Q38). Shared by the Pro calculator and the Tire Finder. Bands start at the
+  // width shown; anything narrower than the first band gets its 5 bar. The
+  // limit is bar × 14.5 unrounded, so it is never nudged above the bar figure;
+  // `text` is how the table Jan approved reads.
+  var HOOKLESS_BANDS = [
+    { from: 55, bar: 2.5, text: '2.5 bar / 36 psi' },
+    { from: 45, bar: 3,   text: '3 bar / 44 psi'   },
+    { from: 40, bar: 3.5, text: '3.5 bar / 51 psi' },
+    { from: 35, bar: 4,   text: '4 bar / 58 psi'   },
+    { from: 30, bar: 4.5, text: '4.5 bar / 65 psi' },
+    { from: 0,  bar: 5,   text: '5 bar / 72.5 psi' },
+  ];
+
+  function hooklessLimit(printedW) {
+    var band = HOOKLESS_BANDS.filter(function(b) { return printedW >= b.from; })[0];
+    return { psi: band.bar * 14.5, text: band.text };
+  }
+
   // Above this share of a tire's maximum pressure, recommend the Endurance
   // casing (Jan, 10 Oct): a heavy rider on a narrow tire runs it hard, and the
   // tougher casing is the one to do that in. Checked after the firm→soft step,
@@ -362,6 +381,12 @@
 
   var TF_TOO_HIGH_MSG = 'For your bike/rider weight, the narrow tire you’ve selected requires ' +
                         'a pressure that is higher than recommended. Please select a wider tire.';
+
+  // Jan's message, naming the limit when it is the hookless rim's rather than the tire's.
+  function tfHooklessMsg(limit) {
+    return 'For your bike/rider weight, the tire you’ve selected requires a pressure that is ' +
+           'higher than the ' + limit.text + ' ETRTO limit for hookless rims. Please select a wider tire.';
+  }
 
   // Q5/Q17: how far the recommended tire has to be from the requested width before
   // we tell the rider the size moved. Below this, the difference comes from the
@@ -491,6 +516,7 @@
     // Same physical measurement in both tabs, so don't make anyone type it twice.
     // Tabs missing from a map are skipped, so this is safe on any page.
     { p: 'rhc-p-rimw',  tf: 'rhc-tf-rimw' },
+    { p: 'rhc-p-rimtype', tf: 'rhc-tf-rimtype' },
   ];
 
   // Tab slug (from the shortcode / DOM id) → internal state prefix.
@@ -864,16 +890,20 @@
 
     // 7. Hookless / tubeless caps
     var notes = [];
-    var HOOKLESS_MAX = 72.5;
     var TUBELESS_MAX = 60;
 
+    // The width dropdowns are the printed width, which is what the ETRTO
+    // table goes by (Jan, Q38).
     if (rimtype === 'hookless' || rimtype === 'dk') {
-      if (fPsi > HOOKLESS_MAX) {
-        notes.push('⚠️ Your front tire/rim combination requires pressure that exceeds the 5 bar / 72.5 psi ETRTO limit for hookless rims.');
+      var fLimit = hooklessLimit(fw), rLimit = hooklessLimit(rw);
+      if (fPsi > fLimit.psi) {
+        notes.push('⚠️ Your front tire/rim combination requires pressure that exceeds the ' + fLimit.text +
+                   ' ETRTO limit for ' + fw + ' mm tires on hookless rims.');
         fPsi = null;
       }
-      if (rPsi !== null && rPsi > HOOKLESS_MAX) {
-        notes.push('⚠️ Your rear tire/rim combination requires pressure that exceeds the 5 bar / 72.5 psi ETRTO limit for hookless rims.');
+      if (rPsi !== null && rPsi > rLimit.psi) {
+        notes.push('⚠️ Your rear tire/rim combination requires pressure that exceeds the ' + rLimit.text +
+                   ' ETRTO limit for ' + rw + ' mm tires on hookless rims.');
         rPsi = null;
       }
     }
@@ -1131,14 +1161,19 @@
   //      step 2 again with it;
   //   4. still over the maximum → no pressure at all; the card says to go wider.
   // The maximum differs between tubes and tubeless on some tires (Jan, 12 Oct).
-  // A tire with no maximum in the spreadsheet skips all of it.
-  function tireFinderPressure(cand, totalLb, feel, tubeless, rimW) {
+  // On a hookless rim it is the lower of that and the ETRTO limit — "whichever
+  // is lowest" — and the steps are the same. With no maximum from either, a
+  // tire skips all of it.
+  function tireFinderPressure(cand, totalLb, feel, tubeless, rimW, hookless) {
     var max     = tubeless ? cand.tire.maxPsiTubeless : cand.tire.maxPsi;
+    var rimMax  = hookless ? hooklessLimit(tirePrintedWidth(cand.tire)) : null;
+    var byRim   = !!rimMax && (!max || rimMax.psi < max);
+    if (byRim) max = rimMax.psi;
     var casings = cand.casings;
     var actualW = cand.actualW;
     var psi     = calcPSI(totalLb, actualW, feel);
     var plan    = { casings: casings, actualW: actualW, psi: psi,
-                    toughened: false, tooHigh: false };
+                    toughened: false, tooHigh: false, rimMax: byRim ? rimMax : null };
     if (!max) return plan;
 
     function soften() {
@@ -1164,6 +1199,16 @@
     plan.psi     = psi;
     plan.tooHigh = psi > max;
     return plan;
+  }
+
+  // The width printed on the tire, in mm, for the hookless table (Jan, Q38).
+  // Nominal Size is that width unless it is in inches (26" tires), when Nominal
+  // Size 2 carries the mm figure; failing both, the inches are converted.
+  function tirePrintedWidth(tire) {
+    var mm = /^([\d.]+)\s*mm$/;
+    var m  = mm.exec(tire.nominal) || mm.exec(tire.nominal2);
+    if (m) return parseFloat(m[1]);
+    return parseFloat(tire.nominal) * 25.4;
   }
 
   // Tire name, linked to its product page when the spreadsheet has one.
@@ -1202,6 +1247,9 @@
     var rimGiven    = isFinite(rimRaw);
     var rimOk       = rimGiven && rimRaw >= TF_RIM_MIN && rimRaw <= TF_RIM_MAX;
     var rimW        = rimOk ? rimRaw : 0;
+    // "Don't know" counts as hookless, as it does in the Pro calculator.
+    var rimTypeEl   = el('rhc-tf-rimtype');
+    var hookless    = !!rimTypeEl && rimTypeEl.value !== 'hooks';
 
     if (!rider || !bike) return hideResults('tf');
 
@@ -1255,7 +1303,7 @@
 
     // The pressure rules can change the casing, and with it the width, so the
     // card shows the planned figures rather than the candidate's.
-    var plan = tireFinderPressure(pick, totalLb, feel, tubeless, rimW);
+    var plan = tireFinderPressure(pick, totalLb, feel, tubeless, rimW, hookless);
     var shown = {};
     for (var k in pick) shown[k] = pick[k];
     shown.casings = plan.casings;
@@ -1275,7 +1323,7 @@
     renderOutPressure('tf');
     var pWarn = el('rhc-tf-pressure-warning');
     if (pWarn) {
-      pWarn.textContent   = plan.tooHigh ? TF_TOO_HIGH_MSG : '';
+      pWarn.textContent   = !plan.tooHigh ? '' : plan.rimMax ? tfHooklessMsg(plan.rimMax) : TF_TOO_HIGH_MSG;
       pWarn.style.display = plan.tooHigh ? 'block' : 'none';
     }
 
@@ -1582,6 +1630,7 @@
     onTfField('rhc-tf-size',        'change');
     onTfField('rhc-tf-width',       'change');
     onTfField('rhc-tf-rimw');
+    onTfField('rhc-tf-rimtype',     'change');
     onTfField('rhc-tf-terrain',     'change');
     onTfField('rhc-tf-gravel',      'change');
     onTfField('rhc-tf-ridingstyle', 'change');

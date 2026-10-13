@@ -85,6 +85,16 @@
 </div>
 
 <div class="field">
+  <label>Rim Type <i class="rhc-tip" tabindex="0">i<span class="rhc-tip-box"><strong>Hooked</strong> rims have a small lip inside the rim channel that locks the tire bead in place — the traditional standard, found on most wheels.<br><br><strong>Hookless</strong> rims have a straight inner wall with no lip, common on modern tubeless-ready carbon wheels.<br><br>Why it matters: hookless rims have a maximum pressure that depends on the tire width, from 5 bar (72.5 psi) for 25–29 mm tires down to 2.5 bar (36 psi) for 55 mm and wider.</span></i></label>
+  <select id="rhc-tf-rimtype">
+    <option value="hooks">Hooked (Standard)</option>
+    <option value="hookless">Hookless</option>
+    <option value="dk">Don't Know</option>
+  </select>
+  <div class="hint"><a href="https://www.renehersecycles.com/hooked-or-hookless-rims/" target="_blank" rel="noopener">Here's how to find out.</a></div>
+</div>
+
+<div class="field">
   <label>Tubes or Tubeless</label>
   <div class="toggle-group">
     <button class="toggle-btn active" id="rhc-tf-tube-tubes" onclick="rhcTpcSetTube('tf','tubes')">Tubes</button>

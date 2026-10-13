@@ -22,6 +22,7 @@ intended for its own page:
 - `index.html`, `calculator.html`, `finder.html` — **generated**, do not hand-edit
 - `composer.json` — declares the Plugin Update Checker dependency
 - `.github/workflows/release.yml` — builds the plugin ZIP and publishes the GitHub Release
+- `.github/workflows/build-test.yml` — same build, run by hand; the ZIP is a run artifact, no release
 
 ## Adding or changing a tab
 
@@ -89,6 +90,9 @@ Four optional columns (Oct 2026) — a blank cell means "no limit" / "no link" f
   tube choice) drive `tireFinderPressure()`: over the max → soft pressure;
   over 80% of it (`TF_ENDURANCE_SHARE`) → Endurance casing; still over → no pressure,
   "select a wider tire" message.
+  On a hookless rim (or "Don't know") the maximum is the lower of that and the ETRTO
+  hookless limit for the tire's **printed** width (`HOOKLESS_BANDS`, `tirePrintedWidth()`),
+  the same table the Pro calculator uses.
 - **Product Link** makes the tire name a link; **TPU Tube Link** feeds the tube line
   shown to riders on tubes. Tubeless riders get the sealant line, whose link is a
   constant in the JS because it is the same for every tire.
@@ -117,6 +121,13 @@ casing and tread alternatives rather than only a different number.
 `node tools/build-static.mjs` and are **not** part of the released plugin — the release
 workflow copies an explicit allowlist that excludes the repo root. They exist for local testing
 and for sending to Jan and his partners. Regenerate them after any template change.
+
+## Test builds
+
+To install on a test site without releasing: **Actions → Build test package → Run workflow**,
+then download the run's artifact, `tire-pressure-calculator-test-<commit>.zip` — that is the
+plugin ZIP itself, uploaded to WordPress as it is. No tag, no release,
+so live sites are never offered it. Artifacts expire after 30 days.
 
 ## Releasing a new version
 

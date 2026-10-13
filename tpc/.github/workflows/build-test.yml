@@ -1,0 +1,38 @@
+name: Build test package
+
+# Run by hand from the Actions tab to get an installable plugin ZIP for a test
+# site. Same build as release.yml, but no tag and no GitHub Release, so live
+# sites are never offered an update.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Build plugin ZIP
+        run: |
+          SLUG="tire-pressure-calculator"
+          mkdir -p dist/${SLUG}
+          cp  tire-pressure-calculator.php        dist/${SLUG}/
+          cp -r templates                         dist/${SLUG}/
+          cp -r tire-pressure-calculator          dist/${SLUG}/
+          cp -r vendor                            dist/${SLUG}/
+          cd dist
+          zip -r ${SLUG}-test-${GITHUB_SHA::7}.zip ${SLUG}
+
+      # archive: false uploads the ZIP as it is, so the download is the plugin
+      # ZIP itself, ready for WordPress (the artifact takes the file's name).
+      - name: Upload plugin ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/tire-pressure-calculator-test-*.zip
+          archive: false
+          retention-days: 30
