@@ -83,9 +83,10 @@ Three columns feed the rider-facing name, all verbatim from the sheet:
 
 Pressure is still calculated from the derived width, never from these strings.
 
-Three optional columns (Oct 2026) — a blank cell means "no limit" / "no link" for that tire:
+Four optional columns (Oct 2026) — a blank cell means "no limit" / "no link" for that tire:
 
-- **Max Pressure (psi)** drives `tireFinderPressure()`: over the max → soft pressure;
+- **Max Pressure TUBES (psi)** and **Max Pressure TUBELESS (psi)** (picked by the rider's
+  tube choice) drive `tireFinderPressure()`: over the max → soft pressure;
   over 80% of it (`TF_ENDURANCE_SHARE`) → Endurance casing; still over → no pressure,
   "select a wider tire" message.
 - **Product Link** makes the tire name a link; **TPU Tube Link** feeds the tube line

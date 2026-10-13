@@ -34,7 +34,10 @@ const REQUIRED = [
 // Optional columns, added Oct 2026. A sheet without them still builds, and a
 // blank cell means "no limit" or "no link" for that tire -- so the columns can
 // be filled in gradually without holding anything else up.
-const MAX_PSI = 'Max Pressure (psi)';
+// The maximum is engraved on the casing and can differ between tubes and
+// tubeless (Jan, 12 Oct), hence two columns.
+const MAX_PSI = 'Max Pressure TUBES (psi)';
+const MAX_PSI_TL = 'Max Pressure TUBELESS (psi)';
 const LINK = 'Product Link';
 const TUBE_LINK = 'TPU Tube Link';
 
@@ -156,10 +159,13 @@ for (let i = 1; i < rows.length; i++) {
 
   const priority = number(r, rowNum, 'Priority', { required: false });
 
-  const maxPsi = MAX_PSI in col ? number(r, rowNum, MAX_PSI, { required: false }) : null;
-  if (maxPsi !== null && (maxPsi < 15 || maxPsi > 150)) {
-    fail(rowNum, `${MAX_PSI} of ${maxPsi} looks wrong (expected 15–150 psi)`);
-  }
+  const maxOf = (name) => {
+    const v = name in col ? number(r, rowNum, name, { required: false }) : null;
+    if (v !== null && (v < 15 || v > 150)) fail(rowNum, `${name} of ${v} looks wrong (expected 15–150 psi)`);
+    return v;
+  };
+  const maxPsi = maxOf(MAX_PSI);
+  const maxPsiTubeless = maxOf(MAX_PSI_TL);
   const link = url(r, rowNum, LINK);
   const tubeLink = url(r, rowNum, TUBE_LINK);
 
@@ -176,6 +182,7 @@ for (let i = 1; i < rows.length; i++) {
     inProduction: yesNo(r, rowNum, 'In Production'),
     priority: priority ?? 1,
     maxPsi,
+    maxPsiTubeless,
     link,
     tubeLink,
     rowNum,
@@ -254,7 +261,11 @@ const body = tires.map((t) =>
   `      tread:${pad(q(t.tread) + ',', w.tread + 1)} casings:[${t.casings.map(q).join(',')}],\n` +
   `      tubeless:${pad(t.tubeless + ',', 7)} inProduction:${pad(t.inProduction + ',', 7)} priority:${t.priority},
 ` +
-  `      maxPsi:${t.maxPsi}, link:${q(t.link)}, tubeLink:${q(t.tubeLink)} },`
+  `      maxPsi:${t.maxPsi}, maxPsiTubeless:${t.maxPsiTubeless},
+` +
+  `      link:${q(t.link)},
+` +
+  `      tubeLink:${q(t.tubeLink)} },`
 ).join('\n').replace(/[ \t]+$/gm, '');   // padding can leave line-end spaces
 
 const sizes = [...new Set(tires.map((t) => t.size))];
@@ -292,8 +303,10 @@ if (live.length !== tires.length) {
 }
 warnings.forEach((warn) => console.log(`warn  ${warn}`));
 // Not a warning: blanks are allowed. A count, so a half-filled column is visible.
-for (const [name, key] of [[MAX_PSI, 'maxPsi'], [LINK, 'link'], [TUBE_LINK, 'tubeLink']]) {
-  const blank = live.filter((t) => !t[key]).length;
-  if (blank) console.log(`blank ${name}: ${blank} of ${live.length} tires in production`);
+for (const [name, key, only] of [[MAX_PSI, 'maxPsi'], [MAX_PSI_TL, 'maxPsiTubeless', 'tubeless'],
+                                  [LINK, 'link'], [TUBE_LINK, 'tubeLink']]) {
+  // The tubeless maximum only matters for tires that can be run tubeless.
+  const blank = live.filter((t) => (!only || t[only]) && !t[key]).length;
+  if (blank) console.log(`blank ${name}: ${blank} tire(s) in production -- no ${key === 'link' || key === 'tubeLink' ? 'link' : 'limit'} for them`);
 }
 console.log(`wrote TIRE_CATALOG into tire-pressure-calculator.js`);

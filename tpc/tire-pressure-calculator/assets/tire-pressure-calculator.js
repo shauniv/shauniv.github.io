@@ -77,146 +77,205 @@
   // design rim, tubed, in a casing other than Extralight — every width the
   // finder shows is derived from it, see tireActualWidth().
   //
-  // 26 tires across 3 wheel sizes: 26", 650B, 700C / 29"
+  // 27 tires across 4 wheel sizes: 26", 650B, 700C / 29", 32"
   var TIRE_CATALOG = [
     { size:'26"',        model:'Elk Pass',         nominal:'1.25"', nominal2:'30 mm',
       designRim:20, baseline:29,
       tread:'Smooth All-Road',     casings:['Extralight'],
       tubeless:false,  inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:100, maxPsiTubeless:null,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/26x125-elk-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'26"',        model:'Naches Pass',      nominal:'1.8"',  nominal2:'42 mm',
       designRim:20, baseline:41,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/26x18-naches-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'26"',        model:'Rat Trap Pass',    nominal:'2.3"',  nominal2:'54 mm',
       designRim:20, baseline:52,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/26x23-rat-trap-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'26"',        model:'Humptulips Ridge', nominal:'2.3"',  nominal2:'54 mm',
       designRim:20, baseline:52,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/26-x-2-3-humptulips-ridge-tc-tire/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Loup Loup Pass',   nominal:'38 mm', nominal2:'',
       designRim:20, baseline:37,
       tread:'Smooth All-Road',     casings:['Extralight'],
       tubeless:false,  inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:null,
+      link:'https://www.renehersecycles.com/shop/components/tires/650b/650bx38-loup-loup-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Babyshoe Pass',    nominal:'42 mm', nominal2:'',
       designRim:20, baseline:40,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:60, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/650b/650bx42-babyshoe-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Switchback Hill',  nominal:'48 mm', nominal2:'',
       designRim:20, baseline:50,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/650bx48-switchback-hill/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Pumpkin Ridge',    nominal:'42 mm', nominal2:'',
       designRim:20, baseline:40,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:60, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/650bx42-pumpkin-ridge/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Juniper Ridge',    nominal:'48 mm', nominal2:'',
       designRim:20, baseline:49,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/650bx48-juniper-ridge-tc/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'650B',       model:'Umtanum Ridge',    nominal:'2.3"',  nominal2:'54 mm',
       designRim:21, baseline:53,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/650b/650b-x-55-umtanum-ridge-tc-tire/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/26-inch/rene-herse-tpu-tubes-650b-26inch/' },
     { size:'700C / 29"', model:'Cayuse Pass',      nominal:'26 mm', nominal2:'',
       designRim:20, baseline:25.5,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
       tubeless:false,  inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:105, maxPsiTubeless:null,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx26-cayuse-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Chinook Pass',     nominal:'28 mm', nominal2:'',
       designRim:20, baseline:28,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
       tubeless:false,  inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:105, maxPsiTubeless:null,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx28-chinook-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Stampede Pass',    nominal:'32 mm', nominal2:'',
       designRim:20, baseline:31,
       tread:'Smooth All-Road',     casings:['Extralight','Standard'],
       tubeless:false,  inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:90, maxPsiTubeless:null,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx32-stampede-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Orondo Grade',     nominal:'31 mm', nominal2:'',
       designRim:20, baseline:31,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:90, maxPsiTubeless:90,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700c-x-31-orondo-grade-tc-tire/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Bon Jon Pass',     nominal:'35 mm', nominal2:'',
       designRim:20, baseline:35,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:90, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx35-bon-jon-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Barlow Pass',      nominal:'38 mm', nominal2:'',
       designRim:20, baseline:38,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx38-barlow-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Snoqualmie Pass',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:42,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx44-snoqualmie-pass/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Hatcher Pass',     nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/700c-x-48-hatcher-pass-tc-tire/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Antelope Hill',    nominal:'55 mm', nominal2:'29" x 2.2"',
       designRim:20, baseline:54,
       tread:'Smooth All-Road',     casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/700cx55-antelope-hill-tc/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Steilacoom',       nominal:'38 mm', nominal2:'',
       designRim:20, baseline:36,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700cx38-steilacoom/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Hurricane Ridge',  nominal:'42 mm', nominal2:'',
       designRim:20, baseline:42,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:false,  priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:null, maxPsiTubeless:null,
+      link:'',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Manastash Ridge',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:43,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:75, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700c-x-44-manastash-ridge-tc-tire/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Oracle Ridge',     nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/700c-x-48-mm-oracle-ridge-tc/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Fleecer Ridge',    nominal:'55 mm', nominal2:'29" x 2.2"',
       designRim:21, baseline:56,
       tread:'Dual-Purpose Knobby', casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/700c-x-55-fleecer-ridge/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Corkscrew Climb',  nominal:'44 mm', nominal2:'',
       designRim:20, baseline:43,
       tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:60, maxPsiTubeless:60,
+      link:'https://www.renehersecycles.com/shop/components/tires/narrower-45mm-tires/700c-x-44-corkscrew-climb-tc-semi-slick/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
     { size:'700C / 29"', model:'Poteau Mountain',  nominal:'48 mm', nominal2:'',
       designRim:21, baseline:47,
       tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
       tubeless:true,   inProduction:true,   priority:1,
-      maxPsi:null, link:'', tubeLink:'' },
+      maxPsi:55, maxPsiTubeless:55,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/700c-x-48-poteau-mountain-tc-semi-slick/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/700c/700c-tpu-tubes-metal-valves/' },
+    { size:'32"',        model:'Indiana Pass',     nominal:'55 mm', nominal2:'32" x 2.2"',
+      designRim:25, baseline:56,
+      tread:'Semi-Slick',          casings:['Extralight','Standard','Endurance','Endurance Plus'],
+      tubeless:true,   inProduction:true,   priority:1,
+      maxPsi:51, maxPsiTubeless:51,
+      link:'https://www.renehersecycles.com/shop/components/tires/wider-45mm-tires/32x22-indiana-pass-tc-semi-slick/',
+      tubeLink:'https://www.renehersecycles.com/shop/components/tires/tubes/rene-herse-tpu-tube-32-inch/' },
   ];
   // ── END GENERATED CATALOG ────────────────────────────────────────────
 
   // Wheel sizes actually present in the catalog. The first is the default, so
-  // the most common size leads (Jan, 10 Oct): 700C, then 650B, then 26". A size
-  // not listed here -- a future 32", say -- follows in catalog order until
-  // someone decides where it belongs.
-  var TF_SIZE_ORDER = ['700C', '650B', '26"'];
+  // the most common size leads (Jan, 10 Oct): 700C, then 650B, then 26", with
+  // 32" last as the newest. A size not listed here follows in catalog order
+  // until someone decides where it belongs.
+  var TF_SIZE_ORDER = ['700C', '650B', '26"', '32"'];
   var TIRE_SIZES = TIRE_CATALOG.reduce(function(acc, t) {
     if (acc.indexOf(t.size) === -1) acc.push(t.size);
     return acc;
@@ -1066,18 +1125,20 @@
   //   2. over the tire's maximum → the soft pressure instead, whatever else
   //      the rider chose;
   //   3. over TF_ENDURANCE_SHARE of the maximum → the Endurance casing, if the
-  //      rider hasn't already asked for something as tough. Leaving Extralight
+  //      rider hasn't already asked for something as tough and the tire is made
+  //      in it -- silently otherwise (Jan, Q35). Leaving Extralight
   //      makes the tire narrower, so the pressure is worked out again — and
   //      step 2 again with it;
   //   4. still over the maximum → no pressure at all; the card says to go wider.
+  // The maximum differs between tubes and tubeless on some tires (Jan, 12 Oct).
   // A tire with no maximum in the spreadsheet skips all of it.
   function tireFinderPressure(cand, totalLb, feel, tubeless, rimW) {
-    var max     = cand.tire.maxPsi;
+    var max     = tubeless ? cand.tire.maxPsiTubeless : cand.tire.maxPsi;
     var casings = cand.casings;
     var actualW = cand.actualW;
     var psi     = calcPSI(totalLb, actualW, feel);
     var plan    = { casings: casings, actualW: actualW, psi: psi,
-                    toughened: false, noEndurance: false, tooHigh: false };
+                    toughened: false, tooHigh: false };
     if (!max) return plan;
 
     function soften() {
@@ -1089,16 +1150,13 @@
     soften();
 
     var tough = casings.some(function(c) { return TF_CASING_ORDER.indexOf(c) >= 2; });
-    if (psi > max * TF_ENDURANCE_SHARE && !tough) {
-      if (cand.tire.casings.indexOf('Endurance') !== -1) {
-        casings = ['Endurance'];
-        actualW = tireActualWidth(cand.tire, casings, tubeless, rimW);
-        psi     = calcPSI(totalLb, actualW, feel);
-        plan.toughened = true;
-        soften();
-      } else {
-        plan.noEndurance = true;
-      }
+    if (psi > max * TF_ENDURANCE_SHARE && !tough &&
+        cand.tire.casings.indexOf('Endurance') !== -1) {
+      casings = ['Endurance'];
+      actualW = tireActualWidth(cand.tire, casings, tubeless, rimW);
+      psi     = calcPSI(totalLb, actualW, feel);
+      plan.toughened = true;
+      soften();
     }
 
     plan.casings = casings;
@@ -1279,9 +1337,6 @@
     // "only available" -- the tire comes in more than that.
     if (plan.toughened && !plan.tooHigh) {
       notes.push('At this pressure, we recommend the Endurance casing for its extra durability.');
-    } else if (plan.noEndurance && !plan.tooHigh) {
-      notes.push('At this pressure, we’d recommend the Endurance casing, which this tire isn’t ' +
-                 'made in. Go wider for a tire that is.');
     }
 
     var forced = [];

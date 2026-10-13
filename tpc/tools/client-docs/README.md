@@ -15,6 +15,7 @@ block with its cream response box.
 | `make_nanfix_docx.py` | Tire Finder - Pressure Fix (Q33) |
 | `make_record_docx.py` | Tire Finder - Where Things Stand (Q34) |
 | `make_limits_docx.py` | Tire Finder - Pressure Limits and Links (Q35–Q37) |
+| `make_hookless_docx.py` | Tire Finder - Hookless Rims (Q38–Q39) |
 
 Run one with `python tools/client-docs/make_record_docx.py` from anywhere; each
 writes to a fixed path in the repo root. They need **python-docx**
@@ -22,7 +23,7 @@ writes to a fixed path in the repo root. They need **python-docx**
 
 ## Conventions worth keeping
 
-- **Question numbers run continuously across documents.** The next one is Q38.
+- **Question numbers run continuously across documents.** The next one is Q40.
 - **Write as "I", never "we", and never "Shaun" in the third person.** The
   documents go out under Shaun's name; from Jan's side there is one person
   writing them, and anything else invites him to wonder who else is involved.
