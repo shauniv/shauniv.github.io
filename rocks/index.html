@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Route 66 Rocks for Teacher Drewdy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f5f2ec;
+      --card: #fffdf9;
+      --ink: #2e2a25;
+      --muted: #6f675d;
+      --rule: #e3ddd2;
+      --accent: #9a7b55;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 20px 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+
+    .intro {
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 34em;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 28px auto 0;
+      opacity: 0.6;
+    }
+
+    main {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 8px 20px 64px;
+      display: grid;
+      /* 4 / 2 / 1 columns so 8 rocks always fill complete rows */
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px 28px;
+    }
+
+    @media (max-width: 1080px) {
+      main { grid-template-columns: repeat(2, 1fr); max-width: 820px; }
+    }
+
+    @media (max-width: 560px) {
+      main { grid-template-columns: 1fr; max-width: 440px; }
+    }
+
+    figure {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 12px 12px 18px;
+      box-shadow: 0 1px 2px rgba(60, 45, 30, 0.04), 0 8px 24px -12px rgba(60, 45, 30, 0.12);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    figure:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px rgba(60, 45, 30, 0.05), 0 16px 32px -14px rgba(60, 45, 30, 0.22);
+    }
+
+    figure a {
+      display: block;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #3a3a3a;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    figure a:hover img { transform: scale(1.03); }
+
+    figure a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    figcaption { padding: 16px 6px 0; }
+
+    figcaption h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    figcaption p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 0 20px 56px;
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 48px 16px 28px; }
+      main { padding: 8px 16px 48px; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Rocks for Teacher Drewdy</h1>
+    <p class="intro">Gathered one at a time, for you. Tap any rock to see it up close.</p>
+    <div class="divider"></div>
+  </header>
+
+  <main>
+    <!-- Each rock: edit the <h2> name and the <p> origin text. Clicking the photo opens the full-size image in a new tab. -->
+
+    <figure>
+      <a href="20261020_065009.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065009.jpg" width="900" height="900" alt="Geode with white quartz crystals inside" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Quartz Geode</h2>
+        <p>Purchased at the Crystal Forest Museum and Rock Shop near Petrified Forest National Park.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065020.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065020.jpg" width="900" height="900" alt="Speckled gray and pink stone" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Sparkly Rock. Granite?</h2>
+        <p>I saw this sparkling in a parking lot in Barstow, California.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065028.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065028.jpg" width="900" height="900" alt="Clear quartz crystal point" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Clear Quartz Crystal</h2>
+        <p>Purchased at the Crystal Forest Museum and Rock Shop near Petrified Forest National Park.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065036.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065036.jpg" width="900" height="900" alt="Porous reddish-brown volcanic rock" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Red Lava Rock</h2>
+        <p>I found this near an ancient lava flow near the Petrified Forest National Park.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065051.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065051.jpg" width="900" height="900" alt="Glittering brassy pyrite cluster" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Pyrite</h2>
+        <p>Purchased at the Crystal Forest Museum and Rock Shop near Petrified Forest National Park.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065058.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065058.jpg" width="900" height="900" alt="Smooth polished stone with tan bands" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Petrified Wood</h2>
+        <p>Purchased at the Crystal Forest Museum and Rock Shop near Petrified Forest National Park.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065125.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065125.jpg" width="900" height="900" alt="Chunky stone in mottled brown, pink and white" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Shiny Rock. Feldspar?</h2>
+        <p>I found this on the side of the road between Santa Fe, New Mexico, and Las Vegas, New Mexico.</p>
+      </figcaption>
+    </figure>
+
+    <figure>
+      <a href="20261020_065152.jpg" target="_blank" rel="noopener">
+        <img src="thumbs/20261020_065152.jpg" width="900" height="900" alt="Desert rose with petal-shaped crystal blades" loading="lazy">
+      </a>
+      <figcaption>
+        <h2>Desert Rose</h2>
+        <p>Purchased at the Crystal Forest Museum and Rock Shop near Petrified Forest National Park. Keep it dry!</p>
+      </figcaption>
+    </figure>
+
+  </main>
+
+  <footer>Collected with Love on Route 66 · 2026</footer>
+
+</body>
+</html>
